@@ -1,31 +1,111 @@
-:root{--ink:#080B0D;--ti:#151A1E;--line:#1b2227;--ice:#F4F6F6;--orange:#FF5A1F;--lime:#CEFF45;--steel:#738087}
+:root{--ink:#080B0D;--ti:#151A1E;--line:#1b2227;--ice:#F4F6F6;--orange:#FF5A1F;--lime:#CEFF45;--steel:#8a969c;--pad:28px;color-scheme:dark}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--ink);color:var(--ice);font-family:var(--font-archivo),sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:var(--ice)}a:hover{color:var(--orange)}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--ink);color:var(--ice);font-family:var(--font-archivo),sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+a{color:var(--ice)}
+button,input,textarea,select{touch-action:manipulation}
 ::selection{background:var(--lime);color:var(--ink)}
 :focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.skip{position:fixed;top:8px;left:8px;z-index:200;background:var(--lime);color:var(--ink);padding:12px 16px;font-weight:800;text-decoration:none;transform:translateY(-200%)}
+.skip:focus{transform:none}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .mono{font-family:var(--font-mono),monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
-.display{font-stretch:62%;font-weight:900;text-transform:uppercase;line-height:.82;margin:0;letter-spacing:-.01em}
-.btn{display:inline-flex;align-items:center;gap:20px;border:0;cursor:pointer;text-decoration:none;padding:16px 22px;font:800 14px var(--font-archivo);font-stretch:80%;letter-spacing:.08em;text-transform:uppercase;min-height:48px}
-.btn-orange{background:var(--orange);color:var(--ink)}.btn-orange:hover{background:var(--lime);color:var(--ink)}
-.btn-ice{background:var(--ice);color:var(--ink)}.btn-ice:hover{background:var(--lime);color:var(--ink)}
-.btn-ghost{background:transparent;color:var(--ice);border:1px solid rgba(244,246,246,.4)}.btn-ghost:hover{border-color:var(--orange);color:var(--ice)}
+.display{font-stretch:62%;font-weight:900;text-transform:uppercase;line-height:.82;margin:0;letter-spacing:-.01em;overflow-wrap:break-word}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:20px;border:0;cursor:pointer;text-decoration:none;padding:16px 22px;font:800 14px var(--font-archivo);font-stretch:80%;letter-spacing:.08em;text-transform:uppercase;min-height:48px}
+.btn:disabled{cursor:not-allowed}
+.btn-orange{background:var(--orange);color:var(--ink)}
+.btn-ice{background:var(--ice);color:var(--ink)}
+.btn-ghost{background:transparent;color:var(--ice);border:1px solid rgba(244,246,246,.4)}
+@media (hover:hover){
+  a:hover{color:var(--orange)}
+  .btn-orange:hover,.btn-ice:hover{background:var(--lime);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--orange);color:var(--ice)}
+}
 .cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sitehead{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px 28px;mix-blend-mode:difference}
+
+/* Viewport heights: svh avoids jumps from mobile browser toolbars. */
+.screen{height:100vh;height:100svh}
+.min-screen{min-height:100vh;min-height:100svh}
+
+.sitehead{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px var(--pad);mix-blend-mode:difference}
 .sitehead nav{display:flex;gap:26px}
-.sitehead nav a{text-decoration:none}
-.sitehead .menu{display:none;background:none;border:1px solid var(--ice);color:var(--ice);height:44px;padding:0 14px}
-.mobilenav{position:fixed;inset:0;z-index:80;background:var(--ink);display:flex;flex-direction:column;justify-content:center;gap:8px;padding:32px}
-.mobilenav a{font-stretch:62%;font-weight:900;font-size:56px;text-transform:uppercase;text-decoration:none;line-height:1}
+.sitehead nav a{text-decoration:none;padding:15px 0}
+.sitehead .menu{display:none;background:none;border:1px solid var(--ice);color:var(--ice);height:44px;padding:0 14px;cursor:pointer}
+.mobilenav{position:fixed;inset:0;z-index:80;background:var(--ink);display:flex;flex-direction:column;justify-content:safe center;gap:8px;padding:88px var(--pad) 32px;overflow-y:auto;overscroll-behavior:contain}
+.mobilenav a{font-stretch:62%;font-weight:900;font-size:clamp(36px,min(12vw,9vh),56px);text-transform:uppercase;text-decoration:none;line-height:1.05;padding:4px 0}
 .stack{display:grid}
+.end-m-start{justify-items:end}
+
+/* Home: ride section */
+.ride-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;gap:16px;padding:96px var(--pad) 28px}
+.ride-profile{width:100%;height:110px;overflow:visible;display:block}
+
+/* Home: expeditions */
+.missions{position:relative;height:100vh;height:100svh;min-height:640px;overflow:hidden;background:#000}
+.missions-inner{position:absolute;inset:0;padding:96px var(--pad) 36px;grid-template-columns:minmax(0,1.6fr) minmax(260px,.8fr);gap:28px}
+
+/* Home: stats strip */
+.stats{grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats>a{grid-column:span 2}
+.stats>div{border-left:1px solid var(--line)}
+
+/* Home: 3D machine */
+.machine{background:#050708;padding:96px var(--pad) 72px;grid-template-columns:minmax(0,1.7fr) minmax(300px,1fr);gap:28px}
+.machine-view{position:relative;min-height:520px;background:#0d1114;border:1px solid var(--line)}
+
+/* Ride mode */
+.ridemode{position:fixed;inset:0;background:#000;overflow:hidden;display:flex;flex-direction:column}
+.ridemode-info{display:flex;justify-content:space-between;align-items:flex-end;gap:16px 32px;flex-wrap:wrap;padding:0 24px 16px}
+
+/* Terrain */
+.terrain{grid-template-columns:minmax(0,1fr) 400px;border-top:1px solid var(--line)}
+.terrain-map{height:min(78vh,760px);min-height:420px;background:#111}
+.terrain-side{border-left:1px solid var(--line);display:flex;flex-direction:column;max-height:min(78vh,760px)}
+
+/* Planner */
+.planner{grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr)}
+.planner-aside{position:sticky;top:0;align-self:start;height:100vh;height:100svh;min-height:360px}
+.planner-main{padding:104px clamp(20px,5vw,72px) 48px;display:flex;flex-direction:column;gap:28px;min-width:0}
+.planner-main>*{min-width:0}
+.brief-row{display:grid;grid-template-columns:140px minmax(0,1fr) auto;gap:16px;padding:14px 0;border-bottom:1px solid #1b2227;align-items:baseline}
+.field{min-width:0;background:#0d1114;border:1px solid #2a3238;color:var(--ice);padding:14px;font:400 16px var(--font-archivo);letter-spacing:0;text-transform:none;width:100%;min-height:48px;border-radius:0;-webkit-appearance:none;appearance:none}
+input[type=range]{min-height:44px}
+.planner-main label{min-width:0}
+
 @media (max-width:860px){
+  :root{--pad:20px}
   .sitehead nav{display:none}.sitehead .menu{display:block}
-  .stack{grid-template-columns:1fr!important}
+  .stack{grid-template-columns:minmax(0,1fr)!important}
   .hide-m{display:none!important}
+  .end-m-start{justify-items:start}
+  .missions{height:auto;min-height:100vh;min-height:100svh}
+  .missions-inner{position:relative;inset:auto;min-height:100vh;min-height:100svh;align-content:end}
+  .stats{grid-template-columns:1fr 1fr!important}
+  .stats>div:nth-of-type(1){border-left:0}
+  .stats>a,.stats>div{border-top:1px solid var(--line)}
+  .stats>a{border-top:0}
+  .machine{padding-top:88px;padding-bottom:56px}
+  .machine-view{min-height:0;height:min(64svh,480px)}
+  .terrain-map{height:60vh;height:60svh;min-height:320px}
+  .terrain-side{border-left:0;border-top:1px solid var(--line);max-height:none}
+  .planner-aside{position:relative;height:auto;min-height:260px}
+  .planner-main{padding-top:32px}
+  .brief-row{grid-template-columns:minmax(0,1fr) auto;gap:4px 16px}
+  .brief-row>span:first-child{grid-column:1/-1}
 }
 @media (max-height:700px){.hud{display:none!important}}
+@media (max-height:500px){
+  .ride-overlay{padding-top:72px;padding-bottom:12px}
+  .ride-profile{height:56px}
+  .ride-note{display:none}
+  .missions{height:auto;min-height:0}
+  .missions-inner{position:relative;inset:auto;min-height:0;padding-top:80px}
+  .machine{padding-top:72px}
+  .machine-view{min-height:0;height:80svh}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 @keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(100vh)}}
 .leaflet-dark .leaflet-tile-pane{filter:invert(1) grayscale(1) brightness(.75) contrast(1.15)}
+.leaflet-container{font-family:var(--font-archivo),sans-serif}
+.leaflet-touch .leaflet-bar a{width:44px;height:44px;line-height:44px}

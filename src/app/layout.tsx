@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Archivo, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import SiteHeader from '@/components/SiteHeader';
@@ -13,10 +13,13 @@ export const metadata: Metadata = {
   openGraph: { type: 'website', siteName: 'Bhutan Motorcycle Tours' },
 };
 
+export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#080B0D', colorScheme: 'dark' };
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={archivo.variable + ' ' + mono.variable}>
       <body>
+        <a href="#main" className="skip">Skip to content</a>
         <SiteHeader />
         {children}
       </body>
