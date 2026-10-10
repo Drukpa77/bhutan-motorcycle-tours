@@ -1,0 +1,31 @@
+:root{--ink:#080B0D;--ti:#151A1E;--line:#1b2227;--ice:#F4F6F6;--orange:#FF5A1F;--lime:#CEFF45;--steel:#738087}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--ice);font-family:var(--font-archivo),sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--ice)}a:hover{color:var(--orange)}
+::selection{background:var(--lime);color:var(--ink)}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.mono{font-family:var(--font-mono),monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.display{font-stretch:62%;font-weight:900;text-transform:uppercase;line-height:.82;margin:0;letter-spacing:-.01em}
+.btn{display:inline-flex;align-items:center;gap:20px;border:0;cursor:pointer;text-decoration:none;padding:16px 22px;font:800 14px var(--font-archivo);font-stretch:80%;letter-spacing:.08em;text-transform:uppercase;min-height:48px}
+.btn-orange{background:var(--orange);color:var(--ink)}.btn-orange:hover{background:var(--lime);color:var(--ink)}
+.btn-ice{background:var(--ice);color:var(--ink)}.btn-ice:hover{background:var(--lime);color:var(--ink)}
+.btn-ghost{background:transparent;color:var(--ice);border:1px solid rgba(244,246,246,.4)}.btn-ghost:hover{border-color:var(--orange);color:var(--ice)}
+.cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sitehead{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px 28px;mix-blend-mode:difference}
+.sitehead nav{display:flex;gap:26px}
+.sitehead nav a{text-decoration:none}
+.sitehead .menu{display:none;background:none;border:1px solid var(--ice);color:var(--ice);height:44px;padding:0 14px}
+.mobilenav{position:fixed;inset:0;z-index:80;background:var(--ink);display:flex;flex-direction:column;justify-content:center;gap:8px;padding:32px}
+.mobilenav a{font-stretch:62%;font-weight:900;font-size:56px;text-transform:uppercase;text-decoration:none;line-height:1}
+.stack{display:grid}
+@media (max-width:860px){
+  .sitehead nav{display:none}.sitehead .menu{display:block}
+  .stack{grid-template-columns:1fr!important}
+  .hide-m{display:none!important}
+}
+@media (max-height:700px){.hud{display:none!important}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(100vh)}}
+.leaflet-dark .leaflet-tile-pane{filter:invert(1) grayscale(1) brightness(.75) contrast(1.15)}
