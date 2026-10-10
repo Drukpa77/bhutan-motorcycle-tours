@@ -16,25 +16,29 @@ Company name/legal entity · phone · email · address · licence/TCB registrati
 - Motorcycle specs shown are published figures for the original Royal Enfield Himalayan (411 cc), via Wikimedia Commons file description. They are **illustrative, not fleet**.
 
 ## 4. Asset register (all hotlinked via Wikimedia `Special:FilePath`, not downloaded)
-| File | Author | Licence (verify on file page) | Used | Bhutan? |
-|---|---|---|---|---|
-| Dochu_La_Pass,_108_Druk_Wangyal_Chortens_(15818199106).jpg | Flickr via Commons | CC BY 2.0 (Flickr import) | Home hero | Yes, Dochula |
-| Dochula_on_Thimphu-Punakha_highway_Bhutan_-_panoramio.jpg | Panoramio user | CC BY-SA 3.0 (Panoramio import) | Seq. road, tour card, map | Yes |
-| Druk_Wangyal_Chortens,_Bhutan_01.jpg | Bernard Gagnon | CC BY-SA (own work) | Story, map | Yes |
-| Punakha_Dzong,_Bhutan_04.jpg | Bernard Gagnon | CC BY-SA (own work) | Story, map | Yes |
-| Punakha_dzong.jpg | Stephen Shephard | CC BY-SA 2.5 / GFDL | Rafting tile | Yes, Mo Chhu |
-| Gangte_Goemba_in_the_Phobjika_Valley,_Bhutan_(26)_-_44254128071.jpg | Prof. Mortel | CC BY 2.0 | Story, map | Yes |
-| Phobjika_Valley,_Bhutan_(12)_-_44206217132.jpg | Prof. Mortel | CC BY 2.0 | Final CTA, map | Yes |
-| The_Phobjikha_Valley.jpg | Phuentsho | Own work, check licence | Cycling tile | Yes |
-| Masang_Kang_as_seen_from_Dochula_Pass.jpg | Kandukuru Nagarjun | CC BY 2.0 | Tour card, climbing tile | Yes |
-| Simtokha_Dzong,_Bhutan_01.jpg | Bernard Gagnon | CC BY-SA (own work) | MTB tile, Thimphu | Yes |
-| Druk_Wangyal_Lhakhang_Temple_at_Dochula_Pass.JPG | Dhruba Jyoti Baruah | Own work, check licence | Map (Paro stand-in) | Yes, but not Paro |
-| Drametse_Lhakhang_(15658416298).jpg | Flickr via Commons | Check | Map (Bumthang stand-in) | Yes, eastern Bhutan, not Bumthang |
-| A_tribute_to_the_'Royal_Enfield_Himalayan'.jpg | Commons | Check | Scroll sequence | Motorcycle, not fleet |
-| Royal_Enfield_Himalayan.jpg | Tritinum | Own work, check licence | Showcase | Motorcycle, not fleet |
-| Royal_Enfield_logo_on_motorcycle.JPG | Alfvanbeem | CC0 | Seq. detail | Detail, not fleet |
+Authors and licences below were read from the Commons API on 10 Oct 2026. "Shows" is the subject the file page describes; GPS is the file's own geotag where it has one.
 
-Stand-ins are flagged in map captions. Replace them with operator photography (Paro, Trongsa, Yotong La, Bumthang, fleet, team).
+| File | Author | Licence | Shows (GPS) | Used for |
+|---|---|---|---|---|
+| Rinpung_Dzong,_Bhutan_17.jpg | Bernard Gagnon | CC BY-SA 4.0 | Rinpung Dzong & Nemi Zam bridge, Paro (27.424, 89.422) | Paro stop, ride poster, planner step 1 |
+| Chele_La_Pass_-_Paro_-_during_LGFC_-_Bhutan_2019_(01).jpg | Vinayaraj | CC BY-SA 4.0 | Chele La (27.370, 89.347) | Chele La stop, Western Valleys card |
+| Lhakhag_Karpo_Haa_Bhutan.jpg | Christopher J. Fynn | CC BY-SA 3.0 | Lhakhang Karpo, Haa | Haa stop |
+| Tashichho_Dzong_2012-11-19.jpg | Christopher J. Fynn | CC BY-SA 3.0 | Tashichho Dzong, Thimphu (27.487, 89.639) | Thimphu stop |
+| Druk_Wangyal_Chortens,_Bhutan_01.jpg | Bernard Gagnon | CC BY-SA 4.0 | Dochula (27.490, 89.750) | Dochula stop, planner |
+| Dochu_La_Pass,_108_Druk_Wangyal_Chortens_(15818199106).jpg | Arian Zwegers | CC BY 2.0 | Dochula (27.490, 89.750) | Hero & ride-mode posters, Dragon’s Spine card, planner |
+| Punakha_Dzong,_Bhutan_04.jpg | Bernard Gagnon | CC BY-SA 4.0 | Punakha Dzong (27.582, 89.863) | Punakha stop, planner |
+| Punakha_dzong.jpg | Stephen Shephard | CC BY-SA 3.0 | Punakha Dzong | Planner summary |
+| Gangte_Goemba_in_the_Phobjika_Valley,_Bhutan_(26)_-_44254128071.jpg | Prof. Mortel | CC BY 2.0 | Gangtey Goemba, Phobjikha | Phobjikha stop, custom card, planner |
+| Phobjika_Valley,_Bhutan_(12)_-_44206217132.jpg | Prof. Mortel | CC BY 2.0 | Phobjikha valley | Finale poster, planner |
+| Pele_La_Pass.jpg | RPSkokie | CC BY-SA 4.0 | Chorten at Pele La | Pele La stop |
+| Trongsa_Dzong_2001_a.jpg | Christopher Fynn | CC BY-SA 3.0 | Trongsa Dzong (27.499, 90.505) | Trongsa stop, planner |
+| Jakar_Dzong,_Bumthang.jpg | Christopher J. Fynn | CC BY-SA 3.0 | Jakar Dzong, Bumthang | Bumthang stop |
+| Pele_La_pass_on_the_Nubding_to_Wandue_Phodrang_highway_-_Bhutan_-_panoramio.jpg | David Broad | CC BY 3.0 | Prayer flags near Pele La (27.547, 90.146) | **Yotong La stand-in** |
+| Royal_Enfield_Himalayan.jpg | Tritinum | CC BY-SA 4.0 | Royal Enfield Himalayan 411 cc | Intro, planner machine step. Not fleet |
+
+Yotong La is the only stop without a photo of the place itself: Commons has none. Its credit is labelled "Stand-in" on the map. Replace it with operator photography, along with fleet and team photos.
+
+Pele La and Yotong La coordinates were corrected to OpenStreetMap (Pele La 27.5372, 90.2029; OSM spells Yotong La "Yutong La", 27.5169, 90.5863).
 
 **Not sourced:** hero video, 3D model, HDRIs, audio. Licences for these could not be verified or downloaded here, so none were faked. The hero uses a photo with a headlight-style light reveal. Drop a licensed clip at `/videos/hero-motorcycle.mp4` in production.
 

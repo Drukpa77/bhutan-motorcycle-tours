@@ -59,23 +59,31 @@ export default function HomeExperience() {
   }, []);
 
   useEffect(() => {
-    let raf = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const el = rideSec.current; if (!el) return;
-        const r = el.getBoundingClientRect();
-        const np = Math.min(1, Math.max(0, -r.top / (el.offsetHeight - innerHeight)));
-        setP(np);
-        const v = ride.current;
-        if (v && fine && v.duration) { const t = np * (v.duration - 0.1); if (Math.abs(v.currentTime - t) > 0.04) v.currentTime = t; }
-      });
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let raf = 0, cur = -1, target = 0;
+    const measure = () => {
+      const el = rideSec.current; if (!el) return;
+      const r = el.getBoundingClientRect();
+      target = Math.min(1, Math.max(0, -r.top / (el.offsetHeight - innerHeight)));
     };
+    const tick = () => {
+      raf = 0;
+      const diff = target - cur;
+      cur = reduce || cur < 0 || Math.abs(diff) < 0.0005 ? target : cur + diff * 0.14;
+      setP(cur);
+      const v = ride.current;
+      if (v && fine && v.duration && !v.seeking) { const t = cur * (v.duration - 0.1); if (Math.abs(v.currentTime - t) > 0.04) v.currentTime = t; }
+      if (cur !== target) raf = requestAnimationFrame(tick);
+    };
+    const onScroll = () => { measure(); if (!raf) raf = requestAnimationFrame(tick); };
+    onScroll();
     addEventListener('scroll', onScroll, { passive: true });
-    return () => { removeEventListener('scroll', onScroll); cancelAnimationFrame(raf); };
+    addEventListener('resize', onScroll);
+    return () => { removeEventListener('scroll', onScroll); removeEventListener('resize', onScroll); cancelAnimationFrame(raf); };
   }, [fine]);
 
   const ci = Math.min(4, Math.floor(p * 5)), ch = CHAPTERS[ci], cp = PLACES[ch.place];
+  const layer = (j: number) => Math.min(1, Math.max(0, (0.85 - Math.abs(p * 5 - (j + 0.5))) / 0.5));
   const prof = ELEV.map((e, i) => [(i / (ELEV.length - 1)) * 1000, 115 - ((e - 1000) / 2600) * 110]);
   const profD = 'M' + prof.map(q => q.join(',')).join(' L');
   const mission = MISSIONS[mi], pts = mission.stops.map(k => proj(PLACES[k].ll));
@@ -87,7 +95,7 @@ export default function HomeExperience() {
       {intro && <Ignition onDone={() => setIntro(false)} />}
 
       <section aria-label="Ride hero" className="screen" style={{ position: 'relative', minHeight: 520, overflow: 'hidden', background: '#000' }}>
-        <video ref={hero} className="cover" autoPlay muted loop playsInline preload="auto" poster={img('Dochula_on_Thimphu-Punakha_highway_Bhutan_-_panoramio.jpg')} aria-hidden style={{ filter: 'saturate(.75) contrast(1.1) brightness(.8)' }}>
+        <video ref={hero} className="cover" autoPlay muted loop playsInline preload="auto" poster={img('Dochu_La_Pass,_108_Druk_Wangyal_Chortens_(15818199106).jpg')} aria-hidden style={{ filter: 'saturate(.75) contrast(1.1) brightness(.8)' }}>
           <source src={VIDEO.hero} type="video/mp4" />
         </video>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,11,13,.55) 0%,rgba(8,11,13,0) 30%,rgba(8,11,13,0) 55%,#080B0D 100%)' }} />
@@ -114,14 +122,16 @@ export default function HomeExperience() {
 
       <section ref={rideSec} aria-label="Scroll-controlled ride" style={{ position: 'relative', height: '420vh' }}>
         <div className="screen" style={{ position: 'sticky', top: 0, overflow: 'hidden' }}>
-          <video ref={ride} aria-hidden className="cover" muted playsInline preload="auto" loop={!fine} autoPlay={!fine} poster={img('Masang_Kang_as_seen_from_Dochula_Pass.jpg')} style={{ filter: 'grayscale(.35) contrast(1.15) brightness(.55)', transform: `scale(${1 + p * 0.15})` }}>
+          <video ref={ride} aria-hidden className="cover" muted playsInline preload="auto" loop={!fine} autoPlay={!fine} poster={img('Rinpung_Dzong,_Bhutan_17.jpg')} style={{ filter: 'grayscale(.35) contrast(1.15) brightness(.55)', transform: `scale(${1 + p * 0.15})`, willChange: 'transform' }}>
             <source src={VIDEO.pov} type="video/mp4" />
           </video>
-          <div style={{ position: 'absolute', inset: 0, background: `url('${img(cp.img)}') center/cover`, opacity: (p * 5) % 1 > 0.55 ? 0.55 : 0, mixBlendMode: 'luminosity', transition: 'opacity .6s' }} />
+          {CHAPTERS.map((c, j) => (
+            <div key={c.place} aria-hidden style={{ position: 'absolute', inset: 0, background: `url('${img(PLACES[c.place].img, 1600)}') center/cover`, opacity: layer(j) * 0.55, mixBlendMode: 'luminosity', willChange: 'opacity' }} />
+          ))}
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 60%,rgba(8,11,13,0),rgba(8,11,13,.85))' }} />
-          <div aria-hidden className="display" style={{ position: 'absolute', top: '50%', left: 0, whiteSpace: 'nowrap', transform: `translate(${-p * 70}%,-50%)`, fontSize: 'clamp(120px,26vw,420px)', color: 'transparent', WebkitTextStroke: '1px rgba(244,246,246,.35)' }}>Paro · Thimphu · Dochula · Punakha · Phobjikha · Pele La · Trongsa · Yotong La · Bumthang</div>
+          <div aria-hidden className="display" style={{ position: 'absolute', top: '50%', left: 0, whiteSpace: 'nowrap', transform: `translate3d(${-p * 70}%,-50%,0)`, willChange: 'transform', fontSize: 'clamp(120px,26vw,420px)', color: 'transparent', WebkitTextStroke: '1px rgba(244,246,246,.35)' }}>Paro · Thimphu · Dochula · Punakha · Phobjikha · Pele La · Trongsa · Yotong La · Bumthang</div>
           <div className="ride-overlay">
-            <div aria-live="polite" style={{ display: 'grid', gap: 8, maxWidth: 420 }}>
+            <div key={ci} aria-live="polite" style={{ display: 'grid', gap: 8, maxWidth: 420, animation: 'chapterIn .6s cubic-bezier(.2,.7,.2,1) both' }}>
               <span className="mono" style={{ color: 'var(--lime)' }}>Chapter 0{ci + 1} / 05</span>
               <h2 className="display" style={{ fontSize: 'clamp(40px,min(7vw,12vh),104px)' }}>{cp.name}</h2>
               <span style={{ ...M, fontSize: 14, color: 'var(--orange)' }}>{cp.elev.toLocaleString()} m · {ch.kind.toLowerCase()}</span>

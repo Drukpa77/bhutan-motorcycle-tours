@@ -21,7 +21,7 @@ export default function RideMode() {
   return (
     <main id="main" ref={root} className="ridemode">
       <h1 className="sr-only">Ride mode</h1>
-      <video ref={vid} aria-hidden className="cover" autoPlay muted loop playsInline poster={img('Dochula_on_Thimphu-Punakha_highway_Bhutan_-_panoramio.jpg')} style={{ filter: 'saturate(.8) contrast(1.08)' }}>
+      <video ref={vid} aria-hidden className="cover" autoPlay muted loop playsInline poster={img('Dochu_La_Pass,_108_Druk_Wangyal_Chortens_(15818199106).jpg')} style={{ filter: 'saturate(.8) contrast(1.08)' }}>
         <source src={VIDEO.pov} type="video/mp4" />
       </video>
       <div style={{ position: 'absolute', inset: 0, background: `url('${img(pl.img)}') center/cover`, opacity: t > 0.55 && t < 0.95 ? 0.9 : 0, transition: 'opacity 1.2s ease' }} />
