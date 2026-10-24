@@ -3,6 +3,7 @@ import { Archivo, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import SiteHeader from '@/components/layout/SiteHeader';
 import { BRAND } from '@/lib/assets';
+import { CONTACT } from '@/lib/content';
 import { SHARE_IMAGE, SITE_DESCRIPTION, SITE_NAME, jsonLd, siteUrl } from '@/lib/site';
 
 const archivo = Archivo({ subsets: ['latin'], axes: ['wdth'], variable: '--font-archivo', display: 'swap' });
@@ -27,6 +28,9 @@ const ORG = {
   image: siteUrl() + SHARE_IMAGE.url,
   description: SITE_DESCRIPTION,
   areaServed: { '@type': 'Country', name: 'Bhutan' },
+  telephone: CONTACT.phoneHref.replace('tel:', ''),
+  email: CONTACT.emails[0],
+  address: { '@type': 'PostalAddress', streetAddress: CONTACT.address.slice(0, 3).join(', '), addressLocality: 'Thimphu', postalCode: '11001', addressCountry: 'BT' },
 };
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#080B0D', colorScheme: 'dark' };

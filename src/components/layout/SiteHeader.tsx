@@ -41,6 +41,7 @@ export default function SiteHeader() {
       <header className="sitehead">
         <Link href="/" className="brand" aria-label="Bhutan Motorcycle Tours, home">
           <img src={BRAND.logo} alt="" className="brand-mark" width={48} height={48} />
+          <span className="brand-name">Bhutan Motorcycle Tours</span>
         </Link>
         <nav aria-label="Primary" className="mono">
           {LINKS.map(l => (

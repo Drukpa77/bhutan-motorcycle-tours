@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { CHAPTERS, PARTS, PLACES, SKETCHFAB_CREDIT, SKETCHFAB_ID, TOURS, VIDEO, img } from '@/lib/content';
+import { CHAPTERS, CONTACT, PARTS, PLACES, SKETCHFAB_CREDIT, SKETCHFAB_ID, TOURS, VIDEO, img } from '@/lib/content';
 
 const M = { fontFamily: 'var(--font-mono)' } as const;
 const ELEV = ['paro', 'thimphu', 'dochula', 'punakha', 'phob', 'pele', 'trongsa', 'yotong', 'bumthang'].map(k => PLACES[k].elev);
@@ -243,7 +243,7 @@ export default function HomeExperience() {
         ))}
       </section>
 
-      <section aria-label="Finale" className="screen" style={{ position: 'relative', minHeight: 480, overflow: 'hidden', display: 'flex', alignItems: 'flex-end' }}>
+      <section aria-label="Finale" className="min-screen" style={{ position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'flex-end', paddingTop: 120 }}>
         <video aria-hidden className="cover" autoPlay muted loop playsInline preload="none" poster={img('places/phobjikha-valley.jpg')} style={{ filter: 'grayscale(.5) brightness(.5) contrast(1.2)' }}>
           <source src={VIDEO.pov} type="video/mp4" />
         </video>
@@ -251,8 +251,14 @@ export default function HomeExperience() {
           <h2 className="display" style={{ fontSize: 'clamp(40px,min(11vw,16vh),190px)', lineHeight: 0.8 }}>This is not a tour.<br /><span style={{ color: 'var(--orange)' }}>This is your next adventure.</span></h2>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 20, flexWrap: 'wrap', borderTop: '1px solid rgba(244,246,246,.25)', paddingTop: 20 }}>
             <Link href="/plan-your-ride" className="btn" style={{ background: 'var(--lime)', color: 'var(--ink)', padding: '20px 28px', fontSize: 16 }}>Initiate your expedition →</Link>
-            <span className="mono" style={{ fontSize: 10, color: 'var(--steel)' }}>Contact details awaiting verification · Photos: Wikimedia Commons · Map © OpenStreetMap</span>
+            <span className="mono" style={{ color: 'var(--orange)' }}>Or talk to us directly ↓</span>
           </div>
+          <address className="contact-strip">
+            <div><span className="mono">Call</span><a className="contact-val" href={CONTACT.phoneHref}>{CONTACT.phone}</a></div>
+            <div><span className="mono">WhatsApp</span><a className="contact-val" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">{CONTACT.whatsapp} ↗</a></div>
+            <div><span className="mono">Email</span>{CONTACT.emails.map(e => <a key={e} className="contact-val contact-email" href={'mailto:' + e}>{e}</a>)}</div>
+            <div><span className="mono">Visit</span><span className="contact-val">{CONTACT.address.join(', ')}</span></div>
+          </address>
         </div>
       </section>
     </main>

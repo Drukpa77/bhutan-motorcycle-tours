@@ -1,5 +1,15 @@
 export { BRAND, img } from './assets';
 
+export const CONTACT = {
+  country: 'Bhutan',
+  phone: '+975 7763 6226',
+  phoneHref: 'tel:+97577636226',
+  whatsapp: '+975 7763 6226',
+  whatsappHref: 'https://wa.me/97577636226',
+  emails: ['info@bhutanmindvacation.com', 'mindvacationtoursbhutan@gmail.com'] as const,
+  address: ['House No PHA-1-38', 'Unit 01-01', 'Babesa', 'Thimphu 11001', 'Bhutan'],
+};
+
 export const VIDEO = {
   // Temporary Mixkit footage (Mixkit Free License). NOT Bhutan. Replace with files in /public/videos/.
   hero: 'https://assets.mixkit.co/videos/31440/31440-720.mp4',

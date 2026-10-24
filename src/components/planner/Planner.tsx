@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { img } from '@/lib/content';
+import { CONTACT, img } from '@/lib/content';
 
 type F = { adv: string; days: number; exp: string; dest: string[]; bike: string; date: string; flex: boolean; riders: number; pax: number; group: 'Private' | 'Join a group'; acc: string; name: string; email: string; phone: string; country: string; notes: string; consent: boolean; hp: string };
 const DEF: F = { adv: '', days: 9, exp: '', dest: [], bike: '', date: '', flex: true, riders: 1, pax: 0, group: 'Private', acc: '', name: '', email: '', phone: '', country: '', notes: '', consent: false, hp: '' };
@@ -46,7 +46,7 @@ export default function Planner() {
   };
   const E = tried ? errs : {};
   const rows: [string, string, number][] = [['Mission', f.adv || '—', 0], ['Duration', f.days + ' days', 1], ['Rider', f.exp || '—', 2], ['Waypoints', f.dest.join(', ') || '—', 3], ['Machine', (f.bike || '—') + ' · availability TBC', 4], ['Window', (f.date || 'Not set') + (f.flex ? ' · flexible' : ''), 5], ['Crew', `${f.riders} rider(s), ${f.pax} passenger(s) · ${f.group}`, 5], ['Basecamp', f.acc || '—', 6], ['Comms', [f.name, f.email, f.phone, f.country].filter(Boolean).join(' · ') || '—', 7], ['Notes', f.notes || '—', 7]];
-  const mailto = 'mailto:?subject=' + encodeURIComponent('Expedition enquiry: ' + f.name) + '&body=' + encodeURIComponent(rows.map(r => r[0] + ': ' + r[1]).join('\n') + '\nPrice: Custom quotation required');
+  const mailto = 'mailto:' + CONTACT.emails.join(',') + '?subject=' + encodeURIComponent('Expedition enquiry: ' + f.name) + '&body=' + encodeURIComponent(rows.map(r => r[0] + ': ' + r[1]).join('\n') + '\nPrice: Custom quotation required');
 
   const submit = async () => {
     const bad = STEPS.findIndex((_, i) => i < STEPS.length - 1 && !valid(i));
@@ -152,13 +152,18 @@ export default function Planner() {
             </div>
             {status.kind === 'mock' && (
               <div role="status" style={{ border: '1px solid var(--orange)', padding: 20, display: 'grid', gap: 12 }}>
-                <b className="display" style={{ fontSize: 26 }}>Validated, but not delivered</b>
-                <span style={{ color: '#c7cdcf' }}>The server accepted your enquiry in MOCK mode. Email delivery isn’t configured yet (set RESEND_API_KEY). Nothing was sent to the operator.</span>
-                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}><a className="btn btn-orange" href={mailto}>Send by email instead</a><button className="btn btn-ghost" onClick={() => print()}>Print brief</button></div>
+                <b className="display" style={{ fontSize: 26 }}>Not sent yet</b>
+                <span style={{ color: '#c7cdcf' }}>Online sending isn’t switched on yet, so your brief hasn’t reached us. Send it by email or WhatsApp instead and we’ll reply with a quote.</span>
+                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}><a className="btn btn-orange" href={mailto}>Send by email</a><a className="btn btn-ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">WhatsApp {CONTACT.whatsapp}</a><button className="btn btn-ghost" onClick={() => print()}>Print brief</button></div>
               </div>
             )}
-            {status.kind === 'sent' && <div role="status" style={{ border: '1px solid var(--lime)', padding: 20 }}><b className="display" style={{ fontSize: 26, color: 'var(--lime)' }}>Enquiry sent</b><p style={{ color: '#c7cdcf', margin: '8px 0 0' }}>The operator has received your brief and will reply by email.</p></div>}
-            {status.kind === 'error' && <div role="alert" style={{ border: '1px solid #ff8a5f', padding: 20, color: '#ff8a5f' }}>{status.msg}</div>}
+            {status.kind === 'sent' && <div role="status" style={{ border: '1px solid var(--lime)', padding: 20 }}><b className="display" style={{ fontSize: 26, color: 'var(--lime)' }}>Enquiry sent</b><p style={{ color: '#c7cdcf', margin: '8px 0 0' }}>We’ve received your brief and will reply to {f.email} with a quote.</p></div>}
+            {status.kind === 'error' && (
+              <div role="alert" style={{ border: '1px solid #ff8a5f', padding: 20, display: 'grid', gap: 12 }}>
+                <span style={{ color: '#ff8a5f' }}>{status.msg} You can still send your brief by email or WhatsApp.</span>
+                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}><a className="btn btn-orange" href={mailto}>Send by email</a><a className="btn btn-ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">WhatsApp {CONTACT.whatsapp}</a></div>
+              </div>
+            )}
           </div>
         )}
 

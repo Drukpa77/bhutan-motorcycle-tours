@@ -12,7 +12,8 @@
       "PowerShell(git pull --ff-only origin main 2>&1)",
       "PowerShell(npm run typecheck 2>&1)",
       "PowerShell(npm run build 2>&1)",
-      "PowerShell(npx next start -p 3123)"
+      "PowerShell(npx next start -p 3123)",
+      "PowerShell(npx next dev -p 3124)"
     ]
   }
 }
