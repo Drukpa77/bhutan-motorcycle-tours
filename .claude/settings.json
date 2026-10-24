@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(git ls-files | Select-Object -First 200; \\(git ls-files | Measure-Object\\).Count)",
+      "WebSearch"
+    ]
+  }
+}

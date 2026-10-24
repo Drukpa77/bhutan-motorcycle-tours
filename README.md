@@ -43,6 +43,17 @@ Add or replace a photo by putting the file in `public/images/...` and pointing a
 - `/plan-your-ride`: 9-step Expedition Control planner, session-persisted
 - `/api/enquiry`: POST with Zod validation, honeypot and rate limit. Runs in **mock mode** until RESEND_API_KEY, ENQUIRY_TO_EMAIL and ENQUIRY_FROM_EMAIL are set
 
+## Sitemap (Google Search Console)
+Next.js serves these automatically:
+- Sitemap: `/sitemap.xml`
+- Robots: `/robots.txt` (points Google at the sitemap)
+
+On the live domain, the URL to paste into Google Search Console is:
+
+`https://bhutanmotorcycletours.com/sitemap.xml`
+
+Set `NEXT_PUBLIC_SITE_URL=https://bhutanmotorcycletours.com` (no trailing slash) in `.env.local` and on the host. Copy `.env.example` if you need a fresh file. After deploy, Google should see that domain in the XML, not localhost.
+
 ## Before launch
 - Replace temporary Mixkit video (not Bhutan) with licensed footage in `public/videos/` and update `VIDEO` in `src/lib/content.ts`.
 - Confirm business facts (`docs/ASSETS-AND-AUDIT.md`). Tours are editorial drafts.
