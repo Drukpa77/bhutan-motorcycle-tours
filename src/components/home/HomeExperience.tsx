@@ -6,7 +6,7 @@ import { CHAPTERS, PARTS, PLACES, SKETCHFAB_CREDIT, SKETCHFAB_ID, TOURS, VIDEO, 
 const M = { fontFamily: 'var(--font-mono)' } as const;
 const ELEV = ['paro', 'thimphu', 'dochula', 'punakha', 'phob', 'pele', 'trongsa', 'yotong', 'bumthang'].map(k => PLACES[k].elev);
 const proj = ([la, lo]: [number, number]) => [Math.round(((lo - 89.2) / 1.65) * 280 + 10), Math.round(((27.65 - la) / 0.32) * 120 + 8)];
-const MISSIONS = [...TOURS.map(t => ({ ...t, href: '/explore-bhutan?tour=' + t.slug, cta: 'Trace route' })),
+const MISSIONS = [...TOURS.map(t => ({ ...t, href: '/motorcycle-tours/' + t.path, cta: 'View route' })),
   { slug: 'custom', code: 'E-00', name: 'Your own line', status: 'Private / custom', summary: 'Your dates, your pace, your passes. Configure an expedition and the operator will quote it individually.', stops: ['paro', 'thimphu', 'punakha', 'phob'], high: 'You decide', img: 'places/phobjikha.jpg', href: '/plan-your-ride', cta: 'Configure' }];
 
 function Ignition({ onDone }: { onDone: () => void }) {
@@ -106,7 +106,7 @@ export default function HomeExperience() {
         </div>
         <div className="stack" style={{ position: 'absolute', left: 'var(--pad)', right: 'var(--pad)', bottom: 'clamp(20px,4vh,36px)', gridTemplateColumns: 'minmax(0,1fr) auto', gap: 24, alignItems: 'end' }}>
           <div>
-            <h1 className="display" style={{ fontSize: 'clamp(44px,min(16vw,22vh),260px)', lineHeight: 0.78 }}>The road<br /><span style={{ WebkitTextStroke: '2px var(--ice)', color: 'transparent' }}>is calling.</span></h1>
+            <h1 className="display" style={{ fontSize: 'clamp(44px,min(16vw,22vh),260px)', lineHeight: 0.78 }}><span className="mono" style={{ display: 'block', fontSize: 12, lineHeight: 1.4, color: 'var(--orange)', marginBottom: 'clamp(12px,2vh,20px)' }}>Bhutan Motorcycle Tours</span>The road<br /><span style={{ WebkitTextStroke: '2px var(--ice)', color: 'transparent' }}>is calling.</span></h1>
             <div style={{ display: 'flex', gap: '14px 28px', alignItems: 'center', flexWrap: 'wrap', marginTop: 'clamp(16px,3vh,28px)' }}>
               <p style={{ margin: 0, fontWeight: 200, fontSize: 'clamp(18px,1.8vw,24px)', flexBasis: 'auto' }}>Ride beyond the ordinary.</p>
               <a href="#missions" className="btn btn-ice">Explore expeditions</a>
@@ -206,6 +206,28 @@ export default function HomeExperience() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section aria-labelledby="about-title" className="page" style={{ paddingTop: 'clamp(56px,8vw,96px)', paddingBottom: 'clamp(56px,8vw,96px)' }}>
+        <div style={{ display: 'grid', gap: 20 }}>
+          <span className="mono" style={{ color: 'var(--orange)' }}>Guided motorcycle tours in Bhutan</span>
+          <h2 id="about-title" className="display" style={{ fontSize: 'clamp(40px,5vw,80px)' }}>Ride the Kingdom<br />of the Thunder Dragon</h2>
+          <p className="prose">Bhutan is one of the last great motorcycle roads in the Himalaya: a single winding lateral highway that climbs from river valleys at 1,200 m to passes near 4,000 m, past cliffside monasteries, fortress dzongs and prayer-flag ridges. Our guided Bhutan motorcycle tours start in Paro and follow that road over Chele La, Dochula, Pele La and Yotong La to the temples of Bumthang, or go wherever your own route takes you.</p>
+        </div>
+        <ul className="cards" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+          {TOURS.map(t => (
+            <li key={t.slug} style={{ background: 'var(--ink)', padding: 24, display: 'grid', gap: 12 }}>
+              <span className="mono" style={{ color: 'var(--steel)' }}>{t.code} · High point {t.high}</span>
+              <h3 className="display" style={{ fontSize: 'clamp(28px,3vw,44px)' }}><Link href={'/motorcycle-tours/' + t.path} style={{ textDecoration: 'none' }}>{t.name} →</Link></h3>
+              <p className="prose" style={{ fontSize: 16 }}>{t.summary}</p>
+            </li>
+          ))}
+          <li style={{ background: 'var(--ink)', padding: 24, display: 'grid', gap: 12 }}>
+            <span className="mono" style={{ color: 'var(--steel)' }}>Licence · SDF fee · Best season</span>
+            <h3 className="display" style={{ fontSize: 'clamp(28px,3vw,44px)' }}><Link href="/faq" style={{ textDecoration: 'none' }}>Rider FAQ →</Link></h3>
+            <p className="prose" style={{ fontSize: 16 }}>What you need to know before riding in Bhutan: licences, guides, the Sustainable Development Fee and when to go.</p>
+          </li>
+        </ul>
       </section>
 
       <section aria-label="Terrain" className="stack stats">

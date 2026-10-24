@@ -71,7 +71,7 @@ export default function Planner() {
       <aside aria-label="Your selections" className="planner-aside" style={{ background: `#050708 url('${img(f.bike === 'Adventure single' ? 'bike/himalayan.jpg' : S.img)}') center/cover` }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,11,13,.3),rgba(8,11,13,.96))' }} />
         <div style={{ position: 'absolute', left: 'var(--pad)', right: 'var(--pad)', bottom: 'var(--pad)', display: 'grid', gap: 14 }}>
-          <span className="mono" style={{ color: 'var(--lime)' }}>Expedition control</span>
+          <h1 className="mono" style={{ color: 'var(--lime)', margin: 0, fontWeight: 400 }}>Plan your Bhutan motorcycle tour</h1>
           <span className="display" style={{ fontSize: 'clamp(36px,4.5vw,72px)' }}>{f.adv || 'Configure your ride'}</span>
           <div className="mono" style={{ display: 'grid', gap: 6, color: '#c7cdcf' }}>
             {([['Days', f.days], ['Rider', f.exp || '—'], ['Machine', f.bike || '—'], ['Waypoints', f.dest.length || '—']] as const).map(([k, v]) => (
@@ -85,7 +85,7 @@ export default function Planner() {
         <div style={{ display: 'flex', gap: 4 }} aria-hidden>{STEPS.map((_, i) => <span key={i} style={{ flex: 1, height: 3, background: i < step ? 'var(--orange)' : i === step ? 'var(--ice)' : '#1b2227' }} />)}</div>
         <div>
           <span className="mono" style={{ color: 'var(--steel)' }}>Step {String(step + 1).padStart(2, '0')} / 09</span>
-          <h1 ref={heading} tabIndex={-1} className="display" style={{ fontSize: 'clamp(44px,6vw,96px)', marginTop: 10, outline: 'none', scrollMarginTop: 96 }}>{S.title}</h1>
+          <h2 ref={heading} tabIndex={-1} className="display" style={{ fontSize: 'clamp(44px,6vw,96px)', marginTop: 10, outline: 'none', scrollMarginTop: 96 }}>{S.title}</h2>
           <p style={{ color: '#c7cdcf', lineHeight: 1.6, maxWidth: '56ch', margin: '14px 0 0' }}>{S.hint}</p>
           {tried && !valid(step) && S.opts && <p role="alert" style={{ color: '#ff8a5f', margin: '10px 0 0' }}>Choose an option to continue.</p>}
         </div>

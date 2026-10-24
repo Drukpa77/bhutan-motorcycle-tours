@@ -65,6 +65,22 @@ button,input,textarea,select{touch-action:manipulation}
 .terrain-map{height:min(78vh,760px);min-height:420px;background:#111}
 .terrain-side{border-left:1px solid var(--line);display:flex;flex-direction:column;max-height:min(78vh,760px)}
 
+/* Text pages: tours, FAQ */
+.page{padding:112px var(--pad) 72px;display:grid;gap:clamp(40px,6vw,72px);max-width:1280px;margin:0 auto}
+.crumbs{display:flex;gap:10px;flex-wrap:wrap;color:var(--steel)}
+.crumbs a{color:var(--steel);text-decoration:none}
+.prose{color:#c7cdcf;font-weight:300;font-size:clamp(16px,1.4vw,19px);line-height:1.65;max-width:62ch;margin:0}
+.photo{position:relative;overflow:hidden;background:var(--ti)}
+.photo img{object-fit:cover;filter:saturate(.8)}
+.credit{color:var(--steel);font-size:10px;margin-top:8px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.card{background:var(--ink);display:grid;gap:16px;padding-bottom:24px;text-decoration:none}
+.card>:not(.photo){padding:0 20px}
+.stop{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(20px,4vw,48px);padding:32px 0;border-top:1px solid var(--line);align-items:start}
+.faq details{border-top:1px solid var(--line);padding:20px 0}
+.faq summary{cursor:pointer;font-stretch:80%;font-weight:800;font-size:clamp(18px,1.8vw,22px);text-transform:uppercase;list-style-position:outside}
+.faq details p{margin:12px 0 0}
+
 /* Planner */
 .planner{grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr)}
 .planner-aside{position:sticky;top:0;align-self:start;height:100vh;height:100svh;min-height:360px}
@@ -95,6 +111,8 @@ input[type=range]{min-height:44px}
   .planner-main{padding-top:32px}
   .brief-row{grid-template-columns:minmax(0,1fr) auto;gap:4px 16px}
   .brief-row>span:first-child{grid-column:1/-1}
+  .page{padding-top:96px}
+  .stop{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-height:700px){.hud{display:none!important}}
 @media (max-height:500px){

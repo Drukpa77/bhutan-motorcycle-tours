@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "PowerShell(git ls-files | Select-Object -First 200; \\(git ls-files | Measure-Object\\).Count)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(curl -sIv https://www.bhutanmotorcycletours.com/)",
+      "Bash(curl -sI http://bhutanmotorcycletours.com/)",
+      "Bash(curl -s -o /dev/null -w \"TTFB %{time_starttransfer}s total %{time_total}s\\\\n\" https://bhutanmotorcycletours.com/)",
+      "Bash(curl -sv https://www.bhutanmotorcycletours.com/ -o /dev/null)",
+      "Bash(nslookup www.bhutanmotorcycletours.com)",
+      "PowerShell(git fetch --all 2>&1)",
+      "PowerShell(git pull --ff-only origin main 2>&1)",
+      "PowerShell(npm run typecheck 2>&1)",
+      "PowerShell(npm run build 2>&1)",
+      "PowerShell(npx next start -p 3123)"
     ]
   }
 }

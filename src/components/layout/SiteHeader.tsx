@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from 'react';
 import { BRAND } from '@/lib/assets';
 
 const LINKS = [
-  { href: '/#missions', label: 'Expeditions' },
-  { href: '/explore-bhutan', label: 'Terrain' },
-  { href: '/#machine', label: 'Machine' },
+  { href: '/motorcycle-tours', label: 'Tours' },
+  { href: '/explore-bhutan', label: 'Route map' },
+  { href: '/faq', label: 'FAQ' },
   { href: '/ride-mode', label: 'Ride mode' },
   { href: '/plan-your-ride', label: 'Build your ride →' },
 ];
@@ -44,7 +44,7 @@ export default function SiteHeader() {
         </Link>
         <nav aria-label="Primary" className="mono">
           {LINKS.map(l => (
-            <Link key={l.href} href={l.href} aria-current={path === l.href ? 'page' : undefined} style={path === l.href ? { color: 'var(--orange)' } : undefined}>{l.label}</Link>
+            <Link key={l.href} href={l.href} aria-current={path === l.href ? 'page' : undefined} style={path.startsWith(l.href) ? { color: 'var(--orange)' } : undefined}>{l.label}</Link>
           ))}
         </nav>
         <button ref={menuBtn} className="menu mono" aria-expanded={open} aria-controls="mobilenav" onClick={() => setOpen(true)}>Menu</button>
