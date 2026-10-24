@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Archivo, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
-import SiteHeader from '@/components/SiteHeader';
+import SiteHeader from '@/components/layout/SiteHeader';
+import { BRAND } from '@/lib/assets';
 
 const archivo = Archivo({ subsets: ['latin'], axes: ['wdth'], variable: '--font-archivo', display: 'swap' });
 const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-mono', display: 'swap' });
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   title: { default: 'Bhutan Motorcycle Tours — Future of the Ride', template: '%s — Bhutan Motorcycle Tours' },
   description: 'Guided motorcycle expeditions across Bhutan’s high passes and valleys.',
   openGraph: { type: 'website', siteName: 'Bhutan Motorcycle Tours' },
+  icons: { icon: BRAND.logo, apple: BRAND.logo },
 };
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#080B0D', colorScheme: 'dark' };

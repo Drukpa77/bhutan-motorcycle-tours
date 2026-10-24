@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import TerrainExplorer from '@/components/TerrainExplorer';
+import TerrainExplorer from '@/components/map/TerrainExplorer';
 export const metadata: Metadata = { title: 'Explore Bhutan — Terrain System', description: 'Trace expedition routes across a real map of Bhutan.' };
 export default async function Page({ searchParams }: { searchParams: Promise<{ tour?: string }> }) {
   const { tour } = await searchParams;

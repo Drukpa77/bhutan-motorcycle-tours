@@ -1,8 +1,7 @@
-export const img = (file: string, w = 2000) =>
-  'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(file) + '?width=' + w;
+export { BRAND, img } from './assets';
 
 export const VIDEO = {
-  // Temporary Mixkit footage (Mixkit Free License). NOT Bhutan. Replace with /public/videos/hero-motorcycle.mp4.
+  // Temporary Mixkit footage (Mixkit Free License). NOT Bhutan. Replace with files in /public/videos/.
   hero: 'https://assets.mixkit.co/videos/31440/31440-720.mp4',
   pov: 'https://assets.mixkit.co/videos/31974/31974-720.mp4',
 };
@@ -10,26 +9,26 @@ export const VIDEO = {
 export type Place = { id: string; name: string; ll: [number, number]; elev: number; pass?: boolean; img: string; credit: string };
 
 // Coordinates: OpenStreetMap / public gazetteers. Elevations: approximate public figures.
-// Photos: Wikimedia Commons, each taken at the named place unless the credit says "Stand-in".
+// Photos: local copies in /public/images/places from Wikimedia Commons.
 export const PLACES: Record<string, Place> = {
-  paro: { id: 'paro', name: 'Paro', ll: [27.4305, 89.4133], elev: 2200, img: 'Rinpung_Dzong,_Bhutan_17.jpg', credit: 'Rinpung Dzong · B. Gagnon · CC BY-SA 4.0' },
-  chele: { id: 'chele', name: 'Chele La', ll: [27.3699, 89.3467], elev: 3988, pass: true, img: 'Chele_La_Pass_-_Paro_-_during_LGFC_-_Bhutan_2019_(01).jpg', credit: 'Chele La · Vinayaraj · CC BY-SA 4.0' },
-  haa: { id: 'haa', name: 'Haa', ll: [27.387, 89.28], elev: 2670, img: 'Lhakhag_Karpo_Haa_Bhutan.jpg', credit: 'Lhakhang Karpo · C. J. Fynn · CC BY-SA 3.0' },
-  thimphu: { id: 'thimphu', name: 'Thimphu', ll: [27.4728, 89.639], elev: 2330, img: 'Tashichho_Dzong_2012-11-19.jpg', credit: 'Tashichho Dzong · C. J. Fynn · CC BY-SA 3.0' },
-  dochula: { id: 'dochula', name: 'Dochula', ll: [27.4914, 89.7503], elev: 3100, pass: true, img: 'Druk_Wangyal_Chortens,_Bhutan_01.jpg', credit: 'Druk Wangyal Chortens · B. Gagnon · CC BY-SA 4.0' },
-  punakha: { id: 'punakha', name: 'Punakha', ll: [27.581, 89.8631], elev: 1250, img: 'Punakha_Dzong,_Bhutan_04.jpg', credit: 'Punakha Dzong · B. Gagnon · CC BY-SA 4.0' },
-  phob: { id: 'phob', name: 'Phobjikha', ll: [27.4626, 90.18], elev: 2900, img: 'Gangte_Goemba_in_the_Phobjika_Valley,_Bhutan_(26)_-_44254128071.jpg', credit: 'Gangtey Goemba · Prof. Mortel · CC BY 2.0' },
-  pele: { id: 'pele', name: 'Pele La', ll: [27.5372, 90.2029], elev: 3420, pass: true, img: 'Pele_La_Pass.jpg', credit: 'Chorten at Pele La · RPSkokie · CC BY-SA 4.0' },
-  trongsa: { id: 'trongsa', name: 'Trongsa', ll: [27.4997, 90.5072], elev: 2180, img: 'Trongsa_Dzong_2001_a.jpg', credit: 'Trongsa Dzong · C. J. Fynn · CC BY-SA 3.0' },
-  yotong: { id: 'yotong', name: 'Yotong La', ll: [27.5169, 90.5863], elev: 3425, pass: true, img: 'Pele_La_pass_on_the_Nubding_to_Wandue_Phodrang_highway_-_Bhutan_-_panoramio.jpg', credit: 'Stand-in: prayer flags near Pele La · D. Broad · CC BY 3.0' },
-  bumthang: { id: 'bumthang', name: 'Bumthang', ll: [27.5492, 90.7525], elev: 2600, img: 'Jakar_Dzong,_Bumthang.jpg', credit: 'Jakar Dzong · C. J. Fynn · CC BY-SA 3.0' },
+  paro: { id: 'paro', name: 'Paro', ll: [27.4305, 89.4133], elev: 2200, img: 'places/paro.jpg', credit: 'Rinpung Dzong · B. Gagnon · CC BY-SA 4.0' },
+  chele: { id: 'chele', name: 'Chele La', ll: [27.3699, 89.3467], elev: 3988, pass: true, img: 'places/chele-la.jpg', credit: 'Chele La · Vinayaraj · CC BY-SA 4.0' },
+  haa: { id: 'haa', name: 'Haa', ll: [27.387, 89.28], elev: 2670, img: 'places/haa.jpg', credit: 'Lhakhang Karpo · C. J. Fynn · CC BY-SA 3.0' },
+  thimphu: { id: 'thimphu', name: 'Thimphu', ll: [27.4728, 89.639], elev: 2330, img: 'places/thimphu.jpg', credit: 'Tashichho Dzong · C. J. Fynn · CC BY-SA 3.0' },
+  dochula: { id: 'dochula', name: 'Dochula', ll: [27.4914, 89.7503], elev: 3100, pass: true, img: 'places/dochula.jpg', credit: 'Druk Wangyal Chortens · B. Gagnon · CC BY-SA 4.0' },
+  punakha: { id: 'punakha', name: 'Punakha', ll: [27.581, 89.8631], elev: 1250, img: 'places/punakha.jpg', credit: 'Punakha Dzong · B. Gagnon · CC BY-SA 4.0' },
+  phob: { id: 'phob', name: 'Phobjikha', ll: [27.4626, 90.18], elev: 2900, img: 'places/phobjikha.jpg', credit: 'Gangtey Goemba · Prof. Mortel · CC BY 2.0' },
+  pele: { id: 'pele', name: 'Pele La', ll: [27.5372, 90.2029], elev: 3420, pass: true, img: 'places/pele-la.jpg', credit: 'Chorten at Pele La · RPSkokie · CC BY-SA 4.0' },
+  trongsa: { id: 'trongsa', name: 'Trongsa', ll: [27.4997, 90.5072], elev: 2180, img: 'places/trongsa.jpg', credit: 'Trongsa Dzong · C. J. Fynn · CC BY-SA 3.0' },
+  yotong: { id: 'yotong', name: 'Yotong La', ll: [27.5169, 90.5863], elev: 3425, pass: true, img: 'places/yotong-la.jpg', credit: 'Stand-in: prayer flags near Pele La · D. Broad · CC BY 3.0' },
+  bumthang: { id: 'bumthang', name: 'Bumthang', ll: [27.5492, 90.7525], elev: 2600, img: 'places/bumthang.jpg', credit: 'Jakar Dzong · C. J. Fynn · CC BY-SA 3.0' },
 };
 
 export type Tour = { slug: string; code: string; name: string; status: string; summary: string; stops: string[]; high: string; img: string };
 // EDITORIAL DRAFT: route concepts only, not verified operator tours. No durations or prices until confirmed.
 export const TOURS: Tour[] = [
-  { slug: 'spine', code: 'E-01', name: 'Dragon’s Spine', status: 'Draft route', summary: 'West to centre along the lateral road. Three passes above 3,000 m, a valley floor at 1,250 m, and the dzongs between.', stops: ['paro', 'thimphu', 'dochula', 'punakha', 'phob', 'pele', 'trongsa', 'yotong', 'bumthang'], high: 'Yotong La 3,425 m', img: 'Dochu_La_Pass,_108_Druk_Wangyal_Chortens_(15818199106).jpg' },
-  { slug: 'west', code: 'E-02', name: 'Western Valleys', status: 'Draft route', summary: 'Chele La, the highest stop on the western circuit, then Haa, Thimphu and the drop to Punakha.', stops: ['paro', 'chele', 'haa', 'paro', 'thimphu', 'dochula', 'punakha'], high: 'Chele La 3,988 m', img: 'Chele_La_Pass_-_Paro_-_during_LGFC_-_Bhutan_2019_(01).jpg' },
+  { slug: 'spine', code: 'E-01', name: 'Dragon’s Spine', status: 'Draft route', summary: 'West to centre along the lateral road. Three passes above 3,000 m, a valley floor at 1,250 m, and the dzongs between.', stops: ['paro', 'thimphu', 'dochula', 'punakha', 'phob', 'pele', 'trongsa', 'yotong', 'bumthang'], high: 'Yotong La 3,425 m', img: 'places/dochula-wide.jpg' },
+  { slug: 'west', code: 'E-02', name: 'Western Valleys', status: 'Draft route', summary: 'Chele La, the highest stop on the western circuit, then Haa, Thimphu and the drop to Punakha.', stops: ['paro', 'chele', 'haa', 'paro', 'thimphu', 'dochula', 'punakha'], high: 'Chele La 3,988 m', img: 'places/chele-la.jpg' },
 ];
 
 export const haversine = (a: [number, number], b: [number, number]) => {

@@ -28,10 +28,13 @@ button,input,textarea,select{touch-action:manipulation}
 .min-screen{min-height:100vh;min-height:100svh}
 
 .sitehead{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px var(--pad);mix-blend-mode:difference}
+.sitehead .brand{display:flex;align-items:center;mix-blend-mode:normal;isolation:isolate}
+.sitehead .brand-mark{height:48px;width:48px;object-fit:cover;object-position:top center;border-radius:50%;background:#fff}
 .sitehead nav{display:flex;gap:26px}
 .sitehead nav a{text-decoration:none;padding:15px 0}
 .sitehead .menu{display:none;background:none;border:1px solid var(--ice);color:var(--ice);height:44px;padding:0 14px;cursor:pointer}
 .mobilenav{position:fixed;inset:0;z-index:80;background:var(--ink);display:flex;flex-direction:column;justify-content:safe center;gap:8px;padding:88px var(--pad) 32px;overflow-y:auto;overscroll-behavior:contain}
+.mobilenav .brand-full{width:min(220px,70vw);height:auto;margin:0 auto 24px;background:#fff;border-radius:16px;padding:12px}
 .mobilenav a{font-stretch:62%;font-weight:900;font-size:clamp(36px,min(12vw,9vh),56px);text-transform:uppercase;text-decoration:none;line-height:1.05;padding:4px 0}
 .stack{display:grid}
 .end-m-start{justify-items:end}

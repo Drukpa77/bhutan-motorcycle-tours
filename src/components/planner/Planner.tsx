@@ -7,15 +7,15 @@ const DEF: F = { adv: '', days: 9, exp: '', dest: [], bike: '', date: '', flex: 
 type Key = 'adv' | 'days' | 'exp' | 'dest' | 'bike' | 'dates' | 'acc' | 'contact' | 'summary';
 type Step = { key: Key; title: string; hint: string; opts?: [string, string][]; multi?: boolean; img: string };
 const STEPS: Step[] = [
-  { key: 'adv', title: 'Mission type', hint: 'Start with the kind of journey you have in mind.', img: 'Rinpung_Dzong,_Bhutan_17.jpg', opts: [['Motorcycle tour', 'Scheduled route, once published'], ['Private expedition', 'Your group, your dates'], ['Other adventure', 'Rafting, cycling, MTB, climbing'], ['Custom itinerary', 'Mix riding with culture']] },
-  { key: 'days', title: 'Duration', hint: 'Allow for arrival in Paro and a rest day at altitude on longer trips.', img: 'Trongsa_Dzong_2001_a.jpg' },
-  { key: 'exp', title: 'Rider profile', hint: 'Eligibility depends on your licence and the operator’s requirements. A valid motorcycle licence is expected.', img: 'Druk_Wangyal_Chortens,_Bhutan_01.jpg', opts: [['Beginner', 'Limited mountain riding'], ['Intermediate', 'Comfortable on twisty roads'], ['Experienced', 'Multi-day touring, some gravel'], ['Advanced mountain', 'High passes, broken surfaces, weather']] },
-  { key: 'dest', multi: true, title: 'Waypoints', hint: 'Pick as many as you like. Real places on the western and central routes.', img: 'Punakha_Dzong,_Bhutan_04.jpg', opts: [['Paro', '2,200 m'], ['Chele La & Haa', '3,988 m'], ['Thimphu', '2,330 m'], ['Dochula', '3,100 m'], ['Punakha', '1,250 m'], ['Phobjikha', '2,900 m'], ['Trongsa', '2,180 m'], ['Bumthang', '2,600 m']] },
-  { key: 'bike', title: 'Machine', hint: 'The fleet is not yet confirmed. State a preference and availability comes with your quote.', img: 'Royal_Enfield_Himalayan.jpg', opts: [['Adventure single', 'Himalayan class (illustrative)'], ['Classic single', 'Upright, relaxed touring'], ['No preference', 'Recommend for my route'], ['Bring my own', 'Ask about permits']] },
-  { key: 'dates', title: 'Window & crew', hint: 'Spring (Mar–May) and autumn (Sep–Nov) are usually the clearest seasons.', img: 'Phobjika_Valley,_Bhutan_(12)_-_44206217132.jpg' },
-  { key: 'acc', title: 'Basecamp', hint: 'A preference, not a guarantee of specific hotels.', img: 'Gangte_Goemba_in_the_Phobjika_Valley,_Bhutan_(26)_-_44254128071.jpg', opts: [['Comfortable hotels', 'Standard tourist-grade'], ['Boutique & heritage', 'Where available on route'], ['Farmhouse stays', 'Family-run, local food'], ['Mixed', 'Best fit for each night']] },
-  { key: 'contact', title: 'Comms', hint: 'Used only to respond to this enquiry.', img: 'Dochu_La_Pass,_108_Druk_Wangyal_Chortens_(15818199106).jpg' },
-  { key: 'summary', title: 'Mission brief', hint: 'Check everything. Edit any line before sending.', img: 'Punakha_dzong.jpg' },
+  { key: 'adv', title: 'Mission type', hint: 'Start with the kind of journey you have in mind.', img: 'places/paro.jpg', opts: [['Motorcycle tour', 'Scheduled route, once published'], ['Private expedition', 'Your group, your dates'], ['Other adventure', 'Rafting, cycling, MTB, climbing'], ['Custom itinerary', 'Mix riding with culture']] },
+  { key: 'days', title: 'Duration', hint: 'Allow for arrival in Paro and a rest day at altitude on longer trips.', img: 'places/trongsa.jpg' },
+  { key: 'exp', title: 'Rider profile', hint: 'Eligibility depends on your licence and the operator’s requirements. A valid motorcycle licence is expected.', img: 'places/dochula.jpg', opts: [['Beginner', 'Limited mountain riding'], ['Intermediate', 'Comfortable on twisty roads'], ['Experienced', 'Multi-day touring, some gravel'], ['Advanced mountain', 'High passes, broken surfaces, weather']] },
+  { key: 'dest', multi: true, title: 'Waypoints', hint: 'Pick as many as you like. Real places on the western and central routes.', img: 'places/punakha.jpg', opts: [['Paro', '2,200 m'], ['Chele La & Haa', '3,988 m'], ['Thimphu', '2,330 m'], ['Dochula', '3,100 m'], ['Punakha', '1,250 m'], ['Phobjikha', '2,900 m'], ['Trongsa', '2,180 m'], ['Bumthang', '2,600 m']] },
+  { key: 'bike', title: 'Machine', hint: 'The fleet is not yet confirmed. State a preference and availability comes with your quote.', img: 'bike/himalayan.jpg', opts: [['Adventure single', 'Himalayan class (illustrative)'], ['Classic single', 'Upright, relaxed touring'], ['No preference', 'Recommend for my route'], ['Bring my own', 'Ask about permits']] },
+  { key: 'dates', title: 'Window & crew', hint: 'Spring (Mar–May) and autumn (Sep–Nov) are usually the clearest seasons.', img: 'places/phobjikha-valley.jpg' },
+  { key: 'acc', title: 'Basecamp', hint: 'A preference, not a guarantee of specific hotels.', img: 'places/phobjikha.jpg', opts: [['Comfortable hotels', 'Standard tourist-grade'], ['Boutique & heritage', 'Where available on route'], ['Farmhouse stays', 'Family-run, local food'], ['Mixed', 'Best fit for each night']] },
+  { key: 'contact', title: 'Comms', hint: 'Used only to respond to this enquiry.', img: 'places/dochula-wide.jpg' },
+  { key: 'summary', title: 'Mission brief', hint: 'Check everything. Edit any line before sending.', img: 'places/punakha-alt.jpg' },
 ];
 const lbl = { display: 'grid', gap: 8, color: 'var(--steel)' } as const;
 type Status = { kind: 'idle' | 'sending' | 'mock' | 'sent' | 'error'; msg?: string };
@@ -68,7 +68,7 @@ export default function Planner() {
 
   return (
     <main id="main" className="stack planner min-screen">
-      <aside aria-label="Your selections" className="planner-aside" style={{ background: `#050708 url('${img(f.bike === 'Adventure single' ? 'Royal_Enfield_Himalayan.jpg' : S.img, 1400)}') center/cover` }}>
+      <aside aria-label="Your selections" className="planner-aside" style={{ background: `#050708 url('${img(f.bike === 'Adventure single' ? 'bike/himalayan.jpg' : S.img)}') center/cover` }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,11,13,.3),rgba(8,11,13,.96))' }} />
         <div style={{ position: 'absolute', left: 'var(--pad)', right: 'var(--pad)', bottom: 'var(--pad)', display: 'grid', gap: 14 }}>
           <span className="mono" style={{ color: 'var(--lime)' }}>Expedition control</span>

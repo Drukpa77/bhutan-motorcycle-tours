@@ -7,7 +7,7 @@ const M = { fontFamily: 'var(--font-mono)' } as const;
 const ELEV = ['paro', 'thimphu', 'dochula', 'punakha', 'phob', 'pele', 'trongsa', 'yotong', 'bumthang'].map(k => PLACES[k].elev);
 const proj = ([la, lo]: [number, number]) => [Math.round(((lo - 89.2) / 1.65) * 280 + 10), Math.round(((27.65 - la) / 0.32) * 120 + 8)];
 const MISSIONS = [...TOURS.map(t => ({ ...t, href: '/explore-bhutan?tour=' + t.slug, cta: 'Trace route' })),
-  { slug: 'custom', code: 'E-00', name: 'Your own line', status: 'Private / custom', summary: 'Your dates, your pace, your passes. Configure an expedition and the operator will quote it individually.', stops: ['paro', 'thimphu', 'punakha', 'phob'], high: 'You decide', img: 'Gangte_Goemba_in_the_Phobjika_Valley,_Bhutan_(26)_-_44254128071.jpg', href: '/plan-your-ride', cta: 'Configure' }];
+  { slug: 'custom', code: 'E-00', name: 'Your own line', status: 'Private / custom', summary: 'Your dates, your pace, your passes. Configure an expedition and the operator will quote it individually.', stops: ['paro', 'thimphu', 'punakha', 'phob'], high: 'You decide', img: 'places/phobjikha.jpg', href: '/plan-your-ride', cta: 'Configure' }];
 
 function Ignition({ onDone }: { onDone: () => void }) {
   const [lit, setLit] = useState(false), [go, setGo] = useState(false);
@@ -22,7 +22,7 @@ function Ignition({ onDone }: { onDone: () => void }) {
   }, []);
   return (
     <div role="dialog" aria-modal="true" aria-label="Ignition intro" style={{ position: 'fixed', inset: 0, zIndex: 100, background: '#030405', overflow: 'hidden', opacity: go ? 0 : 1, transition: 'opacity 1.1s cubic-bezier(.7,0,.2,1)' }}>
-      <div style={{ position: 'absolute', inset: '-4%', background: `url('${img('Royal_Enfield_Himalayan.jpg')}') center/cover`, filter: `grayscale(.6) contrast(1.25) brightness(${lit ? 0.9 : 0.15})`, transform: `scale(${go ? 3.2 : 1.04})`, transition: 'transform 1.4s cubic-bezier(.7,0,.2,1), filter 2.4s ease' }} />
+      <div style={{ position: 'absolute', inset: '-4%', background: `url('${img('bike/himalayan.jpg')}') center/cover`, filter: `grayscale(.6) contrast(1.25) brightness(${lit ? 0.9 : 0.15})`, transform: `scale(${go ? 3.2 : 1.04})`, transition: 'transform 1.4s cubic-bezier(.7,0,.2,1), filter 2.4s ease' }} />
       <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse 40% 50% at 50% 50%, rgba(3,4,5,0) 0, rgba(3,4,5,.7) ${lit ? '70%' : '4%'}, #030405 ${lit ? '140%' : '12%'})`, transition: 'all 2.6s cubic-bezier(.2,.7,.2,1)' }} />
       <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)' }} />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 1, background: 'var(--lime)', opacity: 0.5, animation: 'scan 3.2s linear infinite' }} />
@@ -95,7 +95,7 @@ export default function HomeExperience() {
       {intro && <Ignition onDone={() => setIntro(false)} />}
 
       <section aria-label="Ride hero" className="screen" style={{ position: 'relative', minHeight: 520, overflow: 'hidden', background: '#000' }}>
-        <video ref={hero} className="cover" autoPlay muted loop playsInline preload="auto" poster={img('Dochu_La_Pass,_108_Druk_Wangyal_Chortens_(15818199106).jpg')} aria-hidden style={{ filter: 'saturate(.75) contrast(1.1) brightness(.8)' }}>
+        <video ref={hero} className="cover" autoPlay muted loop playsInline preload="auto" poster={img('places/dochula-wide.jpg')} aria-hidden style={{ filter: 'saturate(.75) contrast(1.1) brightness(.8)' }}>
           <source src={VIDEO.hero} type="video/mp4" />
         </video>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,11,13,.55) 0%,rgba(8,11,13,0) 30%,rgba(8,11,13,0) 55%,#080B0D 100%)' }} />
@@ -122,11 +122,11 @@ export default function HomeExperience() {
 
       <section ref={rideSec} aria-label="Scroll-controlled ride" style={{ position: 'relative', height: '420vh' }}>
         <div className="screen" style={{ position: 'sticky', top: 0, overflow: 'hidden' }}>
-          <video ref={ride} aria-hidden className="cover" muted playsInline preload="auto" loop={!fine} autoPlay={!fine} poster={img('Rinpung_Dzong,_Bhutan_17.jpg')} style={{ filter: 'grayscale(.35) contrast(1.15) brightness(.55)', transform: `scale(${1 + p * 0.15})`, willChange: 'transform' }}>
+          <video ref={ride} aria-hidden className="cover" muted playsInline preload="auto" loop={!fine} autoPlay={!fine} poster={img('places/paro.jpg')} style={{ filter: 'grayscale(.35) contrast(1.15) brightness(.55)', transform: `scale(${1 + p * 0.15})`, willChange: 'transform' }}>
             <source src={VIDEO.pov} type="video/mp4" />
           </video>
           {CHAPTERS.map((c, j) => (
-            <div key={c.place} aria-hidden style={{ position: 'absolute', inset: 0, background: `url('${img(PLACES[c.place].img, 1600)}') center/cover`, opacity: layer(j) * 0.55, mixBlendMode: 'luminosity', willChange: 'opacity' }} />
+            <div key={c.place} aria-hidden style={{ position: 'absolute', inset: 0, background: `url('${img(PLACES[c.place].img)}') center/cover`, opacity: layer(j) * 0.55, mixBlendMode: 'luminosity', willChange: 'opacity' }} />
           ))}
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 60%,rgba(8,11,13,0),rgba(8,11,13,.85))' }} />
           <div aria-hidden className="display" style={{ position: 'absolute', top: '50%', left: 0, whiteSpace: 'nowrap', transform: `translate3d(${-p * 70}%,-50%,0)`, willChange: 'transform', fontSize: 'clamp(120px,26vw,420px)', color: 'transparent', WebkitTextStroke: '1px rgba(244,246,246,.35)' }}>Paro · Thimphu · Dochula · Punakha · Phobjikha · Pele La · Trongsa · Yotong La · Bumthang</div>
@@ -222,7 +222,7 @@ export default function HomeExperience() {
       </section>
 
       <section aria-label="Finale" className="screen" style={{ position: 'relative', minHeight: 480, overflow: 'hidden', display: 'flex', alignItems: 'flex-end' }}>
-        <video aria-hidden className="cover" autoPlay muted loop playsInline preload="none" poster={img('Phobjika_Valley,_Bhutan_(12)_-_44206217132.jpg')} style={{ filter: 'grayscale(.5) brightness(.5) contrast(1.2)' }}>
+        <video aria-hidden className="cover" autoPlay muted loop playsInline preload="none" poster={img('places/phobjikha-valley.jpg')} style={{ filter: 'grayscale(.5) brightness(.5) contrast(1.2)' }}>
           <source src={VIDEO.pov} type="video/mp4" />
         </video>
         <div style={{ position: 'relative', padding: '0 var(--pad) 40px', display: 'grid', gap: 28, width: '100%' }}>

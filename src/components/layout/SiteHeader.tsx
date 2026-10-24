@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { BRAND } from '@/lib/assets';
 
 const LINKS = [
   { href: '/#missions', label: 'Expeditions' },
@@ -38,7 +39,9 @@ export default function SiteHeader() {
   return (
     <>
       <header className="sitehead">
-        <Link href="/" className="display" aria-label="Bhutan Motorcycle Tours, home" style={{ fontSize: 22, textDecoration: 'none', padding: '11px 0' }}>BMT/</Link>
+        <Link href="/" className="brand" aria-label="Bhutan Motorcycle Tours, home">
+          <img src={BRAND.logo} alt="" className="brand-mark" width={48} height={48} />
+        </Link>
         <nav aria-label="Primary" className="mono">
           {LINKS.map(l => (
             <Link key={l.href} href={l.href} aria-current={path === l.href ? 'page' : undefined} style={path === l.href ? { color: 'var(--orange)' } : undefined}>{l.label}</Link>
@@ -48,6 +51,7 @@ export default function SiteHeader() {
       </header>
       {open && (
         <div ref={panel} id="mobilenav" className="mobilenav" role="dialog" aria-modal="true" aria-label="Menu">
+          <img src={BRAND.logo} alt="" className="brand-full" />
           <button className="btn btn-ghost" style={{ position: 'absolute', top: 16, right: 16 }} onClick={() => setOpen(false)}>Close ✕</button>
           <nav aria-label="Mobile" style={{ display: 'grid', gap: 8 }}>
             <Link href="/" aria-current={path === '/' ? 'page' : undefined} onClick={() => setOpen(false)}>Home</Link>
