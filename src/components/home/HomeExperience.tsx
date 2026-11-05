@@ -122,7 +122,7 @@ export default function HomeExperience() {
 
       <section ref={rideSec} aria-label="Scroll-controlled ride" style={{ position: 'relative', height: '420vh' }}>
         <div className="screen" style={{ position: 'sticky', top: 0, overflow: 'hidden' }}>
-          <video ref={ride} aria-hidden className="cover" muted playsInline preload="auto" loop={!fine} autoPlay={!fine} poster={img('places/paro.jpg')} style={{ filter: 'grayscale(.35) contrast(1.15) brightness(.55)', transform: `scale(${1 + p * 0.15})`, willChange: 'transform' }}>
+          <video ref={ride} aria-hidden className="cover" muted playsInline preload="metadata" loop={!fine} autoPlay={!fine} poster={img('places/paro.jpg')} style={{ filter: 'grayscale(.35) contrast(1.15) brightness(.55)', transform: `scale(${1 + p * 0.15})`, willChange: 'transform' }}>
             <source src={VIDEO.pov} type="video/mp4" />
           </video>
           {CHAPTERS.map((c, j) => (

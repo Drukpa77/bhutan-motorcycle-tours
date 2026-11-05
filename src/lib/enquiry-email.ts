@@ -35,8 +35,6 @@ export function enquiryText(e: Enquiry) {
 
 export function enquiryHtml(e: Enquiry) {
   const site = siteUrl();
-  const digits = e.phone.replace(/[^\d+]/g, '');
-  const replyHref = `mailto:${encodeURIComponent(e.email)}?subject=${encodeURIComponent(`Your Bhutan motorcycle tour: ${e.adventure}, ${e.days} days`)}`;
   const received = new Date().toLocaleString('en-GB', { timeZone: 'Asia/Thimphu', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) + ' BTT';
 
   const label = (t: string, color = C.muted) => `<div style="font-family:${MONO};font-size:10px;letter-spacing:2px;text-transform:uppercase;color:${color};margin:0 0 6px">${esc(t)}</div>`;
@@ -44,10 +42,8 @@ export function enquiryHtml(e: Enquiry) {
   const rows = (items: [string, string][]) => `<tr><td style="padding:8px 40px 0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${items.map(([k, v]) =>
     `<tr><td style="padding:13px 0;border-bottom:1px solid ${C.line};font-family:${SANS};font-size:13px;color:${C.muted};width:38%;vertical-align:top">${esc(k)}</td><td style="padding:13px 0;border-bottom:1px solid ${C.line};font-family:${SANS};font-size:15px;color:${C.text};font-weight:600;vertical-align:top">${v}</td></tr>`).join('')}</table></td></tr>`;
   const stat = (k: string, v: string, border: boolean) => `<td width="33%" style="padding:18px 16px;${border ? `border-left:1px solid ${C.line};` : ''}vertical-align:top">${label(k)}<div style="font-family:${SANS};font-size:17px;font-weight:700;color:${C.text};line-height:1.3">${esc(v)}</div></td>`;
-  const button = (href: string, text: string, primary: boolean) => `<td style="padding:0 8px 8px 0"><a href="${href}" style="display:inline-block;padding:14px 22px;background:${primary ? C.orange : C.card};border:1px solid ${primary ? C.orange : C.ink};color:${C.ink};font-family:${SANS};font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none">${esc(text)}</a></td>`;
-
-  const link = (href: string, text: string) => `<a href="${href}" style="color:${C.text};text-decoration:none;border-bottom:1px solid ${C.orange}">${esc(text)}</a>`;
   const route = e.destinations.map(esc).join(` <span style="color:${C.orange}">→</span> `);
+  const phoneCell = e.phone ? esc(e.phone) : '<span style="color:#9aa3a8;font-weight:400">Not given</span>';
 
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>${esc(enquirySubject(e))}</title></head>
 <body style="margin:0;padding:0;background:${C.bg}">
@@ -70,19 +66,17 @@ export function enquiryHtml(e: Enquiry) {
   ${stat('Duration', e.days + ' days', false)}${stat('Travel', travel(e), true)}${stat('Group', crew(e), true)}
 </tr></table></td></tr>
 
-<tr><td style="padding:28px 40px 0"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-  ${button(replyHref, `Reply to ${firstName(e)}`, true)}${digits ? button('tel:' + digits, 'Call', false) + button('https://wa.me/' + digits.replace('+', ''), 'WhatsApp', false) : ''}
-</tr></table></td></tr>
+<tr><td style="padding:28px 40px 0"><div style="font-family:${SANS};font-size:14px;line-height:1.6;color:${C.text}">Reply in your mail app to answer <b>${esc(firstName(e))}</b>. The reply is already addressed to ${esc(e.email)}${e.phone ? ` · ${esc(e.phone)}` : ''}.</div></td></tr>
 
 ${heading('The rider')}
-${rows([['Name', esc(e.name)], ['Email', link('mailto:' + encodeURIComponent(e.email), e.email)], ['Phone', digits ? link('tel:' + digits, e.phone) : '<span style="color:#9aa3a8;font-weight:400">Not given</span>'], ['Country', esc(e.country)], ['Riding experience', esc(e.experience)]])}
+${rows([['Name', esc(e.name)], ['Email', esc(e.email)], ['Phone', phoneCell], ['Country', esc(e.country)], ['Riding experience', esc(e.experience)]])}
 
 ${heading('The ride')}
 ${rows([['Route', route], ['Motorcycle', esc(e.motorcycle)], ['Group type', esc(e.group)], ['Accommodation', esc(e.accommodation)], ['Price', 'Custom quotation required']])}
 
 ${e.notes ? `${heading('Notes from the rider')}<tr><td style="padding:12px 40px 0"><div style="background:#F6F7F7;border-left:3px solid ${C.orange};padding:18px 20px;font-family:${SANS};font-size:15px;line-height:1.6;color:${C.text};white-space:pre-wrap">${esc(e.notes)}</div></td></tr>` : ''}
 
-<tr><td style="padding:36px 40px 32px"><div style="font-family:${SANS};font-size:13px;line-height:1.6;color:${C.muted}">Hit reply to answer ${esc(firstName(e))} directly. Your reply goes to ${link('mailto:' + encodeURIComponent(e.email), e.email)}.</div></td></tr>
+<tr><td style="padding:36px 40px 32px"><div style="font-family:${SANS};font-size:13px;line-height:1.6;color:${C.muted}">Hit reply to answer ${esc(firstName(e))} directly.</div></td></tr>
 
 <tr><td style="background:${C.ti};padding:22px 40px">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>

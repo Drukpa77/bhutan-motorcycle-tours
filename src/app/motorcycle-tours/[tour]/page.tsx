@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { PLACES, TOURS, img } from '@/lib/content';
 import { FAQS } from '@/lib/faq';
-import { breadcrumbLd, jsonLd, siteUrl } from '@/lib/site';
+import { SITE_NAME, breadcrumbLd, jsonLd, siteUrl } from '@/lib/site';
 
 type Props = { params: Promise<{ tour: string }> };
 const find = (path: string) => TOURS.find(t => t.path === path);
@@ -16,11 +16,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = find((await params).tour);
   if (!t) return {};
   const url = `/motorcycle-tours/${t.path}`;
+  const image = { url: img(t.img), alt: t.imgAlt };
+  // Next.js replaces (not merges) the root openGraph/twitter objects, so repeat the site-wide fields here.
   return {
     title: t.title,
     description: t.description,
     alternates: { canonical: url },
-    openGraph: { title: t.title, description: t.description, url, images: [{ url: img(t.img), alt: t.imgAlt }] },
+    openGraph: { type: 'website', siteName: SITE_NAME, locale: 'en_US', title: t.title, description: t.description, url, images: [image] },
+    twitter: { card: 'summary_large_image', title: t.title, description: t.description, images: [image] },
   };
 }
 
