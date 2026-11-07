@@ -23,7 +23,7 @@ const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['300', '400', '500'],
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
-  title: { default: 'Bhutan Motorcycle Tours | Guided Rides Across the Himalayan Passes', template: '%s | Bhutan Motorcycle Tours' },
+  title: { default: 'Bhutan Motorcycle Tours | Guided Himalayan Rides from Paro', template: '%s | Bhutan Motorcycle Tours' },
   description: SITE_DESCRIPTION,
   openGraph: { type: 'website', siteName: SITE_NAME, locale: 'en_US', images: [SHARE_IMAGE] },
   twitter: { card: 'summary_large_image', images: [SHARE_IMAGE.url] },

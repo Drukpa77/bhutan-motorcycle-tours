@@ -101,7 +101,7 @@ export default function HomeExperience({ testimonials }: { testimonials?: React.
             {/* nowrap: lines are fixed by <br>, so the swap from fallback to Archivo can't re-wrap the text and shift the layout. */}
             <h1 className="display" style={{ fontSize: 'clamp(44px,min(16vw,22vh),260px)', lineHeight: 0.78, whiteSpace: 'nowrap' }}><span className="mono" style={{ display: 'block', fontSize: 12, lineHeight: 1.4, color: 'var(--orange)', marginBottom: 'clamp(12px,2vh,20px)' }}>Bhutan Motorcycle Tours</span>The road<br /><span style={{ WebkitTextStroke: '2px var(--ice)', color: 'transparent' }}>is calling.</span></h1>
             <div style={{ display: 'flex', gap: '14px 28px', alignItems: 'center', flexWrap: 'wrap', marginTop: 'clamp(16px,3vh,28px)' }}>
-              <p style={{ margin: 0, fontWeight: 200, fontSize: 'clamp(18px,1.8vw,24px)', flexBasis: 'auto' }}>Ride beyond the ordinary.</p>
+              <p style={{ margin: 0, fontWeight: 200, fontSize: 'clamp(18px,1.8vw,24px)', flexBasis: 'auto' }}>Guided Royal Enfield tours, from Paro to the far east.</p>
               <a href="#missions" className="btn btn-ice">Explore expeditions</a>
               <Link href="/plan-your-ride" className="btn btn-ghost">Build your ride →</Link>
             </div>
@@ -261,10 +261,11 @@ export default function HomeExperience({ testimonials }: { testimonials?: React.
             <span className="mono" style={{ color: 'var(--orange)' }}>Or talk to us directly ↓</span>
           </div>
           <address className="contact-strip">
-            <div><span className="mono">Call</span><a className="contact-val" href={CONTACT.phoneHref}>{CONTACT.phone}</a></div>
-            <div><span className="mono">WhatsApp</span><a className="contact-val" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">{CONTACT.whatsapp} ↗</a></div>
-            <div><span className="mono">Email</span>{CONTACT.emails.map(e => <a key={e} className="contact-val contact-email" href={'mailto:' + e}>{e}</a>)}</div>
-            <div><span className="mono">Visit</span><span className="contact-val">{CONTACT.address.join(', ')}</span></div>
+            {/* sr-only ": " keeps label and value apart in extracted text (search snippets, screen readers). */}
+            <div><span className="mono">Call<span className="sr-only">: </span></span><a className="contact-val" href={CONTACT.phoneHref}>{CONTACT.phone}</a></div>
+            <div><span className="mono">WhatsApp<span className="sr-only">: </span></span><a className="contact-val" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">{CONTACT.whatsapp} ↗</a></div>
+            <div><span className="mono">Email<span className="sr-only">: </span></span>{CONTACT.emails.map(e => <a key={e} className="contact-val contact-email" href={'mailto:' + e}>{e}</a>)}</div>
+            <div><span className="mono">Visit<span className="sr-only">: </span></span><span className="contact-val">{CONTACT.address.join(', ')}</span></div>
           </address>
         </div>
       </section>
