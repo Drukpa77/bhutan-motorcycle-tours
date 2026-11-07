@@ -39,7 +39,11 @@
       "PowerShell(try { $r = Invoke-WebRequest -UseBasicParsing -TimeoutSec 15 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap'; \"googleapis $\\($r.StatusCode\\) $\\($r.Content.Length\\) bytes\" } catch { \"googleapis FAILED: $\\($_.Exception.Message\\)\" })",
       "PowerShell(Get-Content 'C:\\\\Users\\\\palde\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\17c96e0b4ce661e7\\\\e77e9c9c-829b-4c3d-9a46-c80c426ae4d3\\\\scratchpad\\\\build.log' -Tail 5; Get-CimInstance Win32_Process -Filter \"Name='node.exe'\" | Select-Object ProcessId, CreationDate, @{n='MB';e={[int]\\($_.WorkingSetSize/1MB\\)}}, @{n='Cmd';e={$_.CommandLine.Substring\\(0,[Math]::Min\\(110,$_.CommandLine.Length\\)\\)}} | Format-Table -AutoSize -Wrap)",
       "PowerShell(Stop-Process -Id 39220,42460 -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 2; Set-Location 'C:\\\\Users\\\\palde\\\\OneDrive\\\\Desktop\\\\Websites\\\\bhutan-motors'; try { Remove-Item -Recurse -Force .next -ErrorAction Stop; \".next removed\" } catch { \"remove failed: $\\($_.Exception.Message\\)\" })",
-      "PowerShell(Set-Location 'C:\\\\Users\\\\palde\\\\OneDrive\\\\Desktop\\\\Websites\\\\bhutan-motors'; try { Remove-Item -Recurse -Force .next -ErrorAction Stop; \".next removed\" } catch { \"remove failed: $\\($_.Exception.Message\\)\" })"
+      "PowerShell(Set-Location 'C:\\\\Users\\\\palde\\\\OneDrive\\\\Desktop\\\\Websites\\\\bhutan-motors'; try { Remove-Item -Recurse -Force .next -ErrorAction Stop; \".next removed\" } catch { \"remove failed: $\\($_.Exception.Message\\)\" })",
+      "Bash(git checkout *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }
