@@ -23,11 +23,11 @@ const LIST = {
 // How a tour runs, end to end. Every step reflects the operator's published process and terms.
 const STEPS: [string, string][] = [
   ['Plan & quote', 'Send your dates, group size, experience and the passes you want. You get an itemised quote: SDF, visa, land cost and a fuel estimate.'],
-  ['Confirm', 'A 50% deposit on the land cost confirms your dates. We hold hotels and, if you want, Paro flights, which fill early in peak season.'],
-  ['Visa & permits', 'We apply for your Bhutan visa (approval usually in 5–7 working days) and arrange the route permits checked at road checkpoints.'],
+  ['Confirm', 'A deposit confirms your dates (terms on your quote). We hold hotels and, if you want, Paro flights, which fill early in peak season.'],
+  ['Visa & permits', 'We apply for your Bhutan visa and arrange the permits your route needs, before you land.'],
   ['Handover', 'We meet you at Paro airport. You get your Royal Enfield 500, a briefing, a gear and document check, and a short test ride before the first pass.'],
   ['On the road', 'Your guide leads, and the mechanic and the backup 4x4 with your luggage travel with the group. Days are planned in riding hours, not kilometres.'],
-  ['Return', 'Bike handover in Paro, a farewell dinner, and a transfer to your flight. The balance was settled 30 days before departure, so there are no surprises at the end.'],
+  ['Return', 'Bike handover in Paro, a farewell dinner, and a transfer to your flight. Everything was settled before departure, so there are no surprises at the end.'],
 ];
 
 export default function Page() {
@@ -80,7 +80,7 @@ export default function Page() {
       <section aria-labelledby="incl-title" className="stack incl">
         <div style={{ display: 'grid', gap: 14, alignContent: 'start' }}>
           <h2 id="incl-title" className="display" style={{ fontSize: 'clamp(36px,4vw,64px)' }}>What every tour includes</h2>
-          <p className="prose" style={{ fontSize: 16 }}>Fuel, monument entry fees, insurance and tips are extra. The full breakdown, with payment and cancellation terms, is in <Link href="/guides/bhutan-motorcycle-tour-cost">what a Bhutan motorcycle tour costs</Link>.</p>
+          <p className="prose" style={{ fontSize: 16 }}>Fuel, monument entry fees, insurance and tips are extra. The full breakdown is in <Link href="/guides/bhutan-motorcycle-tour-cost">what a Bhutan motorcycle tour costs</Link>.</p>
         </div>
         <ul className="prose guide-list">{OPERATIONS.included.map(x => <li key={x}>{x}</li>)}</ul>
       </section>

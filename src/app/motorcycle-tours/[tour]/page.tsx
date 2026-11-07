@@ -74,7 +74,7 @@ export default async function Page({ params }: Props) {
           <span><span style={{ color: 'var(--steel)' }}>Duration</span> {t.days ? `${t.days} days / ${t.days - 1} nights` : 'Flexible, set to your pace'}</span>
           <span><span style={{ color: 'var(--steel)' }}>Bike</span> {OPERATIONS.fleet}</span>
           <span><span style={{ color: 'var(--steel)' }}>Support</span> Guide, mechanic, backup 4x4</span>
-          <span><span style={{ color: 'var(--steel)' }}>Price</span> Itemised quote</span>
+          <span><span style={{ color: 'var(--steel)' }}>Price</span> TBA</span>
         </div>
         <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
           <Link href="/plan-your-ride" className="btn btn-orange">Get a quote for this route →</Link>
@@ -145,7 +145,7 @@ export default async function Page({ params }: Props) {
       <section aria-labelledby="book-title" className="stack incl" style={{ background: 'var(--ti)', padding: 'clamp(28px,5vw,56px)' }}>
         <div style={{ display: 'grid', gap: 18, alignContent: 'start' }}>
           <h2 id="book-title" className="display" style={{ fontSize: 'clamp(36px,4vw,64px)' }}>Dates, price and what’s included</h2>
-          <p className="prose">Every departure is private and quoted individually, based on your dates, group size and hotel grade. Your quote itemises the land cost, the Sustainable Development Fee (US$100 per person per night, included) and a fuel estimate. <Link href="/guides/bhutan-motorcycle-tour-cost">How tour pricing works →</Link></p>
+          <p className="prose">Every departure is private and quoted individually, based on your dates, group size and hotel grade. Price: TBA. Your quote itemises the land cost, Bhutan’s Sustainable Development Fee (included) and a fuel estimate. <Link href="/guides/bhutan-motorcycle-tour-cost">How tour pricing works →</Link></p>
           <Link href="/plan-your-ride" className="btn btn-orange" style={{ justifySelf: 'start' }}>Get a quote for this route →</Link>
         </div>
         <ul className="prose guide-list">{OPERATIONS.included.map(x => <li key={x}>{x}</li>)}</ul>

@@ -18,7 +18,7 @@ export const GUIDES: Guide[] = [
   {
     slug: 'bhutan-motorcycle-tour-cost',
     title: 'Bhutan Motorcycle Tour Cost: SDF, Visa & What’s Included',
-    description: 'What a Bhutan motorcycle tour really costs: the US$100 SDF, visa, bikes, fuel, hotels, guides and tips, plus what our tours include and how payment works.',
+    description: 'How Bhutan motorcycle tour pricing works: the SDF, visa, bikes, fuel, hotels, guides and tips, what our tours include, and what you pay on the road.',
     h1: 'What a Bhutan motorcycle tour costs',
     kicker: 'Guide · Costs & fees',
     published: '2026-11-07', updated: '2026-11-07',
@@ -28,12 +28,12 @@ export const GUIDES: Guide[] = [
       { id: 'government-fees', h2: 'Government fees: the SDF and your visa', blocks: [
         { p: 'Bhutan charges every visitor a Sustainable Development Fee (SDF) for each night in the country. It is set by the Government of Bhutan, funds free healthcare, education and conservation, and is the same whichever operator you ride with.' },
         { table: { head: ['Fee', 'Who pays', 'Amount'], rows: [
-          ['Sustainable Development Fee', 'International visitors', 'US$100 per person, per night'],
-          ['Sustainable Development Fee', 'Indian nationals', '₹1,200 per person, per night'],
-          ['Tourist visa', 'International visitors', 'US$40, once per trip'],
+          ['Sustainable Development Fee', 'International visitors', 'TBA, per person, per night'],
+          ['Sustainable Development Fee', 'Indian nationals', 'TBA, per person, per night'],
+          ['Tourist visa', 'International visitors', 'TBA'],
         ] } },
-        { p: 'Count nights, not days. A 16-day tour is 15 nights, so the SDF alone is US$1,500 per rider. Young children are exempt and older children pay a reduced rate; we confirm the exact figure on your quote.' },
-        { note: 'Bhutan cut the SDF from US$200 to US$100 per night in 2023, and the reduced rate is currently scheduled to run until 31 August 2027. If a quote looks far cheaper than everyone else’s, check whether the SDF is in it.' },
+        { p: 'The SDF is charged per night, not per day, so count the nights in your tour. We confirm the current rates, including any reduced rates for children, on your quote.' },
+        { note: 'If a quote looks far cheaper than everyone else’s, check whether the SDF is included in it.' },
       ] },
       { id: 'included', h2: 'What our tour price includes', blocks: [
         { p: 'Every rider on our guided tours gets the same operational package. The crew and backup vehicle travel with the group from the first kilometre to the last.' },
@@ -56,17 +56,16 @@ export const GUIDES: Guide[] = [
       ] },
       { id: 'payment', h2: 'Payment and cancellation terms', blocks: [
         { p: OPERATIONS.payment },
-        { table: { head: ['Notice before departure', 'Cancellation charge'], rows: OPERATIONS.cancellation } },
-        { p: 'Cancellations must be made in writing. Because these charges apply, we strongly recommend travel insurance that covers cancellation as well as motorcycle riding.' },
+        { p: 'We strongly recommend travel insurance that covers cancellation as well as motorcycle riding.' },
       ] },
       { id: 'quote', h2: 'Get an itemised quote', blocks: [
-        { p: 'Tell us your dates, group size, riding experience and the passes you want, using [Plan your ride](/plan-your-ride). We reply with an itemised quote: SDF, visa, land cost and estimated fuel, each on its own line.' },
+        { p: 'Tour prices: TBA. Tell us your dates, group size, riding experience and the passes you want, using [Plan your ride](/plan-your-ride). We reply with an itemised quote: SDF, visa, land cost and estimated fuel, each on its own line.' },
       ] },
     ],
     faqs: [
-      { q: 'Is the SDF included in your motorcycle tour price?', a: 'Yes. The Sustainable Development Fee of US$100 per person per night is included in our tour price and shown as its own line on your quote.' },
-      { q: 'Is the Bhutan SDF charged per day or per night?', a: 'Per night. A 16-day tour has 15 nights, so the SDF is US$1,500 per international rider.' },
-      { q: 'Do Indian riders pay the same SDF?', a: 'No. Indian nationals pay ₹1,200 per person per night and do not need a visa, though an entry permit is still required.' },
+      { q: 'Is the SDF included in your motorcycle tour price?', a: 'Yes. Bhutan’s Sustainable Development Fee is included in our tour price and shown as its own line on your quote. Current rate: TBA.' },
+      { q: 'Is the Bhutan SDF charged per day or per night?', a: 'Per night, so count the nights in your tour, not the days.' },
+      { q: 'Do Indian riders pay the same SDF?', a: 'Indian nationals have a separate rate and different entry rules. Details: TBA. We confirm them for your dates.' },
       { q: 'Is fuel included?', a: 'No. Fuel depends on your route, so we estimate it per tour on your quote and you pay for it on the road.' },
     ],
     related: ['riding-a-motorcycle-in-bhutan', 'best-time-for-a-motorcycle-tour-in-bhutan'],
@@ -98,16 +97,16 @@ export const GUIDES: Guide[] = [
       { id: 'visa-permits', h2: 'Visa, SDF and route permits: how we handle them', blocks: [
         { ol: [
           'You send a scan of your passport (minimum six months’ validity).',
-          'Once your tour is paid, we apply for your Bhutan visa. Approval normally arrives by email within 5–7 working days.',
+          'Once your tour is confirmed, we apply for your Bhutan visa and email you the approval. Processing time: TBA.',
           'We pay the Sustainable Development Fee to the government as part of your tour price.',
-          'We arrange the route permits needed beyond Thimphu and Paro before you land. Permits are checked at road checkpoints, so your guide carries them.',
+          'We arrange the permits your route needs before you land, and your guide carries them on the road.',
           'You show your visa approval on arrival at Paro, and we meet you at the airport.',
         ] },
         { p: 'More detail on fees is in [what a Bhutan motorcycle tour costs](/guides/bhutan-motorcycle-tour-cost).' },
       ] },
       { id: 'india', h2: 'Riders from India', blocks: [
-        { p: 'Indian nationals do not need a visa. You need an entry permit, issued against a passport or voter ID, and you pay the SDF at ₹1,200 per person per night. Many Indian riders enter overland at Phuentsholing.' },
-        { p: 'Bringing your own motorcycle needs a vehicle permit and the bike’s original registration, insurance and pollution papers. These requirements change, so tell us your entry point and we will confirm what is needed when you book.' },
+        { p: 'Indian nationals have different entry rules and a separate SDF rate, and many enter overland at Phuentsholing. Entry requirements and fees: TBA.' },
+        { p: 'Bringing your own motorcycle needs extra paperwork for the bike. Requirements: TBA. Tell us your entry point and we will confirm exactly what is needed when you book.' },
       ] },
       { id: 'road-rules', h2: 'Rules of the road', blocks: [
         { ul: [
@@ -135,8 +134,8 @@ export const GUIDES: Guide[] = [
     ],
     faqs: [
       { q: 'Do I need an International Driving Permit to ride in Bhutan?', a: 'Yes. Bring your full home motorcycle licence and an International Driving Permit with the motorcycle category. We check both at the bike handover.' },
-      { q: 'Can I ride a motorcycle in Bhutan without a guide?', a: 'International visitors travel with a licensed Bhutanese guide on a tour arranged by a licensed operator. Your guide also carries the route permits checked on the road.' },
-      { q: 'Can I bring my own motorcycle to Bhutan?', a: 'Indian riders often do, with a vehicle permit and the bike’s original papers. For other nationalities it is rarely practical, which is why our tours include a Royal Enfield 500cc for every rider.' },
+      { q: 'Can I ride a motorcycle in Bhutan without a guide?', a: 'International visitors travel with a licensed Bhutanese guide on a tour arranged by a licensed operator. Your guide also carries your permits on the road.' },
+      { q: 'Can I bring my own motorcycle to Bhutan?', a: 'Indian riders often do; the bike paperwork required is TBA and confirmed when you book. For other nationalities it is rarely practical, which is why our tours include a Royal Enfield 500cc for every rider.' },
       { q: 'Which side of the road does Bhutan drive on?', a: 'The left, as in India and the UK.' },
     ],
     related: ['bhutan-motorcycle-tour-cost', 'bhutan-mountain-passes-by-motorcycle'],

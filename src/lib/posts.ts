@@ -34,7 +34,7 @@ export const POSTS: Post[] = [
         { stats: [
           { n: '30–40', label: 'Typical average km/h on the lateral road' },
           { n: '6', label: 'Major passes on our routes' },
-          { n: 'US$100', label: 'SDF per night (international visitors)' },
+          { n: '3,988 m', label: 'Highest pass on our routes' },
         ] },
       ] },
       { id: 'why-yes', h2: 'Why riders love it', blocks: [
@@ -49,7 +49,7 @@ export const POSTS: Post[] = [
       ] },
       { id: 'why-not', h2: 'The honest downsides', blocks: [
         { ul: [
-          'Cost. The Sustainable Development Fee alone is US$100 per person per night for most nationalities, so a 15-night tour carries US$1,500 in government fees before the tour itself. See [what a tour really costs](/guides/bhutan-motorcycle-tour-cost).',
+          'Cost. On top of the tour, Bhutan charges a Sustainable Development Fee for every night you stay, which makes it pricier than its neighbours. See [how tour pricing works](/guides/bhutan-motorcycle-tour-cost).',
           'No solo riding. International visitors travel with a licensed guide on an operator-arranged tour. If total independence matters most, Bhutan will frustrate you.',
           'It’s slow. Averages of 30–40 km/h are normal. Days are measured in hours, not kilometres.',
           'Roadworks. Sections of the lateral road are often being widened or repaired, especially after the monsoon.',
@@ -199,22 +199,21 @@ export const POSTS: Post[] = [
   },
   {
     slug: 'bhutan-bike-trip-from-india',
-    title: 'Bhutan Bike Trip from India: Permits, SDF & Route (2026)',
-    description: 'Planning a Bhutan bike trip from India? Entry permits, the ₹1,200 SDF, Phuentsholing and other border crossings, bike papers, and when to fly in instead.',
-    h1: 'Riding into Bhutan from India: permits, fees and the road in',
+    title: 'Bhutan Bike Trip from India: Border Crossings & Route',
+    description: 'Planning a Bhutan bike trip from India? Phuentsholing and the other border crossings, the road to Thimphu, riding your own bike vs ours, and what changes on Bhutanese roads.',
+    h1: 'Riding into Bhutan from India: the border and the road in',
     category: 'Planning',
     published: '2026-11-07', updated: '2026-11-07',
     cover: 'places/thimphu.jpg', coverAlt: 'Tashichho Dzong on the Wang Chhu in Thimphu, the end of the first day’s ride from the Indian border', coverCredit: 'Tashichho Dzong · C. J. Fynn · CC BY-SA 3.0',
-    standfirst: 'Bhutan is one of the few foreign countries Indian riders can reach on their own wheels, with no visa and a road straight from the plains into the Himalaya. Here is what the paperwork, fees and first day on the road look like in 2026.',
+    standfirst: 'Bhutan is one of the few foreign countries Indian riders can reach on their own wheels, with a road straight from the plains into the Himalaya. Here is where to cross, what the first day on the road looks like, and when it makes more sense to fly in.',
     sections: W([
       { id: 'short-answer', h2: 'The short answer', blocks: [
         { stats: [
-          { n: '₹1,200', label: 'SDF per person, per night' },
-          { n: 'No visa', label: 'Entry permit instead' },
           { n: '3', label: 'Main road crossings' },
+          { n: '~150 km', label: 'Phuentsholing to Thimphu' },
+          { n: 'TBA', label: 'Entry fees and permits' },
         ] },
-        { p: 'Indian nationals don’t need a visa for Bhutan. You need an entry permit, issued against a passport or voter ID, and you pay the Sustainable Development Fee at ₹1,200 per person, per night. The permit can be applied for online at [immi.gov.bt](https://immi.gov.bt) or at the border.' },
-        { note: 'Rules as of November 2026. Bhutan updates its entry and vehicle rules from time to time, so we re-check everything for your dates when you book.' },
+        { p: 'Indian riders can enter Bhutan overland, most often at Phuentsholing. Entry permits, the Sustainable Development Fee for Indian nationals, and the paperwork for Indian-registered bikes are TBA here: Bhutan updates these rules from time to time, so we confirm the current requirements for your dates when you book.' },
       ] },
       { id: 'border-crossings', h2: 'Where to cross the border', blocks: [
         { p: 'Most riders enter at Phuentsholing, opposite Jaigaon in West Bengal, a short ride from Siliguri and Bagdogra airport. It is the busiest crossing and the most direct way to Thimphu and Paro.' },
@@ -227,25 +226,14 @@ export const POSTS: Post[] = [
         { p: 'From Phuentsholing the road climbs about 150 km to Thimphu, from the plains to over 2,000 m. Allow most of a day: it is slow, winding and often under repair. Our [riding rules guide](/guides/riding-a-motorcycle-in-bhutan) explains why we plan in hours, not kilometres.' },
       ] },
       { id: 'paperwork', h2: 'Your paperwork, rider and bike', blocks: [
-        { checklist: { title: 'Rider documents', items: [
-          'Passport (valid six months) or voter ID, for the entry permit',
-          'Driving licence with the motorcycle category',
-          'Hotel bookings and an itinerary: immigration asks where you are staying',
-          'Proof of SDF payment, or pay it with the permit',
-        ] } },
-        { checklist: { title: 'Bike documents (if you bring your own)', items: [
-          'Original registration certificate (RC)',
-          'Valid insurance',
-          'Pollution under control (PUC) certificate',
-          'The vehicle permit for Bhutan: requirements and fees change, so confirm them for your dates before you ride to the border',
-        ] } },
-        { p: 'Beyond Thimphu and Paro you also need route permits for the districts you plan to ride through. These are checked at road checkpoints, so keep copies with you.' },
+        { p: 'You will need your driving licence with the motorcycle category. The full document list for riders and for Indian-registered motorcycles is TBA: we confirm the current requirements and fees for your dates, so you don’t ride to the border with the wrong papers.' },
+        { cta: { title: 'Check before you ride', text: 'Tell us your entry point and dates, and we’ll send the current entry and vehicle requirements.', href: '/plan-your-ride', label: 'Ask us →' } },
       ] },
       { id: 'own-bike-or-ours', h2: 'Your own bike, or fly in and ride ours?', blocks: [
         { p: 'Riding your own bike in is a great adventure, but it adds two days of plains riding, border queues and vehicle paperwork. Many riders, especially on shorter trips, fly into Paro instead: there are flights from Delhi and Kolkata, and your bike is waiting at the airport.' },
         { table: { head: ['', 'Your own bike', 'Fly in, ride ours'], rows: [
           ['Time to the mountains', '1–2 days from Siliguri', 'Same day you land'],
-          ['Paperwork', 'Rider plus vehicle permits', 'Rider permit only; we handle the rest'],
+          ['Paperwork', 'Rider and vehicle paperwork', 'We handle it'],
           ['Breakdowns', 'Your problem', 'Our mechanic and backup 4x4'],
           ['Bike', 'Your own, loaded with luggage', `${OPERATIONS.fleet}, luggage in the 4x4`],
         ] } },
@@ -263,8 +251,8 @@ export const POSTS: Post[] = [
       ] },
     ]),
     faqs: [
-      { q: 'Do Indians need a visa to ride in Bhutan?', a: 'No. Indian nationals need an entry permit, issued against a passport or voter ID, and pay the SDF of ₹1,200 per person per night.' },
-      { q: 'Can I take my own motorcycle from India to Bhutan?', a: 'Yes, with the bike’s original RC, insurance and PUC papers and a vehicle permit for Bhutan. Requirements change, so confirm them for your travel dates.' },
+      { q: 'What do Indian riders need to enter Bhutan?', a: 'Entry requirements and fees for Indian nationals are TBA here, as Bhutan updates them from time to time. We confirm the current rules for your dates when you book.' },
+      { q: 'Can I take my own motorcycle from India to Bhutan?', a: 'Yes, Indian riders often do. The paperwork needed for the bike is TBA here; we confirm the current requirements for your travel dates.' },
       { q: 'Which border crossing is best for a Bhutan bike trip?', a: 'Phuentsholing, opposite Jaigaon in West Bengal, for Thimphu, Paro and the west. Gelephu and Samdrup Jongkhar in Assam suit central and eastern Bhutan.' },
     ],
     tours: ['east', 'west'],

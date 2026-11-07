@@ -188,7 +188,7 @@ export default function HomeExperience({ testimonials }: { testimonials?: React.
             <h2 className="display" style={{ fontSize: 'clamp(48px,min(12vw,20vh),200px)', lineHeight: 0.8 }}>{mission.name}</h2>
             <p style={{ margin: 0, maxWidth: '52ch', fontWeight: 300, fontSize: 'clamp(16px,1.4vw,18px)', lineHeight: 1.55, color: '#d6dbdc' }}>{mission.summary}</p>
             <div className="mono" style={{ display: 'flex', gap: 28, flexWrap: 'wrap', fontSize: 12 }}>
-              <span><span style={{ color: 'var(--steel)' }}>Stops</span> {mission.stops.length}</span><span><span style={{ color: 'var(--steel)' }}>High point</span> {mission.high}</span><span><span style={{ color: 'var(--steel)' }}>Duration</span> {mission.days ? mission.days + ' days' : 'Flexible'}</span><span><span style={{ color: 'var(--steel)' }}>Price</span> Custom quote</span>
+              <span><span style={{ color: 'var(--steel)' }}>Stops</span> {mission.stops.length}</span><span><span style={{ color: 'var(--steel)' }}>High point</span> {mission.high}</span><span><span style={{ color: 'var(--steel)' }}>Duration</span> {mission.days ? mission.days + ' days' : 'Flexible'}</span><span><span style={{ color: 'var(--steel)' }}>Price</span> TBA</span>
             </div>
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
               <Link href={mission.href} className="btn btn-orange">{mission.cta} →</Link>

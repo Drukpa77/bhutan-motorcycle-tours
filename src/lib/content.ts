@@ -42,7 +42,7 @@ export const OPERATIONS = {
     'Dedicated backup 4x4 with driver, carrying luggage, spares and any rider who needs a break',
     'Professional English-speaking motorcycle tour guide and mechanic',
     'Bhutan visa and route permits, applied for by us',
-    'Sustainable Development Fee (US$100 per person per night)',
+    'Bhutan’s Sustainable Development Fee (current rate confirmed on your quote)',
     '3-star premium hotels and resorts, with farm and village stays where the route allows',
     'Breakfast and dinner every day, and bottled water throughout',
     'Airport transfers, sightseeing and baggage handling',
@@ -55,15 +55,13 @@ export const OPERATIONS = {
     'Costs from flight cancellations, landslides or road closures beyond our control',
     'Personal expenses and bank transfer charges',
   ],
-  payment: 'A 50% deposit on the land cost (plus airfare, if we book it) confirms your place. The balance is due 30 days before departure, by wire transfer.',
-  cancellation: [
-    ['60–89 days before departure', 'US$150 administration fee'],
-    ['45–59 days', '20% of the land cost'],
-    ['30–44 days', '50% of the land cost'],
-    ['20–29 days', '80% of the land cost'],
-    ['Under 20 days', '100% of the land cost'],
-  ] as [string, string][],
+  // Prices, fees and booking terms are TBA on the live site until the operator confirms them for 2026–27.
+  // The operator's 2025 tour PDF had a deposit and cancellation schedule; re-add here once confirmed.
+  payment: 'Deposit, payment schedule and cancellation terms: TBA. They are set out in full on your quote.',
 };
+
+/** Placeholder for any price, fee or permit detail not yet confirmed by the operator. */
+export const TBA = 'TBA';
 
 export const VIDEO = {
   // Temporary Mixkit footage (Mixkit Free License). NOT Bhutan. Replace with files in /public/videos/.
