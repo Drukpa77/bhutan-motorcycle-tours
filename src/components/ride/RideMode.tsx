@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { CHAPTERS, PLACES, VIDEO, img } from '@/lib/content';
+import { CHAPTERS, PLACES, VIDEO, optimized } from '@/lib/content';
 
 export default function RideMode() {
   const [i, setI] = useState(0), [t, setT] = useState(0), [paused, setPaused] = useState(false), [canFs, setCanFs] = useState(false);
@@ -21,10 +21,10 @@ export default function RideMode() {
   return (
     <main id="main" ref={root} className="ridemode">
       <h1 className="sr-only">Ride mode</h1>
-      <video ref={vid} aria-hidden className="cover" autoPlay muted loop playsInline poster={img('places/dochula-wide.jpg')} style={{ filter: 'saturate(.8) contrast(1.08)' }}>
+      <video ref={vid} aria-hidden className="cover" autoPlay muted loop playsInline poster={optimized('places/dochula-wide.jpg', 1920)} style={{ filter: 'saturate(.8) contrast(1.08)' }}>
         <source src={VIDEO.pov} type="video/mp4" />
       </video>
-      <div style={{ position: 'absolute', inset: 0, background: `url('${img(pl.img)}') center/cover`, opacity: t > 0.55 && t < 0.95 ? 0.9 : 0, transition: 'opacity 1.2s ease' }} />
+      <div style={{ position: 'absolute', inset: 0, background: `url('${optimized(pl.img!, 1920)}') center/cover`, opacity: t > 0.55 && t < 0.95 ? 0.9 : 0, transition: 'opacity 1.2s ease' }} />
       <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 70% 60% at 50% 45%,rgba(0,0,0,0),rgba(0,0,0,.75))', pointerEvents: 'none' }} />
 
       <div style={{ position: 'relative', padding: '16px 24px 0', display: 'grid', gap: 8 }}>

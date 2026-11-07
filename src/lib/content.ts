@@ -1,4 +1,4 @@
-export { BRAND, img } from './assets';
+export { BRAND, img, optimized } from './assets';
 
 export const CONTACT = {
   country: 'Bhutan',

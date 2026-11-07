@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { CONTACT, img } from '@/lib/content';
+import { CONTACT, optimized } from '@/lib/content';
 
 type F = { adv: string; days: number; exp: string; dest: string[]; bike: string; date: string; flex: boolean; riders: number; pax: number; group: 'Private' | 'Join a group'; acc: string; name: string; email: string; phone: string; country: string; notes: string; consent: boolean; hp: string };
 const DEF: F = { adv: '', days: 9, exp: '', dest: [], bike: '', date: '', flex: true, riders: 1, pax: 0, group: 'Private', acc: '', name: '', email: '', phone: '', country: '', notes: '', consent: false, hp: '' };
@@ -68,7 +68,7 @@ export default function Planner() {
 
   return (
     <main id="main" className="stack planner min-screen">
-      <aside aria-label="Your selections" className="planner-aside" style={{ background: `#050708 url('${img(f.bike === 'Adventure single' ? 'bike/himalayan.jpg' : S.img)}') center/cover` }}>
+      <aside aria-label="Your selections" className="planner-aside" style={{ background: `#050708 url('${optimized(f.bike === 'Adventure single' ? 'bike/himalayan.jpg' : S.img, 1080)}') center/cover` }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,11,13,.3),rgba(8,11,13,.96))' }} />
         <div style={{ position: 'absolute', left: 'var(--pad)', right: 'var(--pad)', bottom: 'var(--pad)', display: 'grid', gap: 14 }}>
           <h1 className="mono" style={{ color: 'var(--lime)', margin: 0, fontWeight: 400 }}>Plan your Bhutan motorcycle tour</h1>

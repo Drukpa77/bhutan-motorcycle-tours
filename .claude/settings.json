@@ -28,7 +28,18 @@
       "Read(//c/Users/palde/OneDrive/Desktop/Websites/**)",
       "Read(//c/Users/palde/OneDrive/Desktop/Websites/bhutan-mind-vision/**)",
       "Read(//c/Users/palde/OneDrive/Desktop/Websites/bhutan-mind-vision/design_handoff_bmv_website/src/**)",
-      "Read(//c/Users/palde/OneDrive/Desktop/Websites/bhutan-mind-vision/design_handoff_bmv_website/**)"
+      "Read(//c/Users/palde/OneDrive/Desktop/Websites/bhutan-mind-vision/design_handoff_bmv_website/**)",
+      "Bash(curl -s -m 20 https://bhutanmotorcycletours.com/sitemap.xml)",
+      "Bash(git rm *)",
+      "Bash(python -c \"import fontTools; print\\('fonttools', fontTools.version\\)\")",
+      "Read(//c/Windows/Fonts/**)",
+      "PowerShell(Get-Process node -ErrorAction SilentlyContinue | Select-Object Id, StartTime, CPU, @{n='MB';e={[int]\\($_.WorkingSet64/1MB\\)}} | Format-Table -AutoSize)",
+      "Bash(curl -s -m 15 -o /dev/null -w 'googleapis %{http_code} %{time_total}s\\\\n' \"https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap\")",
+      "Bash(curl -s -m 15 -o /dev/null -w 'gstatic %{http_code} %{time_total}s\\\\n' https://fonts.gstatic.com/)",
+      "PowerShell(try { $r = Invoke-WebRequest -UseBasicParsing -TimeoutSec 15 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap'; \"googleapis $\\($r.StatusCode\\) $\\($r.Content.Length\\) bytes\" } catch { \"googleapis FAILED: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(Get-Content 'C:\\\\Users\\\\palde\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\17c96e0b4ce661e7\\\\e77e9c9c-829b-4c3d-9a46-c80c426ae4d3\\\\scratchpad\\\\build.log' -Tail 5; Get-CimInstance Win32_Process -Filter \"Name='node.exe'\" | Select-Object ProcessId, CreationDate, @{n='MB';e={[int]\\($_.WorkingSetSize/1MB\\)}}, @{n='Cmd';e={$_.CommandLine.Substring\\(0,[Math]::Min\\(110,$_.CommandLine.Length\\)\\)}} | Format-Table -AutoSize -Wrap)",
+      "PowerShell(Stop-Process -Id 39220,42460 -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 2; Set-Location 'C:\\\\Users\\\\palde\\\\OneDrive\\\\Desktop\\\\Websites\\\\bhutan-motors'; try { Remove-Item -Recurse -Force .next -ErrorAction Stop; \".next removed\" } catch { \"remove failed: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(Set-Location 'C:\\\\Users\\\\palde\\\\OneDrive\\\\Desktop\\\\Websites\\\\bhutan-motors'; try { Remove-Item -Recurse -Force .next -ErrorAction Stop; \".next removed\" } catch { \"remove failed: $\\($_.Exception.Message\\)\" })"
     ]
   }
 }

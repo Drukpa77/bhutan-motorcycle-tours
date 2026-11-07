@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -41,7 +42,7 @@ export default function SiteHeader() {
     <>
       <header className="sitehead">
         <Link href="/" className="brand" aria-label="Bhutan Motorcycle Tours, home">
-          <img src={BRAND.logo} alt="" className="brand-mark" width={48} height={48} />
+          <Image src={BRAND.logo} alt="" className="brand-mark" width={48} height={48} sizes="48px" priority />
           <span className="brand-name">Bhutan Motorcycle Tours</span>
         </Link>
         <nav aria-label="Primary" className="mono">
@@ -53,7 +54,7 @@ export default function SiteHeader() {
       </header>
       {open && (
         <div ref={panel} id="mobilenav" className="mobilenav" role="dialog" aria-modal="true" aria-label="Menu">
-          <img src={BRAND.logo} alt="" className="brand-full" />
+          <Image src={BRAND.logo} alt="" className="brand-full" width={220} height={220} sizes="220px" />
           <button className="btn btn-ghost" style={{ position: 'absolute', top: 16, right: 16 }} onClick={() => setOpen(false)}>Close ✕</button>
           <nav aria-label="Mobile" style={{ display: 'grid', gap: 8 }}>
             <Link href="/" aria-current={path === '/' ? 'page' : undefined} onClick={() => setOpen(false)}>Home</Link>

@@ -8,7 +8,18 @@ import { CONTACT, OPERATOR } from '@/lib/content';
 import { SHARE_IMAGE, SITE_DESCRIPTION, SITE_NAME, jsonLd, siteUrl } from '@/lib/site';
 
 const archivo = Archivo({ subsets: ['latin'], axes: ['wdth'], variable: '--font-archivo', display: 'swap' });
-const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-mono', display: 'swap' });
+// Condensed headings need their own width-matched fallbacks (see @font-face in globals.css), otherwise the
+// swap from Arial to condensed Archivo re-wraps headings and shifts the page (CLS). First family = hashed Archivo.
+const ARCHIVO = archivo.style.fontFamily.split(',')[0];
+const FONT_VARS = {
+  '--font-display': `${ARCHIVO}, 'Display Fallback', sans-serif`,
+  '--font-heading': `${ARCHIVO}, 'Heading Fallback', sans-serif`,
+} as React.CSSProperties;
+// preload: false — the mono face only styles small labels, so it shouldn't compete with Archivo
+// (which renders the hero headline, the mobile LCP element) for bandwidth on first load.
+// The auto-generated fallback (scaled Arial) wraps uppercase labels differently and caused layout shift.
+// 'Mono Fallback' (globals.css) is Courier New: same 0.6em advance as JetBrains Mono, so labels don't reflow.
+const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-mono', display: 'swap', preload: false, adjustFontFallback: false, fallback: ['Mono Fallback', 'monospace'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
@@ -16,7 +27,8 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   openGraph: { type: 'website', siteName: SITE_NAME, locale: 'en_US', images: [SHARE_IMAGE] },
   twitter: { card: 'summary_large_image', images: [SHARE_IMAGE.url] },
-  icons: { icon: BRAND.logo, apple: BRAND.logo },
+  // Favicons come from the file conventions src/app/icon1.png (96px) and apple-icon.png (180px).
+  // Don't point icons at /brand/logo.png: it is 1.4 MB and browsers download it on every page.
 };
 
 const ORG = {
@@ -45,7 +57,7 @@ export const viewport: Viewport = { width: 'device-width', initialScale: 1, them
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={archivo.variable + ' ' + mono.variable}>
+    <html lang="en" className={archivo.variable + ' ' + mono.variable} style={FONT_VARS}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(ORG)} />
         <a href="#main" className="skip">Skip to content</a>

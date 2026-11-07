@@ -1,7 +1,23 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
-import { CHAPTERS, CONTACT, PARTS, PLACES, SKETCHFAB_CREDIT, SKETCHFAB_ID, TOURS, VIDEO, img } from '@/lib/content';
+import { type RefObject, useEffect, useRef, useState } from 'react';
+import { CHAPTERS, CONTACT, PARTS, PLACES, SKETCHFAB_CREDIT, SKETCHFAB_ID, TOURS, VIDEO, img, optimized } from '@/lib/content';
+
+/** True once the element comes within `margin` of the viewport. Used to defer heavy media. */
+function useNear(ref: RefObject<Element | null>, margin = '50% 0px') {
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || near) return;
+    // intersectionRatio > 0 (not just isIntersecting): a section sitting exactly at the fold is "edge-adjacent"
+    // and would otherwise count as visible, loading its video during the initial page load.
+    const io = new IntersectionObserver(([e]) => { if (e.intersectionRatio > 0) { setNear(true); io.disconnect(); } }, { rootMargin: margin, threshold: [0, 0.01] });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [ref, margin, near]);
+  return near;
+}
 
 const M = { fontFamily: 'var(--font-mono)' } as const;
 const ELEV = ['paro', 'thimphu', 'dochula', 'punakha', 'phob', 'pele', 'trongsa', 'yotong', 'bumthang'].map(k => PLACES[k].elev);
@@ -19,9 +35,21 @@ export default function HomeExperience({ testimonials }: { testimonials?: React.
   const [mi, setMi] = useState(0);
   const [pi, setPi] = useState(0);
   const [fine, setFine] = useState(true);
-  const hero = useRef<HTMLVideoElement>(null), ride = useRef<HTMLVideoElement>(null), rideSec = useRef<HTMLElement>(null);
+  const [heroVideo, setHeroVideo] = useState(false), [heroOn, setHeroOn] = useState(false), [show3d, setShow3d] = useState(false);
+  const hero = useRef<HTMLVideoElement>(null), ride = useRef<HTMLVideoElement>(null), rideSec = useRef<HTMLElement>(null), finale = useRef<HTMLElement>(null);
+  // The ride section starts right at the fold, so it waits for the first scroll (no margin); the finale is far down.
+  const rideNear = useNear(rideSec, '0px'), finaleNear = useNear(finale);
 
-  useEffect(() => { setFine(matchMedia('(pointer:fine)').matches); }, []);
+  useEffect(() => {
+    setFine(matchMedia('(pointer:fine)').matches);
+    // Hero video: desktop only, never with reduced motion or data saver, and only after the page has loaded,
+    // so the optimised poster image is what paints first. Phones keep the still photo and save ~8 MB.
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    if (saveData || !matchMedia('(min-width:861px)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const start = () => setTimeout(() => setHeroVideo(true), 1500);
+    if (document.readyState === 'complete') start(); else addEventListener('load', start, { once: true });
+    return () => removeEventListener('load', start);
+  }, []);
 
   useEffect(() => {
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -58,9 +86,10 @@ export default function HomeExperience({ testimonials }: { testimonials?: React.
   return (
     <main id="main">
       <section aria-label="Ride hero" className="screen" style={{ position: 'relative', minHeight: 520, overflow: 'hidden', background: '#000' }}>
-        <video ref={hero} className="cover" autoPlay muted loop playsInline preload="auto" poster={img('places/dochula-wide.jpg')} aria-hidden style={{ filter: 'saturate(.75) contrast(1.1) brightness(.8)' }}>
-          <source src={VIDEO.hero} type="video/mp4" />
-        </video>
+        <Image src={img('places/dochula-wide.jpg')} alt="" aria-hidden fill priority sizes="100vw" style={{ objectFit: 'cover', filter: 'saturate(.75) contrast(1.1) brightness(.8)' }} />
+        {heroVideo && (
+          <video ref={hero} className="cover" src={VIDEO.hero} autoPlay muted loop playsInline aria-hidden onPlaying={() => setHeroOn(true)} style={{ filter: 'saturate(.75) contrast(1.1) brightness(.8)', opacity: heroOn ? 1 : 0, transition: 'opacity 1s ease' }} />
+        )}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,11,13,.55) 0%,rgba(8,11,13,0) 30%,rgba(8,11,13,0) 55%,#080B0D 100%)' }} />
         <div className="mono hud hide-m" style={{ position: 'absolute', top: 88, left: 'var(--pad)', display: 'grid', gap: 6 }}>
           <span><span style={{ color: 'var(--steel)' }}>Route //</span> Himalayan expedition</span>
@@ -69,27 +98,31 @@ export default function HomeExperience({ testimonials }: { testimonials?: React.
         </div>
         <div className="stack" style={{ position: 'absolute', left: 'var(--pad)', right: 'var(--pad)', bottom: 'clamp(20px,4vh,36px)', gridTemplateColumns: 'minmax(0,1fr) auto', gap: 24, alignItems: 'end' }}>
           <div>
-            <h1 className="display" style={{ fontSize: 'clamp(44px,min(16vw,22vh),260px)', lineHeight: 0.78 }}><span className="mono" style={{ display: 'block', fontSize: 12, lineHeight: 1.4, color: 'var(--orange)', marginBottom: 'clamp(12px,2vh,20px)' }}>Bhutan Motorcycle Tours</span>The road<br /><span style={{ WebkitTextStroke: '2px var(--ice)', color: 'transparent' }}>is calling.</span></h1>
+            {/* nowrap: lines are fixed by <br>, so the swap from fallback to Archivo can't re-wrap the text and shift the layout. */}
+            <h1 className="display" style={{ fontSize: 'clamp(44px,min(16vw,22vh),260px)', lineHeight: 0.78, whiteSpace: 'nowrap' }}><span className="mono" style={{ display: 'block', fontSize: 12, lineHeight: 1.4, color: 'var(--orange)', marginBottom: 'clamp(12px,2vh,20px)' }}>Bhutan Motorcycle Tours</span>The road<br /><span style={{ WebkitTextStroke: '2px var(--ice)', color: 'transparent' }}>is calling.</span></h1>
             <div style={{ display: 'flex', gap: '14px 28px', alignItems: 'center', flexWrap: 'wrap', marginTop: 'clamp(16px,3vh,28px)' }}>
               <p style={{ margin: 0, fontWeight: 200, fontSize: 'clamp(18px,1.8vw,24px)', flexBasis: 'auto' }}>Ride beyond the ordinary.</p>
               <a href="#missions" className="btn btn-ice">Explore expeditions</a>
               <Link href="/plan-your-ride" className="btn btn-ghost">Build your ride →</Link>
             </div>
           </div>
-          <div className="mono end-m-start" style={{ display: 'grid', gap: 10, color: 'var(--steel)', fontSize: 10 }}>
-            <button onClick={toggle} aria-label={paused ? 'Play video' : 'Pause video'} style={{ background: 'rgba(8,11,13,.5)', border: '1px solid rgba(244,246,246,.3)', color: 'var(--ice)', width: 48, height: 48, cursor: 'pointer' }}>{paused ? '▶' : '❚❚'}</button>
-            <span>Footage: Mixkit · temporary · not Bhutan</span>
-          </div>
+          {heroVideo && (
+            <div className="mono end-m-start" style={{ display: 'grid', gap: 10, color: 'var(--steel)', fontSize: 10 }}>
+              <button onClick={toggle} aria-label={paused ? 'Play video' : 'Pause video'} style={{ background: 'rgba(8,11,13,.5)', border: '1px solid rgba(244,246,246,.3)', color: 'var(--ice)', width: 48, height: 48, cursor: 'pointer' }}>{paused ? '▶' : '❚❚'}</button>
+              <span>Footage: Mixkit · temporary · not Bhutan</span>
+            </div>
+          )}
         </div>
       </section>
 
       <section ref={rideSec} aria-label="Scroll-controlled ride" style={{ position: 'relative', height: '420vh' }}>
         <div className="screen" style={{ position: 'sticky', top: 0, overflow: 'hidden' }}>
-          <video ref={ride} aria-hidden className="cover" muted playsInline preload="metadata" loop={!fine} autoPlay={!fine} poster={img('places/paro.jpg')} style={{ filter: 'grayscale(.35) contrast(1.15) brightness(.55)', transform: `scale(${1 + p * 0.15})`, willChange: 'transform' }}>
-            <source src={VIDEO.pov} type="video/mp4" />
-          </video>
+          {/* No src until the section is near the viewport: nothing downloads on first load. */}
+          <video ref={ride} aria-hidden className="cover" src={rideNear ? VIDEO.pov : undefined} muted playsInline preload="metadata" loop={!fine} autoPlay={!fine} poster={rideNear ? optimized('places/paro.jpg', 1080) : undefined} style={{ filter: 'grayscale(.35) contrast(1.15) brightness(.55)', transform: `scale(${1 + p * 0.15})`, willChange: 'transform' }} />
           {CHAPTERS.map((c, j) => (
-            <div key={c.place} aria-hidden style={{ position: 'absolute', inset: 0, background: `url('${img(PLACES[c.place].img)}') center/cover`, opacity: layer(j) * 0.55, mixBlendMode: 'luminosity', willChange: 'opacity' }} />
+            <div key={c.place} aria-hidden style={{ position: 'absolute', inset: 0, opacity: layer(j) * 0.55, mixBlendMode: 'luminosity', willChange: 'opacity' }}>
+              <Image src={img(PLACES[c.place].img!)} alt="" fill sizes="100vw" style={{ objectFit: 'cover' }} />
+            </div>
           ))}
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 60%,rgba(8,11,13,0),rgba(8,11,13,.85))' }} />
           <div aria-hidden className="display" style={{ position: 'absolute', top: '50%', left: 0, whiteSpace: 'nowrap', transform: `translate3d(${-p * 70}%,-50%,0)`, willChange: 'transform', fontSize: 'clamp(120px,26vw,420px)', color: 'transparent', WebkitTextStroke: '1px rgba(244,246,246,.35)' }}>Paro · Thimphu · Dochula · Punakha · Phobjikha · Pele La · Trongsa · Yotong La · Bumthang</div>
@@ -116,7 +149,15 @@ export default function HomeExperience({ testimonials }: { testimonials?: React.
 
       <section id="machine" aria-labelledby="machine-title" className="stack machine min-screen">
         <div className="machine-view">
-          <iframe title={`${SKETCHFAB_CREDIT.title} 3D scan by ${SKETCHFAB_CREDIT.author} (${SKETCHFAB_CREDIT.license}), Sketchfab`} src={`https://sketchfab.com/models/${SKETCHFAB_ID}/embed?autostart=1&ui_theme=dark&ui_infos=0&ui_hint=2&dnt=1&transparent=1`} allow="autoplay; fullscreen; xr-spatial-tracking" allowFullScreen loading="lazy" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }} />
+          {/* Facade: Sketchfab (several MB of JS plus third-party cookies) only loads when the visitor asks for it. */}
+          {show3d ? (
+            <iframe title={`${SKETCHFAB_CREDIT.title} 3D scan by ${SKETCHFAB_CREDIT.author} (${SKETCHFAB_CREDIT.license}), Sketchfab`} src={`https://sketchfab.com/models/${SKETCHFAB_ID}/embed?autostart=1&ui_theme=dark&ui_infos=0&ui_hint=2&dnt=1&transparent=1`} allow="autoplay; fullscreen; xr-spatial-tracking" allowFullScreen style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }} />
+          ) : (
+            <button onClick={() => setShow3d(true)} className="machine-facade" aria-label="Load the interactive 3D motorcycle model (Sketchfab)">
+              <Image src={img('bike/himalayan.jpg')} alt="" fill sizes="(max-width:860px) 100vw, 60vw" style={{ objectFit: 'cover', filter: 'grayscale(.4) brightness(.55)' }} />
+              <span className="btn btn-orange" style={{ position: 'relative' }}>Rotate the bike in 3D ↻</span>
+            </button>
+          )}
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
           <span className="mono" style={{ color: 'var(--orange)' }}>Inspection // 3D</span>
@@ -136,7 +177,9 @@ export default function HomeExperience({ testimonials }: { testimonials?: React.
 
       <section id="missions" aria-label="Choose an expedition" className="missions">
         {MISSIONS.map((m, i) => (
-          <div key={m.slug} aria-hidden style={{ position: 'absolute', inset: 0, background: `url('${img(m.img)}') center/cover`, opacity: i === mi ? 1 : 0, transform: `scale(${i === mi ? 1 : 1.08})`, transition: 'opacity 1s ease, transform 6s cubic-bezier(.2,.7,.2,1)', filter: 'saturate(.7) brightness(.6)' }} />
+          <div key={m.slug} aria-hidden style={{ position: 'absolute', inset: 0, opacity: i === mi ? 1 : 0, transform: `scale(${i === mi ? 1 : 1.08})`, transition: 'opacity 1s ease, transform 6s cubic-bezier(.2,.7,.2,1)', filter: 'saturate(.7) brightness(.6)' }}>
+            <Image src={img(m.img)} alt="" fill sizes="100vw" style={{ objectFit: 'cover' }} />
+          </div>
         ))}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg,rgba(8,11,13,.92) 0,rgba(8,11,13,.4) 50%,rgba(8,11,13,.85) 100%)' }} />
         <div className="stack missions-inner">
@@ -208,10 +251,9 @@ export default function HomeExperience({ testimonials }: { testimonials?: React.
 
       {testimonials && <div className="page" style={{ paddingTop: 'clamp(56px,8vw,96px)' }}>{testimonials}</div>}
 
-      <section aria-label="Finale" className="min-screen" style={{ position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'flex-end', paddingTop: 120 }}>
-        <video aria-hidden className="cover" autoPlay muted loop playsInline preload="none" poster={img('places/phobjikha-valley.jpg')} style={{ filter: 'grayscale(.5) brightness(.5) contrast(1.2)' }}>
-          <source src={VIDEO.pov} type="video/mp4" />
-        </video>
+      <section ref={finale} aria-label="Finale" className="min-screen" style={{ position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'flex-end', paddingTop: 120 }}>
+        {/* autoPlay overrides preload="none", so the src is only set once the section is close. */}
+        <video aria-hidden className="cover" src={finaleNear ? VIDEO.pov : undefined} autoPlay muted loop playsInline poster={finaleNear ? optimized('places/phobjikha-valley.jpg', 1080) : undefined} style={{ filter: 'grayscale(.5) brightness(.5) contrast(1.2)' }} />
         <div style={{ position: 'relative', padding: '0 var(--pad) 40px', display: 'grid', gap: 28, width: '100%' }}>
           <h2 className="display" style={{ fontSize: 'clamp(40px,min(11vw,16vh),190px)', lineHeight: 0.8 }}>This is not a tour.<br /><span style={{ color: 'var(--orange)' }}>This is your next adventure.</span></h2>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 20, flexWrap: 'wrap', borderTop: '1px solid rgba(244,246,246,.25)', paddingTop: 20 }}>
