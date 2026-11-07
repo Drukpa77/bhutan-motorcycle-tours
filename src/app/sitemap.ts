@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { TOURS } from '@/lib/content';
+import { GUIDES } from '@/lib/guides';
 import { siteUrl } from '@/lib/site';
 
 // Only canonical, indexable URLs: no ?tour= map views (they canonicalise to /explore-bhutan) and no /ride-mode (noindex).
@@ -13,7 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: base + '/explore-bhutan', changeFrequency: 'monthly', priority: 0.7 },
     { url: base + '/plan-your-ride', changeFrequency: 'monthly', priority: 0.8 },
     { url: base + '/faq', changeFrequency: 'monthly', priority: 0.7 },
+    { url: base + '/guides', changeFrequency: 'monthly', priority: 0.7 },
   ];
+  // Guides carry a real `updated` date, so they get an honest lastmod.
+  for (const g of GUIDES) {
+    pages.push({ url: `${base}/guides/${g.slug}`, lastModified: g.updated, changeFrequency: 'monthly', priority: 0.8 });
+  }
   for (const tour of TOURS) {
     pages.push({
       url: `${base}/motorcycle-tours/${tour.path}`,

@@ -5,46 +5,15 @@ import { CHAPTERS, CONTACT, PARTS, PLACES, SKETCHFAB_CREDIT, SKETCHFAB_ID, TOURS
 
 const M = { fontFamily: 'var(--font-mono)' } as const;
 const ELEV = ['paro', 'thimphu', 'dochula', 'punakha', 'phob', 'pele', 'trongsa', 'yotong', 'bumthang'].map(k => PLACES[k].elev);
-const proj = ([la, lo]: [number, number]) => [Math.round(((lo - 89.2) / 1.65) * 280 + 10), Math.round(((27.65 - la) / 0.32) * 120 + 8)];
-const MISSIONS = [...TOURS.map(t => ({ ...t, href: '/motorcycle-tours/' + t.path, cta: 'View route' })),
-  { slug: 'custom', code: 'E-00', name: 'Your own line', status: 'Private / custom', summary: 'Your dates, your pace, your passes. Configure an expedition and the operator will quote it individually.', stops: ['paro', 'thimphu', 'punakha', 'phob'], high: 'You decide', img: 'places/phobjikha.jpg', href: '/plan-your-ride', cta: 'Configure' }];
+// Fit every place into the 300x150 route preview, keeping a 10px margin.
+const LL = Object.values(PLACES).map(p => p.ll), LA = LL.map(l => l[0]), LO = LL.map(l => l[1]);
+const [la0, la1, lo0, lo1] = [Math.min(...LA), Math.max(...LA), Math.min(...LO), Math.max(...LO)];
+const proj = ([la, lo]: [number, number]) => [Math.round(((lo - lo0) / (lo1 - lo0)) * 280 + 10), Math.round(((la1 - la) / (la1 - la0)) * 120 + 8)];
+const MISSIONS = [...TOURS.map(t => ({ ...t, href: '/motorcycle-tours/' + t.path, cta: t.itinerary ? 'Day-by-day' : 'View route' })),
+  { slug: 'custom', code: 'E-00', name: 'Your own line', status: 'Private / custom', summary: 'Your dates, your pace, your passes. Configure an expedition and we will quote it individually.', stops: ['paro', 'thimphu', 'punakha', 'phob'], high: 'You decide', img: 'places/phobjikha.jpg', href: '/plan-your-ride', cta: 'Configure', days: undefined }];
 
-function Ignition({ onDone }: { onDone: () => void }) {
-  const [lit, setLit] = useState(false), [go, setGo] = useState(false);
-  const finish = (instant: boolean) => { sessionStorage.setItem('bmt-ignited', '1'); if (instant) return onDone(); setGo(true); setTimeout(onDone, 1300); };
-  useEffect(() => {
-    const t = setTimeout(() => setLit(true), 400);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') finish(true); };
-    addEventListener('keydown', onKey);
-    return () => { clearTimeout(t); document.body.style.overflow = prev; removeEventListener('keydown', onKey); };
-  }, []);
-  return (
-    <div role="dialog" aria-modal="true" aria-label="Ignition intro" style={{ position: 'fixed', inset: 0, zIndex: 100, background: '#030405', overflow: 'hidden', opacity: go ? 0 : 1, transition: 'opacity 1.1s cubic-bezier(.7,0,.2,1)' }}>
-      <div style={{ position: 'absolute', inset: '-4%', background: `url('${img('bike/himalayan.jpg')}') center/cover`, filter: `grayscale(.6) contrast(1.25) brightness(${lit ? 0.9 : 0.15})`, transform: `scale(${go ? 3.2 : 1.04})`, transition: 'transform 1.4s cubic-bezier(.7,0,.2,1), filter 2.4s ease' }} />
-      <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse 40% 50% at 50% 50%, rgba(3,4,5,0) 0, rgba(3,4,5,.7) ${lit ? '70%' : '4%'}, #030405 ${lit ? '140%' : '12%'})`, transition: 'all 2.6s cubic-bezier(.2,.7,.2,1)' }} />
-      <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)' }} />
-      <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 1, background: 'var(--lime)', opacity: 0.5, animation: 'scan 3.2s linear infinite' }} />
-      <div className="mono" style={{ position: 'absolute', top: 28, left: 'var(--pad)', right: 'var(--pad)', display: 'flex', justifyContent: 'space-between', gap: 16, color: 'var(--steel)' }}>
-        <span>BMT // Expedition System</span><span aria-live="polite"><span aria-hidden style={{ color: 'var(--lime)', animation: 'blink 1.4s infinite' }}>●</span> {lit ? 'Systems ready' : 'Ignition'}</span>
-      </div>
-      <div className="stack" style={{ position: 'absolute', left: 'var(--pad)', right: 'var(--pad)', bottom: 40, gridTemplateColumns: 'minmax(0,1fr) auto', gap: 32, alignItems: 'end' }}>
-        <div>
-          <div className="mono" style={{ color: 'var(--orange)', fontSize: 12 }}>Expedition system // Bhutan</div>
-          <div className="display" style={{ fontSize: 'clamp(44px,min(11vw,18vh),180px)', marginTop: 12 }}>Bhutan<br />Motorcycle Tours</div>
-        </div>
-        <div className="end-m-start" style={{ display: 'grid', gap: 12 }}>
-          <button autoFocus className="btn btn-orange" style={{ padding: '22px 30px', fontSize: 18 }} onClick={() => finish(false)}>Start the journey <span aria-hidden>→</span></button>
-          <button className="mono" onClick={() => finish(true)} style={{ background: 'none', border: 0, color: 'var(--steel)', cursor: 'pointer', minHeight: 44 }}>Skip intro ↓</button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function HomeExperience() {
-  const [intro, setIntro] = useState(false);
+/** `testimonials` is a server-rendered slot (reviews, videos, trust links) shown before the finale. */
+export default function HomeExperience({ testimonials }: { testimonials?: React.ReactNode }) {
   const [paused, setPaused] = useState(false);
   const [p, setP] = useState(0);
   const [mi, setMi] = useState(0);
@@ -52,11 +21,7 @@ export default function HomeExperience() {
   const [fine, setFine] = useState(true);
   const hero = useRef<HTMLVideoElement>(null), ride = useRef<HTMLVideoElement>(null), rideSec = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    setIntro(!sessionStorage.getItem('bmt-ignited') && !reduce);
-    setFine(matchMedia('(pointer:fine)').matches);
-  }, []);
+  useEffect(() => { setFine(matchMedia('(pointer:fine)').matches); }, []);
 
   useEffect(() => {
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -92,8 +57,6 @@ export default function HomeExperience() {
 
   return (
     <main id="main">
-      {intro && <Ignition onDone={() => setIntro(false)} />}
-
       <section aria-label="Ride hero" className="screen" style={{ position: 'relative', minHeight: 520, overflow: 'hidden', background: '#000' }}>
         <video ref={hero} className="cover" autoPlay muted loop playsInline preload="auto" poster={img('places/dochula-wide.jpg')} aria-hidden style={{ filter: 'saturate(.75) contrast(1.1) brightness(.8)' }}>
           <source src={VIDEO.hero} type="video/mp4" />
@@ -167,7 +130,7 @@ export default function HomeExperience() {
             <div style={{ fontStretch: '80%', fontWeight: 800, fontSize: 22, textTransform: 'uppercase' }}>{PARTS[pi].t}</div>
             <p style={{ margin: '8px 0 0', fontWeight: 300, lineHeight: 1.6, color: '#c7cdcf' }}>{PARTS[pi].d}</p>
           </div>
-          <p style={{ ...M, margin: 'auto 0 0', fontSize: 10, lineHeight: 1.7, color: 'var(--steel)' }}>Illustrative 3D scan: <a href={SKETCHFAB_CREDIT.url} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>“{SKETCHFAB_CREDIT.title}”</a> by {SKETCHFAB_CREDIT.author}, <a href={SKETCHFAB_CREDIT.licenseUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>{SKETCHFAB_CREDIT.license}</a>, via Sketchfab. The operator’s fleet is unconfirmed.</p>
+          <p style={{ ...M, margin: 'auto 0 0', fontSize: 10, lineHeight: 1.7, color: 'var(--steel)' }}>Illustrative 3D scan: <a href={SKETCHFAB_CREDIT.url} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>“{SKETCHFAB_CREDIT.title}”</a> by {SKETCHFAB_CREDIT.author}, <a href={SKETCHFAB_CREDIT.licenseUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>{SKETCHFAB_CREDIT.license}</a>, via Sketchfab. Our touring fleet is Royal Enfield 500cc.</p>
         </div>
       </section>
 
@@ -182,7 +145,7 @@ export default function HomeExperience() {
             <h2 className="display" style={{ fontSize: 'clamp(48px,min(12vw,20vh),200px)', lineHeight: 0.8 }}>{mission.name}</h2>
             <p style={{ margin: 0, maxWidth: '52ch', fontWeight: 300, fontSize: 'clamp(16px,1.4vw,18px)', lineHeight: 1.55, color: '#d6dbdc' }}>{mission.summary}</p>
             <div className="mono" style={{ display: 'flex', gap: 28, flexWrap: 'wrap', fontSize: 12 }}>
-              <span><span style={{ color: 'var(--steel)' }}>Stops</span> {mission.stops.length}</span><span><span style={{ color: 'var(--steel)' }}>High point</span> {mission.high}</span><span><span style={{ color: 'var(--steel)' }}>Duration</span> TBC</span><span><span style={{ color: 'var(--steel)' }}>Price</span> Custom quote</span>
+              <span><span style={{ color: 'var(--steel)' }}>Stops</span> {mission.stops.length}</span><span><span style={{ color: 'var(--steel)' }}>High point</span> {mission.high}</span><span><span style={{ color: 'var(--steel)' }}>Duration</span> {mission.days ? mission.days + ' days' : 'Flexible'}</span><span><span style={{ color: 'var(--steel)' }}>Price</span> Custom quote</span>
             </div>
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
               <Link href={mission.href} className="btn btn-orange">{mission.cta} →</Link>
@@ -212,7 +175,7 @@ export default function HomeExperience() {
         <div style={{ display: 'grid', gap: 20 }}>
           <span className="mono" style={{ color: 'var(--orange)' }}>Guided motorcycle tours in Bhutan</span>
           <h2 id="about-title" className="display" style={{ fontSize: 'clamp(40px,5vw,80px)' }}>Ride the Kingdom<br />of the Thunder Dragon</h2>
-          <p className="prose">Bhutan is one of the last great motorcycle roads in the Himalaya: a single winding lateral highway that climbs from river valleys at 1,200 m to passes near 4,000 m, past cliffside monasteries, fortress dzongs and prayer-flag ridges. Our guided Bhutan motorcycle tours start in Paro and follow that road over Chele La, Dochula, Pele La and Yotong La to the temples of Bumthang, or go wherever your own route takes you.</p>
+          <p className="prose">Bhutan is one of the last great motorcycle roads in the Himalaya: a single winding lateral highway that climbs from river valleys at 1,200 m to passes near 4,000 m, past cliffside monasteries, fortress dzongs and prayer-flag ridges. Our guided Bhutan motorcycle tours start in Paro and follow that road over Chele La, Dochula, Pele La and Yotong La to the temples of Bumthang, and on over Thrumshing La to Trashigang in the far east. You ride a Royal Enfield 500, with a guide, a mechanic and a backup 4x4 alongside, or go wherever your own route takes you.</p>
         </div>
         <ul className="cards" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
           {TOURS.map(t => (
@@ -235,13 +198,15 @@ export default function HomeExperience() {
           <span className="mono" style={{ color: 'var(--lime)' }}>Terrain system</span>
           <span className="display" style={{ fontSize: 'clamp(48px,6vw,96px)' }}>Trace the route<br />on the real map →</span>
         </Link>
-        {[{ n: 'Chele La', e: '3,988', t: 'Highest stop · m' }, { n: 'Punakha', e: '1,250', t: 'Lowest stop · m' }].map(x => (
+        {[{ n: 'Chele La', e: '3,988', t: 'Highest stop · m' }, { n: 'Trashigang', e: '1,000', t: 'Lowest stop · m' }].map(x => (
           <div key={x.n} style={{ padding: 'clamp(28px,6vw,56px) var(--pad)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 24 }}>
             <span className="mono" style={{ color: 'var(--steel)' }}>{x.t}</span>
             <span><span className="display" style={{ display: 'block', fontSize: 'clamp(44px,6vw,104px)' }}>{x.e}</span><span className="mono" style={{ color: 'var(--orange)', fontSize: 12 }}>{x.n}</span></span>
           </div>
         ))}
       </section>
+
+      {testimonials && <div className="page" style={{ paddingTop: 'clamp(56px,8vw,96px)' }}>{testimonials}</div>}
 
       <section aria-label="Finale" className="min-screen" style={{ position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'flex-end', paddingTop: 120 }}>
         <video aria-hidden className="cover" autoPlay muted loop playsInline preload="none" poster={img('places/phobjikha-valley.jpg')} style={{ filter: 'grayscale(.5) brightness(.5) contrast(1.2)' }}>

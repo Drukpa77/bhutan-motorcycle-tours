@@ -4,4 +4,6 @@ export const BRAND = {
 } as const;
 
 /** Resolve a file under /public/images, or pass a root-relative path. */
-export const img = (file: string) => (file.startsWith('/') ? file : `/images/${file}`);
+export function img(file: string): string;
+export function img(file: string | undefined): string | undefined;
+export function img(file?: string) { return file === undefined ? undefined : file.startsWith('/') ? file : `/images/${file}`; }

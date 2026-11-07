@@ -4,8 +4,8 @@ import { FAQS } from '@/lib/faq';
 import { breadcrumbLd, jsonLd } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Bhutan Motorcycle Tour FAQ: Licence, SDF Fee, Guides & Best Season',
-  description: 'Answers for riders planning a Bhutan motorcycle tour: licence and permit rules, the Sustainable Development Fee, guides, road conditions, altitude and the best months to ride.',
+  title: { absolute: 'Bhutan Motorcycle Tour FAQ: Licence, SDF & Best Season' },
+  description: 'Answers for riders planning a Bhutan motorcycle tour: licence and permits, the SDF fee, guides, road conditions, altitude and the best months to ride.',
   alternates: { canonical: '/faq' },
 };
 

@@ -62,7 +62,7 @@ export default function TerrainExplorer({ initialTour }: { initialTour?: string 
         <div role="group" aria-label="Routes" style={{ display: 'flex', borderBottom: '1px solid var(--line)' }}>
           {TOURS.map((x, i) => <button key={x.slug} aria-pressed={i === ti} onClick={() => { setPlaying(false); setTi(i); }} style={{ flex: 1, background: 'none', border: 0, borderBottom: '2px solid ' + (i === ti ? 'var(--orange)' : 'transparent'), color: i === ti ? 'var(--ice)' : 'var(--steel)', padding: 16, minHeight: 52, fontStretch: '75%', fontWeight: 800, fontSize: 16, textTransform: 'uppercase', cursor: 'pointer' }}>{x.name}</button>)}
         </div>
-        <div role="img" aria-label={here.name} style={{ height: 170, background: `#222 url('${img(here.img)}') center/cover`, position: 'relative' }}><span className="mono" style={{ position: 'absolute', left: 12, bottom: 10, fontSize: 10, letterSpacing: '.08em', background: 'rgba(0,0,0,.7)', padding: '3px 6px' }}>{here.credit}</span></div>
+        <div role="img" aria-label={here.alt} style={{ height: 170, background: here.img ? `#222 url('${img(here.img)}') center/cover` : 'var(--ti)', position: 'relative' }}>{here.credit && <span className="mono" style={{ position: 'absolute', left: 12, bottom: 10, fontSize: 10, letterSpacing: '.08em', background: 'rgba(0,0,0,.7)', padding: '3px 6px' }}>{here.credit}</span>}</div>
         <div aria-live="polite" style={{ display: 'grid', gridTemplateColumns: '96px 1fr', gap: 16, padding: '18px 20px', borderBottom: '1px solid var(--line)', alignItems: 'center' }}>
           <div style={{ position: 'relative', width: 96, height: 96 }}>
             <svg aria-hidden width={96} height={96} viewBox="0 0 96 96" style={{ transform: 'rotate(-90deg)' }}><circle cx={48} cy={48} r={42} fill="none" stroke="#1b2227" strokeWidth={6} /><circle cx={48} cy={48} r={42} fill="none" stroke="#FF5A1F" strokeWidth={6} strokeDasharray={263.9} strokeDashoffset={263.9 * (1 - prog)} /></svg>
@@ -82,14 +82,14 @@ export default function TerrainExplorer({ initialTour }: { initialTour?: string 
         <ol aria-label="Stops" style={{ listStyle: 'none', margin: 0, padding: 0, overflow: 'auto', flex: 1 }}>
           {tour.stops.map((k, j) => (
             <li key={j}><button aria-current={j === idx ? 'step' : undefined} onClick={() => { setPlaying(false); setProg(cum[j] / tot); }} style={{ width: '100%', textAlign: 'left', background: j === idx ? '#151A1E' : 'none', border: 0, borderBottom: '1px solid #13181b', color: 'var(--ice)', padding: '14px 20px', display: 'grid', gridTemplateColumns: '52px 1fr auto', gap: 10, cursor: 'pointer' }}>
-              <span className="mono" style={{ color: 'var(--orange)' }}>Day {String(j + 1).padStart(2, '0')}</span>
+              <span className="mono" style={{ color: 'var(--orange)' }}>Stop {String(j + 1).padStart(2, '0')}</span>
               <span><span style={{ fontStretch: '75%', fontWeight: 800, fontSize: 18, textTransform: 'uppercase' }}>{PLACES[k].name}</span><small style={{ display: 'block', color: 'var(--steel)' }}>{PLACES[k].pass ? 'Mountain pass · ' : ''}{PLACES[k].elev.toLocaleString()} m</small></span>
               <span className="mono" style={{ color: 'var(--steel)' }}>{Math.round(cum[j])} km</span>
             </button></li>
           ))}
         </ol>
       </aside>
-      <p className="mono" style={{ gridColumn: '1/-1', padding: '14px var(--pad)', margin: 0, color: 'var(--steel)', fontSize: 10, lineHeight: 1.8, borderTop: '1px solid var(--line)' }}>Editorial draft routes · *approximate public elevations · km are straight-line, not road distance · Map data © OpenStreetMap contributors</p>
+      <p className="mono" style={{ gridColumn: '1/-1', padding: '14px var(--pad)', margin: 0, color: 'var(--steel)', fontSize: 10, lineHeight: 1.8, borderTop: '1px solid var(--line)' }}>Route outlines · *approximate elevations · km are straight-line, not road distance · Map data © OpenStreetMap contributors</p>
     </div>
   );
 }

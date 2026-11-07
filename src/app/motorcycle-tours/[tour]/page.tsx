@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { PLACES, TOURS, img } from '@/lib/content';
-import { FAQS } from '@/lib/faq';
+import Testimonials from '@/components/content/Testimonials';
+import TrustStrip from '@/components/content/TrustStrip';
+import { OPERATIONS, PLACES, TOURS, img } from '@/lib/content';
+import { GUIDES } from '@/lib/guides';
 import { SITE_NAME, breadcrumbLd, jsonLd, siteUrl } from '@/lib/site';
 
 type Props = { params: Promise<{ tour: string }> };
@@ -19,7 +21,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const image = { url: img(t.img), alt: t.imgAlt };
   // Next.js replaces (not merges) the root openGraph/twitter objects, so repeat the site-wide fields here.
   return {
-    title: t.title,
+    // Absolute: the tour titles already say "Motorcycle Tour", so the site suffix only pushed them past ~60 chars.
+    title: { absolute: t.title },
     description: t.description,
     alternates: { canonical: url },
     openGraph: { type: 'website', siteName: SITE_NAME, locale: 'en_US', title: t.title, description: t.description, url, images: [image] },
@@ -43,6 +46,7 @@ export default async function Page({ params }: Props) {
     image: siteUrl() + img(t.img),
     touristType: 'Motorcycle touring',
     provider: { '@id': siteUrl() + '/#org' },
+    ...(t.itinerary && { subjectOf: { '@type': 'CreativeWork', name: `${t.days}-day itinerary`, text: t.itinerary.map(d => `Day ${d.day}: ${d.title}`).join('; ') } }),
     itinerary: {
       '@type': 'ItemList',
       itemListElement: t.stops.map((s, i) => ({
@@ -67,7 +71,10 @@ export default async function Page({ params }: Props) {
           <span><span style={{ color: 'var(--steel)' }}>Finish</span> {PLACES[t.stops[t.stops.length - 1]].name}</span>
           <span><span style={{ color: 'var(--steel)' }}>High point</span> {t.high}</span>
           <span><span style={{ color: 'var(--steel)' }}>Passes</span> {passes.map(p => p.name).join(', ')}</span>
-          <span><span style={{ color: 'var(--steel)' }}>Price</span> Custom quote</span>
+          <span><span style={{ color: 'var(--steel)' }}>Duration</span> {t.days ? `${t.days} days / ${t.days - 1} nights` : 'Flexible, set to your pace'}</span>
+          <span><span style={{ color: 'var(--steel)' }}>Bike</span> {OPERATIONS.fleet}</span>
+          <span><span style={{ color: 'var(--steel)' }}>Support</span> Guide, mechanic, backup 4x4</span>
+          <span><span style={{ color: 'var(--steel)' }}>Price</span> Itemised quote</span>
         </div>
         <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
           <Link href="/plan-your-ride" className="btn btn-orange">Get a quote for this route →</Link>
@@ -92,13 +99,15 @@ export default async function Page({ params }: Props) {
               </li>
             );
             return (
-              <li key={s + i} className="stop">
-                <figure style={{ margin: 0 }}>
-                  <div className="photo" style={{ aspectRatio: '4/3' }}>
-                    <Image src={img(p.img)} alt={p.alt} fill sizes="(max-width:860px) 100vw, 40vw" />
-                  </div>
-                  <figcaption className="mono credit">Photo: {p.credit} · Wikimedia Commons</figcaption>
-                </figure>
+              <li key={s + i} className={p.img ? 'stop' : 'stop stop-text'}>
+                {p.img && (
+                  <figure style={{ margin: 0 }}>
+                    <div className="photo" style={{ aspectRatio: '4/3' }}>
+                      <Image src={img(p.img)} alt={p.alt} fill sizes="(max-width:860px) 100vw, 40vw" />
+                    </div>
+                    <figcaption className="mono credit">Photo: {p.credit} · Wikimedia Commons</figcaption>
+                  </figure>
+                )}
                 <div style={{ display: 'grid', gap: 12 }}>
                   <span className="mono" style={{ color: 'var(--lime)' }}>Stop {String(i + 1).padStart(2, '0')}{p.pass ? ' · Mountain pass' : ''}</span>
                   <h3 className="display" style={{ fontSize: 'clamp(36px,4vw,64px)' }}>{p.name}</h3>
@@ -111,19 +120,45 @@ export default async function Page({ params }: Props) {
         </ol>
       </section>
 
-      <section aria-labelledby="book-title" style={{ background: 'var(--ti)', padding: 'clamp(28px,5vw,56px)', display: 'grid', gap: 18 }}>
-        <h2 id="book-title" className="display" style={{ fontSize: 'clamp(36px,4vw,64px)' }}>Dates, duration and price</h2>
-        <p className="prose">Every departure is quoted individually, based on your dates, group size, riding experience and how many days you want in the saddle. Bhutan’s Sustainable Development Fee is charged per night on top of the tour price.</p>
-        <Link href="/plan-your-ride" className="btn btn-orange" style={{ justifySelf: 'start' }}>Plan your ride →</Link>
+      {t.itinerary && (
+        <section aria-labelledby="itin-title" style={{ display: 'grid', gap: 24 }}>
+          <div style={{ display: 'grid', gap: 12 }}>
+            <span className="mono" style={{ color: 'var(--orange)' }}>{t.days} days · {t.days! - 1} nights</span>
+            <h2 id="itin-title" className="display" style={{ fontSize: 'clamp(40px,5vw,80px)' }}>Day-by-day itinerary</h2>
+            <p className="prose">Riding times are approximate and include photo stops. As a private tour, the pace and the stops are yours to adjust with your guide.</p>
+          </div>
+          <ol className="itin">
+            {t.itinerary.map(d => (
+              <li key={d.day}>
+                <span className="mono itin-day">Day {String(d.day).padStart(2, '0')}</span>
+                <div style={{ display: 'grid', gap: 8 }}>
+                  <h3>{d.title}</h3>
+                  <p className="prose" style={{ fontSize: 16 }}>{d.detail}</p>
+                  <span className="mono" style={{ color: 'var(--steel)' }}>{d.ride ? 'Ride: ' + d.ride + ' · ' : ''}Night: {d.night}</span>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      <section aria-labelledby="book-title" className="stack incl" style={{ background: 'var(--ti)', padding: 'clamp(28px,5vw,56px)' }}>
+        <div style={{ display: 'grid', gap: 18, alignContent: 'start' }}>
+          <h2 id="book-title" className="display" style={{ fontSize: 'clamp(36px,4vw,64px)' }}>Dates, price and what’s included</h2>
+          <p className="prose">Every departure is private and quoted individually, based on your dates, group size and hotel grade. Your quote itemises the land cost, the Sustainable Development Fee (US$100 per person per night, included) and a fuel estimate. <Link href="/guides/bhutan-motorcycle-tour-cost">How tour pricing works →</Link></p>
+          <Link href="/plan-your-ride" className="btn btn-orange" style={{ justifySelf: 'start' }}>Get a quote for this route →</Link>
+        </div>
+        <ul className="prose guide-list">{OPERATIONS.included.map(x => <li key={x}>{x}</li>)}</ul>
       </section>
 
-      <section aria-labelledby="faq-title" className="faq">
-        <h2 id="faq-title" className="display" style={{ fontSize: 'clamp(36px,4vw,64px)', marginBottom: 16 }}>Before you ride</h2>
-        {FAQS.slice(0, 4).map(f => (
-          <details key={f.q}><summary>{f.q}</summary><p className="prose">{f.a}</p></details>
-        ))}
-        <p className="mono" style={{ marginTop: 20 }}><Link href="/faq">All questions →</Link></p>
-      </section>
+      <TrustStrip />
+      <Testimonials tour={t.slug} />
+
+      <nav aria-label="Before you ride" style={{ display: 'grid', gap: 12 }}>
+        <span className="mono" style={{ color: 'var(--steel)' }}>Before you ride</span>
+        {GUIDES.map(g => <Link key={g.slug} href={`/guides/${g.slug}`} className="mono" style={{ fontSize: 13 }}>{g.h1} →</Link>)}
+        <Link href="/faq" className="mono" style={{ fontSize: 13 }}>Rider FAQ →</Link>
+      </nav>
 
       {others.length > 0 && (
         <nav aria-label="Other tours" style={{ display: 'grid', gap: 12 }}>

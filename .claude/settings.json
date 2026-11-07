@@ -14,7 +14,21 @@
       "PowerShell(npm run build 2>&1)",
       "PowerShell(npx next start -p 3123)",
       "PowerShell(npx next dev -p 3124)",
-      "PowerShell(npx tsc --noEmit)"
+      "PowerShell(npx tsc --noEmit)",
+      "Bash(curl -s -m 20 -D - -o /dev/null https://bhutan-motorcycle-tours.vercel.app/)",
+      "WebFetch(domain:bhutanmototours.com)",
+      "WebFetch(domain:bhutan.com.au)",
+      "WebFetch(domain:www.bhutantuskmotorcycle.com)",
+      "WebFetch(domain:extremebiketours.com)",
+      "WebFetch(domain:motobirds.com)",
+      "WebFetch(domain:www.twowheeledexpeditions.com)",
+      "WebFetch(domain:motorcycleparadise.net)",
+      "WebFetch(domain:www.bhutanmindvacation.com)",
+      "Bash(curl -sS -m 30 -o /dev/null -w '%{http_code}\\\\n' \"https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/View_of_Mongar_town.jpg/1920px-View_of_Mongar_town.jpg\" -A \"bhutan-motors-site-build/1.0\")",
+      "Read(//c/Users/palde/OneDrive/Desktop/Websites/**)",
+      "Read(//c/Users/palde/OneDrive/Desktop/Websites/bhutan-mind-vision/**)",
+      "Read(//c/Users/palde/OneDrive/Desktop/Websites/bhutan-mind-vision/design_handoff_bmv_website/src/**)",
+      "Read(//c/Users/palde/OneDrive/Desktop/Websites/bhutan-mind-vision/design_handoff_bmv_website/**)"
     ]
   }
 }
