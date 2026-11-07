@@ -36,6 +36,14 @@ Authors and licences were read from the Commons API on 10 Oct 2026. Files were d
 | `/images/places/bumthang.jpg` | Jakar_Dzong,_Bumthang.jpg | Christopher J. Fynn | CC BY-SA 3.0 | Jakar Dzong |
 | `/images/places/yotong-la.jpg` | Pele_La_pass_on_the_Nubding_to_Wandue_Phodrang_highway_-_Bhutan_-_panoramio.jpg | David Broad | CC BY 3.0 | **Yotong La stand-in** |
 | `/images/bike/himalayan.jpg` | Royal_Enfield_Himalayan.jpg | Tritinum | CC BY-SA 4.0 | Illustrative bike, not fleet |
+| `/images/places/thrumshing-la.jpg` | Thrumshing_La,_view_of_road,_Nov_2012.jpg | Wmarcc | CC BY-SA 3.0 | Road over Thrumshing La |
+| `/images/places/thrumshing-la-pass.jpg` | Jakar_-_Autsho,_Thrumshing_La_pass_(15223611104).jpg | Arian Zwegers | CC BY 2.0 | Prayer flags at Thrumshing La (blog cover) |
+| `/images/places/ura.jpg` | Ura_Mang_gi_Lhakhang.jpg | Christopher J. Fynn | CC BY-SA 4.0 | Ura village temple |
+| `/images/places/mongar.jpg` | View_of_Mongar_town.jpg | Christopher J. Fynn | CC BY-SA 3.0 | Mongar town |
+| `/images/places/lhuentse.jpg` | Lhuentse_Dzong.jpg | muddum27 | CC BY 2.0 | Lhuentse Dzong |
+| `/images/places/trashigang.jpg` | Tashigang_Dzong_111120.jpg | Christopher J. Fynn | CC BY-SA 3.0 | Trashigang Dzong |
+| `/images/places/chorten-kora.jpg` | Chorten_Kora,_Trashiyangtse_District,_Bhutan.jpg | Vikramjit Kakati | CC BY-SA 4.0 | Chorten Kora, Trashi Yangtse |
+| `/images/places/phuentsholing-gate.jpg` | Bhutan_gate_in_Phuentsholing_1.jpg | Afifa Afrin | CC BY-SA 3.0 | Bhutan Gate, Phuentsholing (blog) |
 
 Yotong La is the only stop without a photo of the place itself: Commons has none. Its credit is labelled "Stand-in" on the map. Replace it with operator photography, along with fleet and team photos.
 

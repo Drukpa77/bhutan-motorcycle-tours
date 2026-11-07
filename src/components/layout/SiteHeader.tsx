@@ -8,9 +8,9 @@ import { BRAND } from '@/lib/assets';
 const LINKS = [
   { href: '/motorcycle-tours', label: 'Tours' },
   { href: '/guides', label: 'Guides' },
+  { href: '/blog', label: 'Blog' },
   { href: '/explore-bhutan', label: 'Route map' },
   { href: '/faq', label: 'FAQ' },
-  { href: '/ride-mode', label: 'Ride mode' },
   { href: '/plan-your-ride', label: 'Build your ride →' },
 ];
 

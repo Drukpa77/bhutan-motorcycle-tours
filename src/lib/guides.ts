@@ -1,19 +1,13 @@
+import type { Section } from './blocks';
 import { OPERATIONS, OPERATOR } from './content';
 import type { Faq } from './faq';
+export type { Block, Section } from './blocks';
 
 /**
  * Long-form guides, each targeting one keyword cluster (see docs/seo/keyword-strategy.md).
  * Inline links use [text](/path) and are rendered by <RichText>. Government fees and rules change:
  * re-check the SDF, visa and permit facts each season and bump `updated` when you do.
  */
-export type Block =
-  | { p: string }
-  | { h3: string }
-  | { ul: string[] }
-  | { ol: string[] }
-  | { table: { head: string[]; rows: string[][] } }
-  | { note: string };
-export type Section = { id: string; h2: string; blocks: Block[] };
 export type Guide = {
   slug: string; title: string; description: string; h1: string; kicker: string;
   published: string; updated: string; img: string; imgAlt: string;

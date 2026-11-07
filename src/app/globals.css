@@ -130,6 +130,55 @@ button,input,textarea,select{touch-action:manipulation}
 .guide-table tbody th{font-weight:700;color:var(--ice)}
 .guide-table td{color:#c7cdcf;font-weight:300}
 
+/* Blog: index */
+.post-lead{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:end;text-decoration:none;color:inherit}
+.post-lead .photo{aspect-ratio:4/3}
+.post-lead-text{display:grid;gap:18px;padding-bottom:8px}
+.post-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(420px,100%),1fr));gap:clamp(32px,4vw,56px) clamp(24px,3vw,40px)}
+.post-card{display:grid;gap:14px;align-content:start;text-decoration:none;color:inherit}
+
+/* Blog: post */
+.post-hero{position:relative;min-height:min(86svh,820px);display:flex;align-items:flex-end;overflow:hidden;background:var(--ti)}
+.post-hero-img{object-fit:cover;filter:saturate(.85)}
+.post-hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,11,13,.55) 0%,rgba(8,11,13,.05) 35%,rgba(8,11,13,.35) 65%,#080B0D 100%)}
+.post-hero-text{position:relative;display:grid;gap:20px;padding:120px var(--pad) clamp(28px,5vw,56px);max-width:1280px;width:100%;margin:0 auto}
+.post-hero-credit{position:absolute;right:var(--pad);bottom:12px;margin:0;font-size:9px}
+.post-standfirst{margin:0;max-width:40ch;font-stretch:80%;font-weight:500;font-size:clamp(22px,2.4vw,32px);line-height:1.3;color:var(--ice)}
+
+/* Blog & guide blocks */
+.photo.zoom img{transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .6s ease}
+@media (hover:hover){a:hover .photo.zoom img,.blk-figure:hover .photo.zoom img,.blk-gallery figure:hover .photo.zoom img{transform:scale(1.05);filter:saturate(1)}}
+.blk-figure,.blk-gallery figure{margin:0;display:grid;gap:10px}
+.blk-figure figcaption{font-size:15px;color:var(--steel)}
+.blk-figure .credit,.blk-gallery .credit{display:inline;margin:0 0 0 6px;font-size:9px}
+.blk-gallery{display:grid;gap:12px}
+.blk-quote{margin:8px 0;padding:8px 0 8px clamp(18px,3vw,32px);border-left:3px solid var(--orange);display:grid;gap:12px}
+.blk-quote p{margin:0;font-stretch:75%;font-weight:800;font-size:clamp(26px,3vw,40px);line-height:1.1;text-transform:uppercase}
+.blk-quote cite{font-style:normal;color:var(--steel)}
+.blk-check{background:var(--ti);border:1px solid var(--line);padding:clamp(20px,3vw,28px);display:grid;gap:14px}
+.blk-check ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.blk-check li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;align-items:start;color:#c7cdcf;font-weight:300;font-size:clamp(15px,1.3vw,17px);line-height:1.5}
+.blk-check .tick{width:18px;height:18px;border:1.5px solid var(--lime);margin-top:3px;position:relative}
+.blk-check .tick::after{content:'';position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--lime);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.blk-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:0}
+.blk-stats>div{background:var(--ink);padding:20px;display:flex;flex-direction:column-reverse;gap:10px}
+.blk-stats dt{color:var(--steel);font-size:10px}
+.blk-stats dd{margin:0;font-size:clamp(34px,4vw,56px);color:var(--ice)}
+.blk-cta{display:grid;gap:14px;justify-items:start;padding:clamp(24px,4vw,40px);background:linear-gradient(135deg,var(--ti),#1d1410);border:1px solid rgba(255,90,31,.35)}
+.blk-cta strong{font-size:clamp(30px,3.4vw,48px)}
+
+/* Motion: CSS scroll-driven, zero JS. Only where supported; content is fully visible everywhere else.
+   The global prefers-reduced-motion rule below switches all of it off. */
+@keyframes reveal{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes heroIn{from{transform:scale(1.08)}to{transform:scale(1)}}
+.post-hero-img{animation:heroIn 2.4s cubic-bezier(.2,.7,.2,1) both}
+.read-progress{display:none}
+@supports (animation-timeline:view()){
+  .reveal{animation:reveal linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
+  .read-progress{display:block;position:fixed;top:0;left:0;right:0;height:3px;z-index:70;background:var(--orange);transform-origin:0 50%;animation:progress linear both;animation-timeline:scroll(root)}
+}
+
 /* Tours: operations steps, inclusions, itinerary */
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
 .steps li{background:var(--ink);padding:24px;display:grid;gap:10px;align-content:start}
@@ -156,11 +205,12 @@ button,input,textarea,select{touch-action:manipulation}
 
 /* Footer */
 .sitefoot{border-top:1px solid var(--line);padding:56px var(--pad) 32px;display:grid;gap:40px;max-width:1280px;margin:0 auto}
-.foot-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px}
+.foot-cols{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:32px}
 .foot-cols>div{display:grid;gap:10px;align-content:start;min-width:0}
 .foot-cols .mono{color:var(--orange);margin-bottom:4px}
 .foot-cols a,.foot-cols span:not(.mono){color:#c7cdcf;text-decoration:none;font-weight:300;font-size:15px;line-height:1.4;overflow-wrap:anywhere}
 @media (max-width:1000px){.foot-cols{grid-template-columns:1fr 1fr}.guide{grid-template-columns:minmax(0,1fr)}.guide-toc{position:static}}
+@media (max-width:860px){.post-lead{grid-template-columns:minmax(0,1fr)}.blk-gallery{grid-template-columns:minmax(0,1fr)!important}}
 @media (max-width:520px){.foot-cols{grid-template-columns:minmax(0,1fr)}.itin li{grid-template-columns:minmax(0,1fr);gap:8px}}
 
 /* Planner */

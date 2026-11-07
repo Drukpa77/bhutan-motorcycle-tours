@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { CONTACT, OPERATOR, TOURS } from '@/lib/content';
 import { GUIDES } from '@/lib/guides';
+import { POSTS } from '@/lib/posts';
 import HideOnRideMode from './HideOnRideMode';
 
 const SOCIAL: [string, string][] = ([
@@ -29,6 +30,12 @@ export default function SiteFooter() {
           {GUIDES.map(g => <Link key={g.slug} href={`/guides/${g.slug}`}>{short(g.title)}</Link>)}
           <Link href="/faq">Rider FAQ</Link>
           <Link href="/explore-bhutan">Route map</Link>
+          <Link href="/ride-mode">Ride mode</Link>
+        </div>
+        <div>
+          <span className="mono">Blog</span>
+          {POSTS.slice(0, 4).map(p => <Link key={p.slug} href={`/blog/${p.slug}`}>{p.h1}</Link>)}
+          <Link href="/blog">All posts →</Link>
         </div>
         <div>
           <span className="mono">Operated by</span>

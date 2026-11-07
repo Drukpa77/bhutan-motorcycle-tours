@@ -100,24 +100,18 @@ export const PLACES: Record<string, Place> = {
   bumthang: { id: 'bumthang', name: 'Bumthang', ll: [27.5492, 90.7525], elev: 2600, img: 'places/bumthang.jpg', credit: 'Jakar Dzong · C. J. Fynn · CC BY-SA 3.0', alt: 'Jakar Dzong overlooking the Chamkhar valley, Bumthang, Bhutan',
     blurb: 'Bhutan’s spiritual heartland: four valleys holding some of the country’s oldest temples, including Jambay Lhakhang and Kurjey, below Jakar Dzong.' },
   // Eastern Bhutan. Coordinates: OpenStreetMap (Nominatim). Elevations: Open-Meteo DEM at that point, rounded.
-  // Photos still to add. Suggested Wikimedia Commons files (download, save under /public/images/places, then set img + credit):
-  //   mongar.jpg        File:View_of_Mongar_town.jpg — Christopher J. Fynn, CC BY-SA 3.0
-  //   thrumshing-la.jpg File:Thrumshing_La,_view_of_road,_Nov_2012.jpg — Wmarcc, CC BY-SA 3.0
-  //   lhuentse.jpg      File:Lhuentse_Dzong.jpg — muddum27, CC BY 2.0
-  //   trashigang.jpg    File:Tashigang_Dzong_111120.jpg — Christopher J. Fynn, CC BY-SA 3.0
-  //   chorten-kora.jpg  File:Chorten_Kora,_Trashiyangtse_District,_Bhutan.jpg — Vikramjit Kakati, CC BY-SA 4.0
-  //   ura.jpg           File:Ura_Mang_gi_Lhakhang.jpg — Christopher J. Fynn, CC BY-SA 4.0
-  ura: { id: 'ura', name: 'Ura', ll: [27.4789, 90.9057], elev: 3100, alt: 'Ura village, Bumthang, Bhutan',
+  // Photos: Wikimedia Commons (files named in each credit), local copies in /public/images/places.
+  ura: { id: 'ura', name: 'Ura', ll: [27.4789, 90.9057], elev: 3100, img: 'places/ura.jpg', credit: 'Ura Mang gi Lhakhang · C. J. Fynn · CC BY-SA 4.0', alt: 'Ura Mang gi Lhakhang temple in Ura village, Bumthang, Bhutan',
     blurb: 'A stone-built village at about 3,100 m, one of the highest in central Bhutan. Narrow lanes, buckwheat fields, and pancakes and ara with a local family.' },
-  thrumshing: { id: 'thrumshing', name: 'Thrumshing La', ll: [27.4017, 90.9962], elev: 3750, pass: true, alt: 'Prayer flags on Thrumshing La pass, Bhutan',
+  thrumshing: { id: 'thrumshing', name: 'Thrumshing La', ll: [27.4017, 90.9962], elev: 3750, pass: true, img: 'places/thrumshing-la.jpg', credit: 'Thrumshing La · Wmarcc · CC BY-SA 3.0', alt: 'The road over Thrumshing La under prayer flags and fir trees, Bhutan',
     blurb: 'The highest pass on the lateral road, at about 3,750 m, inside Thrumshingla National Park. On the far side the road drops through cliffs and cloud forest towards Sengor and Mongar.' },
-  mongar: { id: 'mongar', name: 'Mongar', ll: [27.2757, 91.2403], elev: 1600, alt: 'Mongar town on its ridge, eastern Bhutan',
+  mongar: { id: 'mongar', name: 'Mongar', ll: [27.2757, 91.2403], elev: 1600, img: 'places/mongar.jpg', credit: 'View of Mongar town · C. J. Fynn · CC BY-SA 3.0', alt: 'Mongar town on its ridge, eastern Bhutan',
     blurb: 'The gateway to eastern Bhutan, unusually built on a ridge rather than a valley floor. A working town that sees few visitors.' },
-  lhuentse: { id: 'lhuentse', name: 'Lhuentse', ll: [27.6656, 91.1867], elev: 1470, alt: 'Lhuentse Dzong above the Kuri Chhu, Bhutan',
+  lhuentse: { id: 'lhuentse', name: 'Lhuentse', ll: [27.6656, 91.1867], elev: 1470, img: 'places/lhuentse.jpg', credit: 'Lhuentse Dzong · muddum27 · CC BY 2.0', alt: 'Lhuentse Dzong above the Kuri Chhu, Bhutan',
     blurb: 'The ancestral home of Bhutan’s royal family, reached by a quiet road up the Kuri Chhu gorge. Lhuentse Dzong sits on a spur high above the river, and nearby Takila has a giant statue of Guru Rinpoche.' },
-  trashigang: { id: 'trashigang', name: 'Trashigang', ll: [27.3363, 91.5513], elev: 1000, alt: 'Trashigang Dzong above the Drangme Chhu, eastern Bhutan',
+  trashigang: { id: 'trashigang', name: 'Trashigang', ll: [27.3363, 91.5513], elev: 1000, img: 'places/trashigang.jpg', credit: 'Trashigang Dzong · C. J. Fynn · CC BY-SA 3.0', alt: 'Trashigang Dzong above the Drangme Chhu, eastern Bhutan',
     blurb: 'The far east’s biggest town, below a 17th-century dzong built on a spur above the Drangme Chhu. The road in from Mongar crosses Kori La at about 2,400 m.' },
-  yangtse: { id: 'yangtse', name: 'Trashi Yangtse', ll: [27.6060, 91.4949], elev: 1740, alt: 'Chorten Kora stupa, Trashi Yangtse, Bhutan',
+  yangtse: { id: 'yangtse', name: 'Trashi Yangtse', ll: [27.6060, 91.4949], elev: 1740, img: 'places/chorten-kora.jpg', credit: 'Chorten Kora · Vikramjit Kakati · CC BY-SA 4.0', alt: 'Chorten Kora stupa, Trashi Yangtse, Bhutan',
     blurb: 'A valley known for wood turning and traditional crafts, with the white stupa of Chorten Kora on the riverbank.' },
 };
 
