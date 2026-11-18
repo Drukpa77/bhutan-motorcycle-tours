@@ -2,7 +2,7 @@ export const LIVE_SITE_URL = 'https://bhutanmotorcycletours.com';
 export const SITE_NAME = 'Bhutan Motorcycle Tours';
 // Home page meta description (also the site default and the schema description). Keep it ≤155 characters
 // and free of apostrophes/quotes, which search engines sometimes render as HTML entities.
-export const SITE_DESCRIPTION = 'Guided Bhutan motorcycle tours on Royal Enfield 500s, Paro to the far east. Licensed local operator with guide, mechanic and backup 4x4. Plan your ride.';
+export const SITE_DESCRIPTION = 'Guided Bhutan motorcycle tours on Royal Enfield Himalayans, Paro to the far east. Licensed local operator with guide, mechanic and backup vehicle.';
 /** Default social share image (Dochula, CC BY 2.0 — Arian Zwegers). */
 export const SHARE_IMAGE = { url: '/images/places/dochula-wide.jpg', alt: 'The 108 chortens at Dochula pass, Bhutan' };
 

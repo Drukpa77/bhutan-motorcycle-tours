@@ -179,6 +179,89 @@ button,input,textarea,select{touch-action:manipulation}
   .read-progress{display:block;position:fixed;top:0;left:0;right:0;height:3px;z-index:70;background:var(--orange);transform-origin:0 50%;animation:progress linear both;animation-timeline:scroll(root)}
 }
 
+/* Wide page-top photo. No min-height: with aspect-ratio it would force a minimum WIDTH
+   (240px × 21/9 = 560px) and make phones zoom the whole page out. Taller ratio on small screens instead. */
+.hero-photo{aspect-ratio:21/9}
+@media (max-width:860px){.hero-photo{aspect-ratio:3/2}}
+
+/* Tour page: at-a-glance, lengths, gated itinerary */
+.tour-facts dd{font-stretch:80%;font-weight:700;font-size:clamp(17px,1.6vw,21px);line-height:1.25;text-transform:none}
+.len-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.len-card{background:var(--ink);padding:clamp(22px,3vw,32px);display:grid;gap:14px;align-content:start;justify-items:start}
+.len-card.is-main{background:linear-gradient(160deg,#1a1410,var(--ink) 60%);box-shadow:inset 0 3px 0 var(--orange)}
+.len-card h3{font-size:clamp(44px,5vw,72px)}
+.itin-chips{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px;font-size:11px}
+.itin-chips li{border:1px solid var(--line);padding:6px 10px;color:var(--ice)}
+.itin-chips li span{color:var(--steel);margin-right:4px}
+.itin-gate{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 40px;align-items:start;padding:clamp(24px,4vw,44px);background:linear-gradient(135deg,var(--ti),#1d1410);border:1px solid rgba(255,90,31,.35)}
+.itin-gate h3{font-size:clamp(34px,4vw,56px)}
+.itin-gate>div:last-child{grid-column:1/-1}
+.blk-check-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.blk-check-list li,.blk-check li{position:relative}
+.blk-check-list li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;color:#c7cdcf;font-weight:300;line-height:1.5}
+.blk-check-list .tick{width:18px;height:18px;border:1.5px solid var(--lime);margin-top:3px;position:relative}
+.blk-check-list .tick::after{content:'';position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--lime);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.enq-start{justify-self:start}
+
+/* Enquiry: sticky bar */
+.enq-bar{position:fixed;z-index:55;right:var(--pad);bottom:20px;display:flex;align-items:center;gap:16px;padding:8px 8px 8px 20px;background:rgba(8,11,13,.92);border:1px solid rgba(244,246,246,.18);backdrop-filter:blur(8px);box-shadow:0 12px 40px rgba(0,0,0,.45)}
+.enq-bar .mono{color:var(--steel)}.enq-bar b{color:var(--ice);font-weight:500}
+body:has(.enq-bar) .sitefoot{padding-bottom:110px}
+
+/* Enquiry: slide-in panel */
+.enq-scrim{position:fixed;inset:0;z-index:90;background:rgba(3,4,5,.6);animation:fadeIn .25s ease both}
+.enq-panel{position:fixed;z-index:95;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--ink);border-left:1px solid var(--line);overflow-y:auto;overscroll-behavior:contain;animation:enqIn .35s cubic-bezier(.2,.7,.2,1) both;
+  /* Keep focused/scrolled-to fields clear of the sticky header and the sticky send bar. */
+  scroll-padding:150px 0 96px}
+.enq-panel[hidden]{display:none}
+.enq-head{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:24px 24px 18px;background:rgba(8,11,13,.96);border-bottom:1px solid var(--line)}
+.enq-head h2{margin:8px 0 0;font-stretch:70%;font-weight:900;font-size:clamp(28px,4vw,38px);line-height:.95;text-transform:uppercase}
+.enq-summary{margin:10px 0 0;color:var(--lime)}
+.enq-close{background:none;border:1px solid rgba(244,246,246,.3);color:var(--ice);width:44px;height:44px;flex:none;cursor:pointer;font-size:16px}
+.enq-form{display:grid;gap:26px;padding:24px}
+.enq-form fieldset{border:0;margin:0;padding:0;display:grid;gap:12px;min-width:0}
+.enq-form legend{padding:0;margin-bottom:12px;font-family:var(--font-mono),monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+.enq-chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.enq-chips-2{grid-template-columns:1fr 1fr}
+.enq-chips-sm{grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}
+.enq-chips button{display:grid;gap:4px;text-align:left;background:#0d1114;color:var(--ice);border:1px solid #2a3238;padding:12px;min-height:48px;cursor:pointer;font:500 14px var(--font-archivo);transition:border-color .2s,background .2s}
+.enq-chips button b{font-stretch:80%;font-weight:800;font-size:16px;text-transform:uppercase}
+.enq-chips button small{color:var(--steel);font-size:12px;font-weight:300}
+.enq-chips button[aria-pressed=true]{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.enq-chips button[aria-pressed=true] small{color:#2c3a10}
+@media (hover:hover){.enq-chips button:hover{border-color:var(--orange)}}
+.enq-hint{color:var(--steel);font-size:12px}
+.enq-steppers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.enq-stepper{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#0d1114;border:1px solid #2a3238;padding:8px 8px 8px 14px}
+.enq-stepper>span{font-size:14px}
+.enq-stepper>div{display:flex;align-items:center;gap:6px}
+.enq-stepper button{width:40px;height:40px;background:none;border:1px solid rgba(244,246,246,.3);color:var(--ice);font-size:18px;cursor:pointer}
+.enq-stepper button:disabled{opacity:.3;cursor:not-allowed}
+.enq-stepper output{min-width:2ch;text-align:center;font-weight:800;font-size:18px}
+.enq-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.enq-fields label{display:grid;gap:6px;min-width:0;color:var(--steel);font-size:13px}
+.enq-fields .enq-wide{grid-column:1/-1}
+.enq-form .field[aria-invalid=true],.enq-form fieldset[aria-invalid=true] .enq-chips button{border-color:var(--orange)}
+.enq-err{color:var(--orange);font-size:13px}
+.enq-consent{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;color:#c7cdcf;font-size:14px;line-height:1.5;cursor:pointer}
+.enq-consent input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--lime)}
+.enq-actions{display:flex;gap:10px;flex-wrap:wrap;position:sticky;bottom:0;background:var(--ink);padding:14px 0 6px;border-top:1px solid var(--line)}
+.enq-done{display:grid;gap:18px;justify-items:start;padding:32px 24px}
+.enq-tick{width:64px;height:64px;border-radius:50%;background:var(--lime);color:var(--ink);display:grid;place-items:center;font-size:30px;font-weight:900;animation:pop .45s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes enqIn{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+@media (max-width:860px){
+  .enq-bar{left:0;right:0;bottom:0;justify-content:space-between;padding:10px var(--pad);border-width:1px 0 0}
+  /* Keep scrolled-to and keyboard-focused content clear of the fixed bar. */
+  html:has(.enq-bar){scroll-padding-bottom:96px}
+  .enq-bar .mono{font-size:10px}
+  .enq-panel{top:auto;max-height:92svh;width:100%;border-left:0;border-top:1px solid var(--line);animation-name:enqUp}
+  .itin-gate{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.enq-fields,.enq-steppers,.enq-chips-2{grid-template-columns:minmax(0,1fr)}}
+@keyframes enqUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+
 /* Tours: operations steps, inclusions, itinerary */
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
 .steps li{background:var(--ink);padding:24px;display:grid;gap:10px;align-content:start}

@@ -18,5 +18,10 @@ export const EnquirySchema = z.object({
   notes: z.string().max(4000).optional().default(''),
   consent: z.literal(true, { errorMap: () => ({ message: 'Consent is required' }) }),
   company_website: z.string().optional().default(''), // honeypot
+  /** 'planner' = Build Your Ride; 'itinerary' = "send me the full itinerary" from a tour page. */
+  kind: z.enum(['planner', 'itinerary']).optional().default('planner'),
+  /** Tour page the request came from (itinerary requests). */
+  tour: z.string().trim().max(160).optional().default(''),
+  page: z.string().trim().max(300).optional().default(''),
 });
 export type Enquiry = z.infer<typeof EnquirySchema>;

@@ -15,7 +15,14 @@ const fmtDate = (d: string) => {
 const plural = (n: number, w: string) => `${n} ${w}${n === 1 ? '' : 's'}`;
 const firstName = (e: Enquiry) => e.name.split(/\s+/)[0];
 
-export const enquirySubject = (e: Enquiry) => `New ride enquiry · ${e.name} · ${e.adventure}, ${e.days} days`;
+const isItin = (e: Enquiry) => e.kind === 'itinerary';
+export const enquirySubject = (e: Enquiry) => isItin(e)
+  ? `Itinerary request · ${e.name} · ${e.tour || e.adventure}, ${e.days} days`
+  : `New ride enquiry · ${e.name} · ${e.adventure}, ${e.days} days`;
+/** What the rider is asking for, shown at the top of both email parts. */
+const ask = (e: Enquiry) => isItin(e)
+  ? `Send ${firstName(e)} the full day-by-day itinerary for ${e.tour || e.adventure} (${e.days} days), with a quote.`
+  : '';
 
 const travel = (e: Enquiry) => (e.date ? fmtDate(e.date) : 'Dates open') + (e.flexible ? ' · flexible' : '');
 const crew = (e: Enquiry) => plural(e.riders, 'rider') + (e.passengers ? ', ' + plural(e.passengers, 'passenger') : '');
@@ -24,8 +31,9 @@ const crew = (e: Enquiry) => plural(e.riders, 'rider') + (e.passengers ? ', ' + 
 export function enquiryText(e: Enquiry) {
   const block = (title: string, rows: [string, string][]) => `${title.toUpperCase()}\n` + rows.map(([k, v]) => `  ${k.padEnd(14)} ${v}`).join('\n');
   return [
-    `NEW RIDE ENQUIRY — ${SITE_NAME}`,
+    `${isItin(e) ? 'ITINERARY REQUEST' : 'NEW RIDE ENQUIRY'} — ${SITE_NAME}`,
     `${e.adventure} · ${e.days} days · ${travel(e)}`,
+    isItin(e) ? `REQUEST\n  ${ask(e)}${e.page ? `\n  From: ${e.page}` : ''}` : '',
     block('Rider', [['Name', e.name], ['Email', e.email], ['Phone', e.phone || '—'], ['Country', e.country], ['Experience', e.experience]]),
     block('The ride', [['Route', e.destinations.join(' → ')], ['Motorcycle', e.motorcycle], ['Group', `${crew(e)} · ${e.group}`], ['Accommodation', e.accommodation]]),
     e.notes ? `NOTES\n  ${e.notes.replace(/\n/g, '\n  ')}` : '',
@@ -54,7 +62,7 @@ export function enquiryHtml(e: Enquiry) {
 <tr><td style="background:${C.ink};padding:28px 40px">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
     <td style="vertical-align:middle"><img src="${site}${BRAND.logo}" width="44" height="44" alt="${esc(SITE_NAME)}" style="display:block;border-radius:50%;background:#fff"></td>
-    <td align="right" style="vertical-align:middle;font-family:${MONO};font-size:10px;letter-spacing:2px;text-transform:uppercase;color:${C.lime}">● New enquiry</td>
+    <td align="right" style="vertical-align:middle;font-family:${MONO};font-size:10px;letter-spacing:2px;text-transform:uppercase;color:${C.lime}">● ${isItin(e) ? 'Itinerary request' : 'New enquiry'}</td>
   </tr></table>
   <div style="font-family:${SANS};font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8a969c;margin:28px 0 8px">${esc(SITE_NAME)}</div>
   <div style="font-family:${SANS};font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-.3px;color:#F4F6F6;text-transform:uppercase">${esc(e.adventure)}</div>
@@ -66,6 +74,7 @@ export function enquiryHtml(e: Enquiry) {
   ${stat('Duration', e.days + ' days', false)}${stat('Travel', travel(e), true)}${stat('Group', crew(e), true)}
 </tr></table></td></tr>
 
+${isItin(e) ? `<tr><td style="padding:24px 40px 0"><div style="background:#FFF4EF;border-left:3px solid ${C.orange};padding:16px 20px;font-family:${SANS};font-size:15px;line-height:1.5;color:${C.text}"><b>Request:</b> ${esc(ask(e))}${e.page ? `<div style="font-size:12px;color:${C.muted};margin-top:6px">From <a href="${esc(e.page)}" style="color:${C.muted}">${esc(e.page.replace(/^https?:\/\//, ''))}</a></div>` : ''}</div></td></tr>` : ''}
 <tr><td style="padding:28px 40px 0"><div style="font-family:${SANS};font-size:14px;line-height:1.6;color:${C.text}">Reply in your mail app to answer <b>${esc(firstName(e))}</b>. The reply is already addressed to ${esc(e.email)}${e.phone ? ` · ${esc(e.phone)}` : ''}.</div></td></tr>
 
 ${heading('The rider')}
@@ -86,7 +95,7 @@ ${e.notes ? `${heading('Notes from the rider')}<tr><td style="padding:12px 40px 
 </td></tr>
 
 </table>
-<div style="font-family:${SANS};font-size:11px;color:#9aa3a8;padding:16px 0">Sent from the Build Your Ride planner on ${esc(SITE_NAME)}.</div>
+<div style="font-family:${SANS};font-size:11px;color:#9aa3a8;padding:16px 0">Sent from ${isItin(e) ? 'the itinerary request form' : 'the Build Your Ride planner'} on ${esc(SITE_NAME)}.</div>
 </td></tr></table>
 </body></html>`;
 }

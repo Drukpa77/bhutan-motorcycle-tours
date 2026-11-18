@@ -50,7 +50,9 @@ export default function SiteFooter() {
           {SOCIAL.map(([n, u]) => <a key={n} href={u} target="_blank" rel="noopener noreferrer me">{n} ↗</a>)}
         </div>
       </nav>
-      <p className="mono" style={{ color: 'var(--steel)', margin: 0, fontSize: 10 }}>© {new Date().getFullYear()} Bhutan Motorcycle Tours · a {OPERATOR.name} brand</p>
+      <p className="mono" style={{ color: 'var(--steel)', margin: 0, fontSize: 10, lineHeight: 1.8 }}>
+        © 2026 {OPERATOR.name}. All rights reserved. Tours, itineraries, guides and design may not be copied without written permission · <Link href="/copyright" style={{ color: 'inherit' }}>Copyright &amp; content use</Link> · Photos: Wikimedia Commons contributors, under their own licences
+      </p>
     </footer>
     </HideOnRideMode>
   );

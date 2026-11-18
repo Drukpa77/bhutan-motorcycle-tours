@@ -40,6 +40,7 @@ export default async function Page({ params }: Props) {
     datePublished: p.published, dateModified: p.updated, mainEntityOfPage: siteUrl() + url, articleSection: p.category,
     author: { '@type': 'Organization', name: OPERATOR.name, url: OPERATOR.url },
     publisher: { '@id': siteUrl() + '/#org' },
+    copyrightHolder: { '@type': 'Organization', name: OPERATOR.name, url: OPERATOR.url }, copyrightYear: 2026,
   };
   const faq = p.faqs.length && {
     '@context': 'https://schema.org', '@type': 'FAQPage',

@@ -5,7 +5,7 @@ export default function TrustStrip() {
   const items: [string, React.ReactNode][] = [
     ['Licensed operator', <><a href={OPERATOR.licenceUrl} target="_blank" rel="noopener noreferrer">{OPERATOR.name} ↗</a>, registered with Bhutan’s Department of Tourism</>],
     ['Local & family owned', <>Bhutanese family business, running tours for almost two decades</>],
-    ['On the road', <>Guide, mechanic and a backup 4x4 with driver on every tour</>],
+    ['On the road', <>Guide, mechanic and a backup vehicle with driver on every tour</>],
     ['The fleet', <>{OPERATIONS.fleet} for every rider</>],
     ['Reviews', <><a href={OPERATOR.tripadvisor} target="_blank" rel="noopener noreferrer">{OPERATOR.award} ↗</a></>],
   ];

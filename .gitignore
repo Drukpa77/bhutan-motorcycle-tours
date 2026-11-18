@@ -5,3 +5,8 @@ out
 .env.local
 *.tsbuildinfo
 *.zip
+
+# Client source documents and private reports: never commit (the GitHub repo is public)
+itenaries/
+SEo/
+*.docx

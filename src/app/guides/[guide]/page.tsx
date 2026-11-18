@@ -40,6 +40,7 @@ export default async function Page({ params }: Props) {
     datePublished: g.published, dateModified: g.updated, mainEntityOfPage: siteUrl() + url,
     author: { '@type': 'Organization', name: OPERATOR.name, url: OPERATOR.url },
     publisher: { '@id': siteUrl() + '/#org' },
+    copyrightHolder: { '@type': 'Organization', name: OPERATOR.name, url: OPERATOR.url }, copyrightYear: 2026,
   };
   const faq = g.faqs.length && {
     '@context': 'https://schema.org', '@type': 'FAQPage',
@@ -61,7 +62,7 @@ export default async function Page({ params }: Props) {
       </header>
 
       <figure style={{ margin: 0 }}>
-        <div className="photo" style={{ aspectRatio: '21/9', minHeight: 220 }}>
+        <div className="photo hero-photo">
           <Image src={img(g.img)} alt={g.imgAlt} fill priority sizes="(max-width:1280px) 100vw, 1280px" />
         </div>
       </figure>

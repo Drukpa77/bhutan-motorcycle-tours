@@ -44,6 +44,9 @@ Authors and licences were read from the Commons API on 10 Oct 2026. Files were d
 | `/images/places/trashigang.jpg` | Tashigang_Dzong_111120.jpg | Christopher J. Fynn | CC BY-SA 3.0 | Trashigang Dzong |
 | `/images/places/chorten-kora.jpg` | Chorten_Kora,_Trashiyangtse_District,_Bhutan.jpg | Vikramjit Kakati | CC BY-SA 4.0 | Chorten Kora, Trashi Yangtse |
 | `/images/places/phuentsholing-gate.jpg` | Bhutan_gate_in_Phuentsholing_1.jpg | Afifa Afrin | CC BY-SA 3.0 | Bhutan Gate, Phuentsholing (blog) |
+| `/images/places/panbang.jpg` | Panbang,_Bhutan.jpg | DEBANUTOSH | CC0 | Prayer flags in the Panbang jungle |
+| `/images/places/nabji.jpg` | The_vast_paddy_of_Nabji_and_Korphu.jpg | Phuentsho | CC BY-SA 4.0 | Nabji and Korphu rice terraces |
+| `/images/places/khoma-weaver.jpg` | Khoma,_weaver_(15223675234).jpg | Arian Zwegers | CC BY 2.0 | Kishuthara weaver, Khoma (spare, not yet used) |
 
 Yotong La is the only stop without a photo of the place itself: Commons has none. Its credit is labelled "Stand-in" on the map. Replace it with operator photography, along with fleet and team photos.
 

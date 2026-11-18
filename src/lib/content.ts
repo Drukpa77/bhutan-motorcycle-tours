@@ -33,27 +33,39 @@ export const OPERATOR = {
   googleReviews: '',
 };
 
-/** How tours are run, from the operator's published tour terms. Confirmed per booking on the quote. */
+/**
+ * How tours are run. Source: the operator's 2026–27 itineraries (12, 13 and 16 days; originals in /itenaries,
+ * which is git-ignored because they name clients). Confirmed per booking on the quote.
+ */
 export const OPERATIONS = {
-  fleet: 'Royal Enfield 500cc',
-  crew: ['Professional motorcycle tour guide (English-speaking, trained by the Department of Tourism)', 'Mechanic', 'Driver with a dedicated backup 4x4'],
+  fleet: 'Royal Enfield Himalayan 411 & 450',
+  crew: ['Motorcycle tour guide / road captain (English-speaking, trained by the Department of Tourism)', 'Motorcycle technician', 'Driver with a dedicated backup vehicle'],
   included: [
-    'Royal Enfield 500cc motorcycle for every rider',
-    'Dedicated backup 4x4 with driver, carrying luggage, spares and any rider who needs a break',
-    'Professional English-speaking motorcycle tour guide and mechanic',
+    'Royal Enfield Himalayan (411cc or 450cc) for every rider',
+    'Dedicated backup vehicle with driver, carrying luggage, spares and any rider who needs a break',
+    'English-speaking motorcycle tour guide and road captain, trained by Bhutan’s Department of Tourism',
+    'Motorcycle technician on the road with the group',
     'Bhutan visa and route permits, applied for by us',
-    'Bhutan’s Sustainable Development Fee (current rate confirmed on your quote)',
-    '3-star premium hotels and resorts, with farm and village stays where the route allows',
-    'Breakfast and dinner every day, and bottled water throughout',
-    'Airport transfers, sightseeing and baggage handling',
+    'Bhutan’s Sustainable Development Fee and applicable taxes (current rates confirmed on your quote)',
+    '3-star premium hotels and resorts, with village homestays and camps on remote routes',
+    'Full board: breakfast, lunch and dinner every day',
+    'Entry fees to dzongs, monasteries, temples and museums',
+    'Sightseeing, airport transfers and baggage handling',
+    'Farewell dinner with a Bhutanese cultural show, and a Bhutan T-shirt',
   ],
   excluded: [
     'Motorcycle fuel',
-    'Entry fees at dzongs, monasteries, temples and museums',
     'Travel and medical insurance (strongly recommended, covering motorcycle riding)',
-    'Tips for your guide, mechanic and driver (at your discretion)',
-    'Costs from flight cancellations, landslides or road closures beyond our control',
+    'Tips for your guide, technician and driver (at your discretion)',
     'Personal expenses and bank transfer charges',
+  ],
+  /** Extras the operator offers; good to mention, details on enquiry. */
+  extras: [
+    'Flights to Paro: the operator is an authorised sales agent for both Bhutanese airlines',
+    'Moto camping, with a camping crew, chef and dining tent travelling with the group',
+    'Guides who also speak German, French, Japanese, Mandarin or Hindi, on request',
+    'Hotel upgrades to 4- and 5-star properties',
+    'Rafting, mountain biking, trekking, heli tours and hot-stone baths',
   ],
   // Prices, fees and booking terms are TBA on the live site until the operator confirms them for 2026–27.
   // The operator's 2025 tour PDF had a deposit and cancellation schedule; re-add here once confirmed.
@@ -106,17 +118,39 @@ export const PLACES: Record<string, Place> = {
   mongar: { id: 'mongar', name: 'Mongar', ll: [27.2757, 91.2403], elev: 1600, img: 'places/mongar.jpg', credit: 'View of Mongar town · C. J. Fynn · CC BY-SA 3.0', alt: 'Mongar town on its ridge, eastern Bhutan',
     blurb: 'The gateway to eastern Bhutan, unusually built on a ridge rather than a valley floor. A working town that sees few visitors.' },
   lhuentse: { id: 'lhuentse', name: 'Lhuentse', ll: [27.6656, 91.1867], elev: 1470, img: 'places/lhuentse.jpg', credit: 'Lhuentse Dzong · muddum27 · CC BY 2.0', alt: 'Lhuentse Dzong above the Kuri Chhu, Bhutan',
-    blurb: 'The ancestral home of Bhutan’s royal family, reached by a quiet road up the Kuri Chhu gorge. Lhuentse Dzong sits on a spur high above the river, and nearby Takila has a giant statue of Guru Rinpoche.' },
+    blurb: 'The ancestral home of Bhutan’s royal family, reached by a quiet road up the Kuri Chhu gorge. Lhuentse Dzong sits on a spur high above the river, Takila has a 154-foot statue of Guru Nangsa Zelen, and nearby Khoma village is famous for weaving Kishuthara, one of Bhutan’s most prized textiles.' },
   trashigang: { id: 'trashigang', name: 'Trashigang', ll: [27.3363, 91.5513], elev: 1000, img: 'places/trashigang.jpg', credit: 'Trashigang Dzong · C. J. Fynn · CC BY-SA 3.0', alt: 'Trashigang Dzong above the Drangme Chhu, eastern Bhutan',
     blurb: 'The far east’s biggest town, below a 17th-century dzong built on a spur above the Drangme Chhu. The road in from Mongar crosses Kori La at about 2,400 m.' },
   yangtse: { id: 'yangtse', name: 'Trashi Yangtse', ll: [27.6060, 91.4949], elev: 1740, img: 'places/chorten-kora.jpg', credit: 'Chorten Kora · Vikramjit Kakati · CC BY-SA 4.0', alt: 'Chorten Kora stupa, Trashi Yangtse, Bhutan',
     blurb: 'A valley known for wood turning and traditional crafts, with the white stupa of Chorten Kora on the riverbank.' },
+  // Southern and central Bhutan, from the operator's 2026–27 itineraries. Coordinates: OpenStreetMap (Nominatim).
+  // Elevations: the operator's overnight figures (Panbang camp, Nabji) cross-checked with Open-Meteo DEM.
+  panbang: { id: 'panbang', name: 'Panbang', ll: [26.8504, 90.9617], elev: 300, img: 'places/panbang.jpg', credit: 'Panbang · DEBANUTOSH · CC0', alt: 'White prayer flags in the subtropical forest at Panbang, southern Bhutan',
+    blurb: 'Bhutan’s subtropical south, on the Manas river near Royal Manas National Park. The lowest point on any of our routes: a jungle camp among palms, bamboo and some of the richest forest in the Himalaya.' },
+  zhemgang: { id: 'zhemgang', name: 'Zhemgang', ll: [27.2134, 90.6550], elev: 1900, alt: 'Zhemgang Dzong and the Trong heritage village, central Bhutan',
+    blurb: 'Home of the Kheng people. Trong, a heritage village of cobbled lanes and stone houses, sits just above Zhemgang Dzong, and the road north runs through a protected corridor known for golden langurs.' },
+  nabji: { id: 'nabji', name: 'Nabji', ll: [27.1913, 90.5176], elev: 1300, img: 'places/nabji.jpg', credit: 'Nabji and Korphu · Phuentsho · CC BY-SA 4.0', alt: 'Rice terraces of Nabji and Korphu below forested hills, central Bhutan',
+    blurb: 'A remote valley of rice terraces, home to the Monpa, traditionally regarded as among the earliest inhabitants of Bhutan. Village guesthouses, no crowds, and the neighbouring hilltop village of Korphu.' },
 };
 
-export type ItineraryDay = { day: number; title: string; ride?: string; detail: string; night: string };
-export type Tour = { slug: string; path: string; code: string; name: string; title: string; description: string; status: string; summary: string; intro: string; stops: string[]; high: string; img: string; imgAlt: string; days?: number; itinerary?: ItineraryDay[] };
+/** `km` and `elev` (overnight, metres) are shown as chips; keep `detail` to a one-line teaser on gated tours. */
+export type ItineraryDay = { day: number; title: string; ride?: string; km?: string; elev?: number; detail: string; night: string };
+/** Alternative lengths of the same route. Only the headline difference is public; the full plan is sent on request. */
+export type TourLength = { days: number; label: string; note: string };
+export type Tour = {
+  slug: string; path: string; code: string; name: string; title: string; description: string; status: string; summary: string; intro: string;
+  stops: string[]; high: string; img: string; imgAlt: string; days?: number; itinerary?: ItineraryDay[];
+  /** Other lengths offered for this route. */
+  lengths?: TourLength[];
+  /** Headline facts for the "at a glance" strip (and for AI/search answers). */
+  facts?: [string, string][];
+  /** true: show day headlines only, and offer the full itinerary on request. */
+  gated?: boolean;
+};
 // E-01 and E-02 are private route outlines: the operator sets days and pace per group, so no fixed duration or price.
 // E-03 is the operator's own 16-day West to East itinerary (first run in 2025), from its published tour PDF.
+// E-04 is from the operator's 2026–27 itineraries (12, 13, 16 days). Public page = 13-day headlines only, by design:
+// hotels, meals, every visit and the other lengths' day plans are what the "full itinerary" enquiry delivers.
 // `slug` keys the map (?tour=); `path` is the public tour page URL under /motorcycle-tours/.
 export const TOURS: Tour[] = [
   { slug: 'spine', path: 'dragons-spine-paro-to-bumthang', code: 'E-01', name: 'Dragon’s Spine', status: 'Private · flexible length',
@@ -133,9 +167,9 @@ export const TOURS: Tour[] = [
     stops: ['paro', 'chele', 'haa', 'paro', 'thimphu', 'dochula', 'punakha'], high: 'Chele La 3,988 m', img: 'places/chele-la.jpg', imgAlt: 'Prayer flags at Chele La pass between Paro and Haa, Bhutan' },
   { slug: 'east', path: 'west-to-east-bhutan-16-day-motorcycle-tour', code: 'E-03', name: 'West to East', status: '16 days · signature route', days: 16,
     title: '16-Day West to East Bhutan Motorcycle Tour',
-    description: 'Ride all of Bhutan in 16 days on Royal Enfield 500s: Paro to Trashigang and back over Dochula, Pele La, Thrumshing La and Chele La, with a guide, mechanic and backup 4x4.',
+    description: 'Ride all of Bhutan in 16 days on Royal Enfield Himalayans: Paro to Trashigang and back over Dochula, Pele La, Thrumshing La and Chele La, with full crew support.',
     summary: 'The whole kingdom in 16 days: every major pass on the lateral road, the remote east, and Chele La to finish.',
-    intro: 'Our signature ride crosses Bhutan from the Paro valley to Trashigang in the far east and back, on the full length of the lateral road. You cross every major pass, from Dochula to Thrumshing La, the highest on the route east, ride into valleys that few visitors reach, and finish over Chele La above Paro. A guide, a mechanic and a backup 4x4 with driver travel with the group the whole way.',
+    intro: 'Our signature ride crosses Bhutan from the Paro valley to Trashigang in the far east and back, on the full length of the lateral road. You cross every major pass, from Dochula to Thrumshing La, the highest on the route east, ride into valleys that few visitors reach, and finish over Chele La above Paro. A guide, a motorcycle technician and a backup vehicle with driver travel with the group the whole way.',
     stops: ['paro', 'thimphu', 'dochula', 'punakha', 'pele', 'trongsa', 'yotong', 'bumthang', 'thrumshing', 'mongar', 'lhuentse', 'trashigang', 'yangtse', 'trashigang', 'mongar', 'thrumshing', 'ura', 'bumthang', 'yotong', 'trongsa', 'pele', 'phob', 'dochula', 'thimphu', 'haa', 'chele', 'paro'],
     high: 'Chele La 3,988 m', img: 'places/trongsa.jpg', imgAlt: 'Trongsa Dzong above the Mangde Chhu gorge on the lateral road, Bhutan',
     itinerary: [
@@ -172,6 +206,54 @@ export const TOURS: Tour[] = [
       { day: 16, title: 'Depart Paro', night: '—',
         detail: 'Transfer to Paro airport for your flight out.' },
     ] },
+  { slug: 'hidden', path: 'hidden-bhutan-motorcycle-expedition', code: 'E-04', name: 'Hidden Bhutan', status: '12, 13 or 16 days · off the tourist trail', days: 13, gated: true,
+    title: 'Hidden Bhutan Motorcycle Expedition: East & Jungles',
+    description: 'A 12 to 16-day Bhutan motorcycle expedition off the tourist trail: Thrumshing La, Khoma weavers, a jungle camp at Panbang, Monpa villages and Chele La.',
+    summary: 'Over Thrumshing La to the weavers of Khoma, down to a jungle camp at 300 m, and back through Monpa villages most visitors never see.',
+    intro: 'Our expedition route leaves the usual tourist circuit behind. From the passes of central Bhutan you ride east over Thrumshing La to Khoma, a weaving village in the royal district of Lhuentse, then drop through gorges into the subtropical jungle at Panbang, the lowest point of any of our routes. The way back climbs through the Kheng and Monpa villages of central Bhutan to the crane valley of Phobjikha, Punakha and finally Chele La above Paro. Homestays, a jungle camp and village guesthouses sit alongside 3-star hotels, and a guide, technician and backup vehicle ride with you throughout.',
+    stops: ['paro', 'thimphu', 'dochula', 'pele', 'trongsa', 'bumthang', 'ura', 'thrumshing', 'mongar', 'lhuentse', 'panbang', 'zhemgang', 'nabji', 'phob', 'punakha', 'dochula', 'paro', 'chele', 'paro'],
+    high: 'Chele La 3,988 m', img: 'places/nabji.jpg', imgAlt: 'Rice terraces of Nabji and Korphu in the remote Monpa country of central Bhutan',
+    facts: [
+      ['Length', '12, 13 or 16 days'],
+      ['Riding', 'About 1,400 km (13 days)'],
+      ['Altitude range', '300 m to 3,988 m'],
+      ['Longest day', 'Khoma to Panbang, 7–8 hours'],
+      ['Bike', 'Royal Enfield Himalayan 411 / 450'],
+      ['Stays', 'Hotels, homestay, jungle camp, village guesthouse'],
+    ],
+    lengths: [
+      { days: 12, label: 'Classic loop', note: 'Phobjikha early in the ride instead of near the end, the same eastern loop through Khoma, Panbang and Nabji, and back via Punakha to Paro. No Chele La morning.' },
+      { days: 13, label: 'With Chele La', note: 'The route shown below: the full eastern loop, Phobjikha on the way back, a morning on Chele La at 3,988 m, and Tiger’s Nest to finish.' },
+      { days: 16, label: 'Grand expedition', note: 'Adds a day in Thimphu meeting Bhutanese women riders, a Bumthang festival in season, a night at Zhemgang, a village homestay, a stay with nuns near Paro, and an overland exit via Phuentsholing into India.' },
+    ],
+    itinerary: [
+      { day: 1, title: 'Arrive Paro, ride Thimphu', km: 'Under 50 km', ride: '1–2 h', elev: 2300, night: 'Thimphu',
+        detail: 'Bike handover and an orientation ride around the capital, up to the giant Buddha Dordenma above the valley.' },
+      { day: 2, title: 'Thimphu to Bumthang over Dochula and Pele La', km: '250 km', ride: '6–7 h', elev: 2600, night: 'Bumthang',
+        detail: 'The big day on the lateral road: two high passes, Trongsa Dzong, and a women’s weaving workshop in Chumey.' },
+      { day: 3, title: 'Bumthang: temples and the Burning Lake', km: 'Under 100 km', ride: '2–3 h', elev: 2600, night: 'Bumthang',
+        detail: 'Short rides between 7th-century temples, the Burning Lake of Mebar Tsho and Bumthang’s craft brewery.' },
+      { day: 4, title: 'Over Thrumshing La to Mongar', km: '180 km', ride: '5–6 h', elev: 1600, night: 'Mongar',
+        detail: 'Through Ura and over the highest pass on the lateral road, then down past cliffs and waterfalls into the east.' },
+      { day: 5, title: 'Mongar to Khoma', km: '90 km', ride: '2–3 h', elev: 1500, night: 'Khoma (village homestay)',
+        detail: 'The great Guru statue at Takila, then a night in Khoma with the weavers of Kishuthara.' },
+      { day: 6, title: 'Khoma to the Panbang jungle', km: '210 km', ride: '7–8 h', elev: 300, night: 'Panbang (jungle camp)',
+        detail: 'The longest day: from the eastern highlands down through gorges and subtropical forest to a riverside camp.' },
+      { day: 7, title: 'Panbang to Nabji via Trong', km: '160 km', ride: '5–6 h', elev: 1300, night: 'Nabji (village guesthouse)',
+        detail: 'Climb back into the hills through the Trong heritage village to the Monpa valley of Nabji and Korphu.' },
+      { day: 8, title: 'Nabji to Phobjikha', km: '160 km', ride: '5–6 h', elev: 2900, night: 'Phobjikha',
+        detail: 'From subtropical valleys up to the glacial valley of the black-necked cranes.' },
+      { day: 9, title: 'Phobjikha to Punakha', km: '100 km', ride: '2–3 h', elev: 1300, night: 'Punakha',
+        detail: 'Down to the warm Punakha valley, its dzong at the river confluence, and optional rafting.' },
+      { day: 10, title: 'Punakha to Paro', km: '112 km', ride: '3 h', elev: 2200, night: 'Paro',
+        detail: 'Himalayan viewpoints, a women-owned café, and tea with the nuns of a hilltop nunnery.' },
+      { day: 11, title: 'Chele La and the Paro valley', km: 'Under 50 km', ride: '1–2 h', elev: 2200, night: 'Paro',
+        detail: 'A morning ride to Chele La at 3,988 m for Jomolhari views, then the National Museum and Kyichu Lhakhang.' },
+      { day: 12, title: 'Tiger’s Nest', elev: 2200, night: 'Paro',
+        detail: 'The hike to Taktsang, a hot-stone bath at a farmhouse, and a farewell dinner with a cultural show.' },
+      { day: 13, title: 'Depart Paro', night: '—',
+        detail: 'Transfer to the airport for your flight out.' },
+    ] },
 ];
 
 export const haversine = (a: [number, number], b: [number, number]) => {
@@ -189,12 +271,12 @@ export const CHAPTERS = [
 ];
 
 export const PARTS = [
-  { code: '01', t: 'Engine', d: 'Royal Enfield 500cc air-cooled single. Torque-led and simple to fix far from a workshop, which is why our mechanic rides with the group.' },
+  { code: '01', t: 'Engine', d: 'Royal Enfield Himalayan: a 411cc air-cooled or 450cc liquid-cooled single. Torque for long climbs, and our technician rides with the group.' },
   { code: '02', t: 'Headlamp', d: 'Round headlamp and nacelle. Lighting checks are part of every pre-ride inspection.' },
-  { code: '03', t: 'Wheels', d: 'Spoked wheels tolerate broken tarmac and gravel shoulders. Pressures are adjusted for altitude.' },
-  { code: '04', t: 'Suspension', d: 'Telescopic fork and twin rear shocks, suited to a steady touring pace.' },
-  { code: '05', t: 'Seat', d: 'Upright position for long climbs. Tell us about pillion plans when you enquire.' },
-  { code: '06', t: 'Luggage', d: 'Ride light: main luggage travels in the backup 4x4 with our driver.' },
+  { code: '03', t: 'Wheels', d: 'Spoked wheels tolerate broken tarmac, gravel and the short farm-road sections in remote villages.' },
+  { code: '04', t: 'Suspension', d: 'Long-travel adventure suspension, built for broken mountain roads at a steady touring pace.' },
+  { code: '05', t: 'Seat', d: 'Upright adventure position for long climbs. Tell us about pillion plans when you enquire.' },
+  { code: '06', t: 'Luggage', d: 'Ride light: main luggage travels in the backup vehicle with our driver.' },
 ];
 
 // "Bike - Royal Enfield" by Addere Creations, CC BY 4.0. Attribution is required wherever it is shown.

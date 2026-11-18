@@ -42,15 +42,15 @@ export const GUIDES: Guide[] = [
       ] },
       { id: 'not-included', h2: 'What you pay on the road', blocks: [
         { ul: OPERATIONS.excluded },
-        { p: 'Fuel is the main running cost. A 500cc single is frugal, but the total depends on your route, so we estimate it per tour on your quote instead of padding the price.' },
+        { p: 'Fuel is the main running cost. A Himalayan single is frugal, but the total depends on your route, so we estimate it per tour on your quote instead of padding the price.' },
       ] },
       { id: 'price-factors', h2: 'What changes the price', blocks: [
         { ul: [
           'Number of nights. Each extra night adds hotel, meals, crew time and the SDF.',
-          'Group size. The guide, mechanic, driver and backup 4x4 are fixed costs shared across the group, so the per-rider price falls as the group grows.',
+          'Group size. The guide, mechanic, driver and backup vehicle are fixed costs shared across the group, so the per-rider price falls as the group grows.',
           'Hotel grade. Our standard is 3-star premium hotels and resorts, with farm and village stays where the route allows. 4- and 5-star upgrades are available at a top-up.',
           'Season. Spring and autumn are peak months for hotels and flights into Paro.',
-          'Pillions and non-riding partners. A partner can ride pillion or travel in the backup 4x4.',
+          'Pillions and non-riding partners. A partner can ride pillion or travel in the backup vehicle.',
           'Flights. We can book Paro flights with your tour, or you can arrange your own.',
         ] },
       ] },
@@ -90,7 +90,7 @@ export const GUIDES: Guide[] = [
           'A passport valid for at least six months from your entry date.',
           'Your full home motorcycle licence (not a learner or car-only licence).',
           'An International Driving Permit with the motorcycle category, issued before you travel.',
-          'Travel and medical insurance that covers riding a motorcycle of 500cc, plus emergency evacuation.',
+          'Travel and medical insurance that covers riding a motorcycle of up to 450cc, plus emergency evacuation.',
           'Your own riding gear. Helmets are compulsory in Bhutan, and most riders prefer to wear their own.',
         ] },
       ] },
@@ -126,7 +126,7 @@ export const GUIDES: Guide[] = [
       { id: 'checklist', h2: 'Before you book: rider checklist', blocks: [
         { ul: [
           'You hold a full motorcycle licence and can get an IDP before travel.',
-          'You are comfortable riding a 500cc single on tight mountain roads for 5–7 hours.',
+          'You are comfortable riding a mid-size adventure bike (411–450cc) on tight mountain roads for 5–7 hours.',
           'Your insurance covers motorcycle riding and evacuation.',
           'You have chosen a season. See [the best time to ride Bhutan](/guides/best-time-for-a-motorcycle-tour-in-bhutan).',
         ] },
@@ -135,7 +135,7 @@ export const GUIDES: Guide[] = [
     faqs: [
       { q: 'Do I need an International Driving Permit to ride in Bhutan?', a: 'Yes. Bring your full home motorcycle licence and an International Driving Permit with the motorcycle category. We check both at the bike handover.' },
       { q: 'Can I ride a motorcycle in Bhutan without a guide?', a: 'International visitors travel with a licensed Bhutanese guide on a tour arranged by a licensed operator. Your guide also carries your permits on the road.' },
-      { q: 'Can I bring my own motorcycle to Bhutan?', a: 'Indian riders often do; the bike paperwork required is TBA and confirmed when you book. For other nationalities it is rarely practical, which is why our tours include a Royal Enfield 500cc for every rider.' },
+      { q: 'Can I bring my own motorcycle to Bhutan?', a: 'Indian riders often do; the bike paperwork required is TBA and confirmed when you book. For other nationalities it is rarely practical, which is why our tours include a Royal Enfield Himalayan for every rider.' },
       { q: 'Which side of the road does Bhutan drive on?', a: 'The left, as in India and the UK.' },
     ],
     related: ['bhutan-motorcycle-tour-cost', 'bhutan-mountain-passes-by-motorcycle'],
@@ -236,7 +236,7 @@ export const GUIDES: Guide[] = [
           'Tours start low and build up. Day 1 of the West to East tour is a short test ride around Thimphu (2,330 m) before the first big pass.',
           'Drink more water than you think you need, and tell your guide about headaches or breathlessness early.',
           'Pack layers. It can be near freezing on a pass and over 20 °C in Punakha on the same day.',
-          'The backup 4x4 follows the group, so any rider who feels unwell can ride in it while the mechanic or driver brings the bike.',
+          'The backup vehicle follows the group, so any rider who feels unwell can ride in it while the mechanic or driver brings the bike.',
         ] },
       ] },
     ],

@@ -43,7 +43,7 @@ export const POSTS: Post[] = [
           'The riding is all corners. The lateral road climbs over a pass between every valley, from about 1,000 m to near 4,000 m.',
           'The culture is intact. You ride past working dzongs, prayer-flag ridges and villages where national dress is everyday clothing.',
           'It’s calm and safe. Drivers are patient, the horn is rarely used, and the country is famously relaxed.',
-          'It’s organised. Visa, permits, hotels and the government fee are arranged before you land, and a mechanic and backup 4x4 travel with you.',
+          'It’s organised. Visa, permits, hotels and the government fee are arranged before you land, and a mechanic and backup vehicle travel with you.',
         ] },
         { figure: { src: 'places/trongsa.jpg', alt: 'Trongsa Dzong spilling down a ridge above the Mangde Chhu gorge', caption: 'Trongsa Dzong, seen from the road long before you reach it. This is the kind of view that comes round every corner.', credit: 'C. J. Fynn · CC BY-SA 3.0' } },
       ] },
@@ -73,7 +73,7 @@ export const POSTS: Post[] = [
           'Enjoy flowing mountain corners more than top speed',
           'Want culture and landscape as much as riding',
           'Prefer a crew to handle logistics, breakdowns and permits',
-          'Are riding with a partner, who can ride pillion or travel in the 4x4',
+          'Are riding with a partner, who can ride pillion or travel in the backup vehicle',
           'Have ridden a mid-size motorcycle on twisty roads before',
         ] } },
         { cta: { title: 'Try it on the full route', text: 'The [16-day West to East tour](/motorcycle-tours/west-to-east-bhutan-16-day-motorcycle-tour) rides the whole kingdom, or start shorter with the [Western Valleys](/motorcycle-tours/western-valleys-chele-la-haa-punakha).', href: '/motorcycle-tours', label: 'Compare the tours →' } },
@@ -234,8 +234,8 @@ export const POSTS: Post[] = [
         { table: { head: ['', 'Your own bike', 'Fly in, ride ours'], rows: [
           ['Time to the mountains', '1–2 days from Siliguri', 'Same day you land'],
           ['Paperwork', 'Rider and vehicle paperwork', 'We handle it'],
-          ['Breakdowns', 'Your problem', 'Our mechanic and backup 4x4'],
-          ['Bike', 'Your own, loaded with luggage', `${OPERATIONS.fleet}, luggage in the 4x4`],
+          ['Breakdowns', 'Your problem', 'Our mechanic and backup vehicle'],
+          ['Bike', 'Your own, loaded with luggage', `${OPERATIONS.fleet}, luggage in the backup vehicle`],
         ] } },
         { cta: { title: 'Ride ours', text: 'Fly into Paro and start on the [16-day West to East tour](/motorcycle-tours/west-to-east-bhutan-16-day-motorcycle-tour), or a shorter private route built around your leave.', href: '/plan-your-ride', label: 'Plan your ride →' } },
       ] },
@@ -320,15 +320,15 @@ export const POSTS: Post[] = [
     category: 'Planning',
     published: '2026-11-07', updated: '2026-11-07',
     cover: 'places/pele-la.jpg', coverAlt: 'Chorten and prayer flags at Pele La, a cold 3,420 m pass on the lateral road', coverCredit: 'RPSkokie · CC BY-SA 4.0',
-    standfirst: 'In a single day in Bhutan you can ride from a frosty pass near 4,000 m to a river valley where it is warm enough for a T-shirt. This is the packing list we send every rider, built around that range and around one useful fact: your main bag rides in our backup 4x4, not on the bike.',
+    standfirst: 'In a single day in Bhutan you can ride from a frosty pass near 4,000 m to a river valley where it is warm enough for a T-shirt. This is the packing list we send every rider, built around that range and around one useful fact: your main bag rides in our backup vehicle, not on the bike.',
     sections: W([
       { id: 'the-rule', h2: 'The one rule: layers', blocks: [
         { stats: [
           { n: '~0 °C', label: 'Autumn morning on a high pass' },
           { n: '20 °C+', label: 'Punakha valley, same day' },
-          { n: '1 bag', label: 'Main luggage, in the 4x4' },
+          { n: '1 bag', label: 'Main luggage, in the backup vehicle' },
         ] },
-        { p: 'Temperature swings, not extremes, are the challenge. Pack so you can add and remove layers at every stop. Because your main bag travels in the backup 4x4, you only carry what you need for the day: layers, rain gear, documents and a camera.' },
+        { p: 'Temperature swings, not extremes, are the challenge. Pack so you can add and remove layers at every stop. Because your main bag travels in the backup vehicle, you only carry what you need for the day: layers, rain gear, documents and a camera.' },
         { gallery: [
           { src: 'places/chele-la.jpg', alt: 'Prayer flags on the cold, high ridge of Chele La', credit: 'Vinayaraj · CC BY-SA 4.0' },
           { src: 'places/punakha.jpg', alt: 'Punakha Dzong in the warm valley at the river confluence', credit: 'B. Gagnon · CC BY-SA 4.0' },
@@ -380,7 +380,7 @@ export const POSTS: Post[] = [
       ] },
       { id: 'leave-at-home', h2: 'What to leave at home', blocks: [
         { ul: [
-          'Hard panniers and a tank bag full of luggage: the 4x4 carries your bag.',
+          'Hard panniers and a tank bag full of luggage: the backup vehicle carries your bag.',
           'A drone, unless you have cleared it with us first: drones need prior permission in Bhutan.',
           'Too many clothes: most hotels offer laundry.',
         ] },
@@ -390,7 +390,7 @@ export const POSTS: Post[] = [
     faqs: [
       { q: 'Should I bring my own helmet to Bhutan?', a: 'Yes, if you can. Helmets are compulsory, and your own fitted helmet is safer and more comfortable for long days.' },
       { q: 'How cold does it get on a Bhutan motorcycle tour?', a: 'High passes can be near freezing on spring and autumn mornings, while valleys like Punakha can be over 20 °C the same day. Pack layers.' },
-      { q: 'Do I need to carry all my luggage on the motorcycle?', a: 'No. On our tours your main bag travels in the backup 4x4, so you only carry what you need for the day.' },
+      { q: 'Do I need to carry all my luggage on the motorcycle?', a: 'No. On our tours your main bag travels in the backup vehicle, so you only carry what you need for the day.' },
     ],
     tours: ['east', 'spine', 'west'],
   },

@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Testimonials from '@/components/content/Testimonials';
+import ItineraryRequest, { EnquireButton } from '@/components/enquiry/ItineraryRequest';
+import { whatsappLink } from '@/lib/whatsapp';
 import TrustStrip from '@/components/content/TrustStrip';
 import { OPERATIONS, PLACES, TOURS, img } from '@/lib/content';
 import { GUIDES } from '@/lib/guides';
@@ -71,19 +73,25 @@ export default async function Page({ params }: Props) {
           <span><span style={{ color: 'var(--steel)' }}>Finish</span> {PLACES[t.stops[t.stops.length - 1]].name}</span>
           <span><span style={{ color: 'var(--steel)' }}>High point</span> {t.high}</span>
           <span><span style={{ color: 'var(--steel)' }}>Passes</span> {passes.map(p => p.name).join(', ')}</span>
-          <span><span style={{ color: 'var(--steel)' }}>Duration</span> {t.days ? `${t.days} days / ${t.days - 1} nights` : 'Flexible, set to your pace'}</span>
+          <span><span style={{ color: 'var(--steel)' }}>Duration</span> {t.lengths ? t.lengths.map(l => l.days).join(', ') + ' days' : t.days ? `${t.days} days / ${t.days - 1} nights` : 'Flexible, set to your pace'}</span>
           <span><span style={{ color: 'var(--steel)' }}>Bike</span> {OPERATIONS.fleet}</span>
-          <span><span style={{ color: 'var(--steel)' }}>Support</span> Guide, mechanic, backup 4x4</span>
+          <span><span style={{ color: 'var(--steel)' }}>Support</span> Guide, mechanic, backup vehicle</span>
           <span><span style={{ color: 'var(--steel)' }}>Price</span> TBA</span>
         </div>
         <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-          <Link href="/plan-your-ride" className="btn btn-orange">Get a quote for this route →</Link>
+          <EnquireButton>Get the full itinerary →</EnquireButton>
           <Link href={'/explore-bhutan?tour=' + t.slug} className="btn btn-ghost">Trace it on the map</Link>
         </div>
       </div>
 
+      {t.facts && (
+        <dl className="blk-stats tour-facts" aria-label="At a glance">
+          {t.facts.map(([k, v]) => <div key={k}><dt className="mono">{k}</dt><dd>{v}</dd></div>)}
+        </dl>
+      )}
+
       <figure style={{ margin: 0 }}>
-        <div className="photo" style={{ aspectRatio: '21/9', minHeight: 240 }}>
+        <div className="photo hero-photo">
           <Image src={img(t.img)} alt={t.imgAlt} fill priority sizes="(max-width:1280px) 100vw, 1280px" />
         </div>
       </figure>
@@ -120,25 +128,65 @@ export default async function Page({ params }: Props) {
         </ol>
       </section>
 
+      {t.lengths && (
+        <section aria-labelledby="len-title" style={{ display: 'grid', gap: 24 }}>
+          <div style={{ display: 'grid', gap: 12 }}>
+            <span className="mono" style={{ color: 'var(--orange)' }}>One route, three lengths</span>
+            <h2 id="len-title" className="display" style={{ fontSize: 'clamp(40px,5vw,80px)' }}>Choose your expedition</h2>
+          </div>
+          <div className="len-cards">
+            {t.lengths.map(l => (
+              <article key={l.days} className={'len-card reveal' + (l.days === t.days ? ' is-main' : '')}>
+                <span className="mono" style={{ color: 'var(--lime)' }}>{l.label}{l.days === t.days ? ' · shown below' : ''}</span>
+                <h3 className="display">{l.days} days</h3>
+                <p className="prose" style={{ fontSize: 16 }}>{l.note}</p>
+                <EnquireButton days={l.days} className="btn btn-ghost">Get the {l.days}-day plan →</EnquireButton>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
       {t.itinerary && (
         <section aria-labelledby="itin-title" style={{ display: 'grid', gap: 24 }}>
           <div style={{ display: 'grid', gap: 12 }}>
-            <span className="mono" style={{ color: 'var(--orange)' }}>{t.days} days · {t.days! - 1} nights</span>
-            <h2 id="itin-title" className="display" style={{ fontSize: 'clamp(40px,5vw,80px)' }}>Day-by-day itinerary</h2>
+            <span className="mono" style={{ color: 'var(--orange)' }}>{t.days} days · {t.days! - 1} nights{t.gated ? ' · highlights' : ''}</span>
+            <h2 id="itin-title" className="display" style={{ fontSize: 'clamp(40px,5vw,80px)' }}>Day-by-day {t.gated ? 'highlights' : 'itinerary'}</h2>
             <p className="prose">Riding times are approximate and include photo stops. As a private tour, the pace and the stops are yours to adjust with your guide.</p>
           </div>
           <ol className="itin">
             {t.itinerary.map(d => (
-              <li key={d.day}>
+              <li key={d.day} className="reveal">
                 <span className="mono itin-day">Day {String(d.day).padStart(2, '0')}</span>
                 <div style={{ display: 'grid', gap: 8 }}>
                   <h3>{d.title}</h3>
                   <p className="prose" style={{ fontSize: 16 }}>{d.detail}</p>
-                  <span className="mono" style={{ color: 'var(--steel)' }}>{d.ride ? 'Ride: ' + d.ride + ' · ' : ''}Night: {d.night}</span>
+                  {(d.km || d.ride || d.elev) ? (
+                    <ul className="itin-chips mono" aria-label="Day facts">
+                      {d.km && <li><span>Distance</span> {d.km}</li>}
+                      {d.ride && <li><span>Riding</span> {d.ride}</li>}
+                      {d.elev && <li><span>Night at</span> {d.elev.toLocaleString()} m</li>}
+                      <li><span>Overnight</span> {d.night}</li>
+                    </ul>
+                  ) : <span className="mono" style={{ color: 'var(--steel)' }}>Night: {d.night}</span>}
                 </div>
               </li>
             ))}
           </ol>
+          <aside className="itin-gate reveal" aria-labelledby="gate-title">
+            <div style={{ display: 'grid', gap: 12 }}>
+              <span className="mono" style={{ color: 'var(--lime)' }}>The full itinerary</span>
+              <h3 id="gate-title" className="display">Want every detail?</h3>
+              <p className="prose" style={{ fontSize: 16 }}>We send the complete plan by email, built around your dates and group.</p>
+            </div>
+            <ul className="blk-check-list">
+              {['Hotels, homestays and camps for every night', 'Every visit, ride and experience, hour by hour', 'Meals, flights and logistics', t.lengths ? 'Day plans for every length of this route' : 'Options to shorten or extend the route', 'An itemised quote for your group'].map(x => <li key={x}><span aria-hidden className="tick" />{x}</li>)}
+            </ul>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <EnquireButton>Send me the full itinerary →</EnquireButton>
+              <a className="btn btn-ghost" href={whatsappLink(t.name, t.days)} target="_blank" rel="noopener noreferrer">WhatsApp us ↗</a>
+            </div>
+          </aside>
         </section>
       )}
 
@@ -146,7 +194,8 @@ export default async function Page({ params }: Props) {
         <div style={{ display: 'grid', gap: 18, alignContent: 'start' }}>
           <h2 id="book-title" className="display" style={{ fontSize: 'clamp(36px,4vw,64px)' }}>Dates, price and what’s included</h2>
           <p className="prose">Every departure is private and quoted individually, based on your dates, group size and hotel grade. Price: TBA. Your quote itemises the land cost, Bhutan’s Sustainable Development Fee (included) and a fuel estimate. <Link href="/guides/bhutan-motorcycle-tour-cost">How tour pricing works →</Link></p>
-          <Link href="/plan-your-ride" className="btn btn-orange" style={{ justifySelf: 'start' }}>Get a quote for this route →</Link>
+          <EnquireButton className="btn btn-orange enq-start">Get the itinerary and a quote →</EnquireButton>
+          <ul className="prose guide-list" aria-label="Also available" style={{ fontSize: 15 }}>{OPERATIONS.extras.map(x => <li key={x}>{x}</li>)}</ul>
         </div>
         <ul className="prose guide-list">{OPERATIONS.included.map(x => <li key={x}>{x}</li>)}</ul>
       </section>
@@ -166,6 +215,12 @@ export default async function Page({ params }: Props) {
           {others.map(o => <Link key={o.slug} href={`/motorcycle-tours/${o.path}`} className="display" style={{ fontSize: 'clamp(32px,4vw,56px)', textDecoration: 'none' }}>{o.name} →</Link>)}
         </nav>
       )}
+
+      <div className="enq-bar" role="region" aria-label="Enquire about this tour">
+        <span className="mono"><b>{t.name}</b>{t.days ? ` · ${t.lengths ? t.lengths.map(l => l.days).join(' / ') : t.days} days` : ''}</span>
+        <EnquireButton>Get the full itinerary →</EnquireButton>
+      </div>
+      <ItineraryRequest tour={{ slug: t.slug, name: t.name, title: t.title, days: t.days, lengths: t.lengths?.map(l => ({ days: l.days, label: l.label })), places: [...new Set(t.stops.map(s => PLACES[s].name))] }} />
     </main>
   );
 }

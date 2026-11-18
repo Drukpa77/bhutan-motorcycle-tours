@@ -1,0 +1,39 @@
+Copyright (c) 2026 Bhutan Mind Vacation Tours (BMV Tours and Treks), Thimphu, Bhutan.
+All rights reserved.
+
+PROPRIETARY LICENCE
+
+This repository and the website published from it at https://bhutanmotorcycletours.com
+("the Website") contain proprietary material owned by Bhutan Mind Vacation Tours ("the Owner"),
+including but not limited to:
+
+  - source code, components, styles and build configuration;
+  - written content: tour descriptions, itineraries, route and day plans, guides, blog posts,
+    FAQs and all other text;
+  - compilations of data: route stops, elevations, distances, riding times and their selection
+    and arrangement;
+  - design, layout, branding, logos and the "Bhutan Motorcycle Tours" name as used here.
+
+No licence is granted. Without the Owner's prior written permission you may not copy, reproduce,
+modify, publish, distribute, display, sell, sublicense, scrape or create derivative works from any
+of this material, in whole or in part, whether for commercial or non-commercial purposes.
+
+Permitted without asking:
+  - viewing the Website and printing or saving pages for your own personal, non-commercial trip
+    planning;
+  - linking to any page of the Website;
+  - quoting a short excerpt (no more than two sentences) with a clear credit and a link to the
+    source page.
+
+THIRD-PARTY MATERIAL IS NOT COVERED BY THIS LICENCE. It remains under its own licence and the
+Owner claims no rights in it:
+  - photographs from Wikimedia Commons, credited on the page where they appear and listed with
+    their licences in docs/ASSETS-AND-AUDIT.md (Creative Commons BY, BY-SA and CC0);
+  - the 3D motorcycle model "Bike - Royal Enfield" by Addere Creations (CC BY 4.0, via Sketchfab);
+  - map data (c) OpenStreetMap contributors (ODbL);
+  - temporary stock video from Mixkit (Mixkit licence);
+  - open-source software packages under their own licences (see package.json and node_modules).
+
+Permission requests and copyright notices: info@bhutanmindvacation.com
+
+THIS MATERIAL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.

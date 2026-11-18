@@ -9,7 +9,7 @@ import { breadcrumbLd, jsonLd, siteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: { absolute: 'Bhutan Motorcycle Tours: Guided Royal Enfield Rides' },
-  description: 'Guided Bhutan motorcycle tours on Royal Enfield 500s with a guide, mechanic and backup 4x4: the 16-day West to East, Dragon’s Spine, Western Valleys or a private route.',
+  description: 'Guided Bhutan motorcycle tours on Royal Enfield Himalayans: the Hidden Bhutan expedition (12–16 days), the 16-day West to East, shorter routes or a private plan.',
   alternates: { canonical: '/motorcycle-tours' },
 };
 
@@ -25,8 +25,8 @@ const STEPS: [string, string][] = [
   ['Plan & quote', 'Send your dates, group size, experience and the passes you want. You get an itemised quote: SDF, visa, land cost and a fuel estimate.'],
   ['Confirm', 'A deposit confirms your dates (terms on your quote). We hold hotels and, if you want, Paro flights, which fill early in peak season.'],
   ['Visa & permits', 'We apply for your Bhutan visa and arrange the permits your route needs, before you land.'],
-  ['Handover', 'We meet you at Paro airport. You get your Royal Enfield 500, a briefing, a gear and document check, and a short test ride before the first pass.'],
-  ['On the road', 'Your guide leads, and the mechanic and the backup 4x4 with your luggage travel with the group. Days are planned in riding hours, not kilometres.'],
+  ['Handover', 'We meet you at Paro airport. You get your Royal Enfield Himalayan, a briefing, a gear and document check, and a short test ride before the first pass.'],
+  ['On the road', 'Your guide leads, and the mechanic and the backup vehicle with your luggage travel with the group. Days are planned in riding hours, not kilometres.'],
   ['Return', 'Bike handover in Paro, a farewell dinner, and a transfer to your flight. Everything was settled before departure, so there are no surprises at the end.'],
 ];
 
@@ -38,7 +38,7 @@ export default function Page() {
       <div style={{ display: 'grid', gap: 20 }}>
         <nav aria-label="Breadcrumb" className="crumbs mono"><Link href="/">Home</Link><span aria-hidden>/</span><span aria-current="page">Motorcycle tours</span></nav>
         <h1 className="display" style={{ fontSize: 'clamp(48px,8vw,128px)' }}>Bhutan motorcycle tours</h1>
-        <p className="prose">Guided motorcycle tours across the Kingdom of Bhutan on {OPERATIONS.fleet} bikes, from the Paro valley over the high passes of the Himalaya to the temples of Bumthang and the far east. Every tour is private to your group and run by a licensed Bhutanese operator. A guide, a mechanic and a backup 4x4 travel with you, and we handle the visa, the permits and the Sustainable Development Fee.</p>
+        <p className="prose">Guided motorcycle tours across the Kingdom of Bhutan on {OPERATIONS.fleet} bikes, from the Paro valley over the high passes of the Himalaya to the temples of Bumthang and the far east. Every tour is private to your group and run by a licensed Bhutanese operator. A guide, a mechanic and a backup vehicle travel with you, and we handle the visa, the permits and the Sustainable Development Fee.</p>
       </div>
 
       <section aria-label="Tours" className="cards">
@@ -80,7 +80,7 @@ export default function Page() {
       <section aria-labelledby="incl-title" className="stack incl">
         <div style={{ display: 'grid', gap: 14, alignContent: 'start' }}>
           <h2 id="incl-title" className="display" style={{ fontSize: 'clamp(36px,4vw,64px)' }}>What every tour includes</h2>
-          <p className="prose" style={{ fontSize: 16 }}>Fuel, monument entry fees, insurance and tips are extra. The full breakdown is in <Link href="/guides/bhutan-motorcycle-tour-cost">what a Bhutan motorcycle tour costs</Link>.</p>
+          <p className="prose" style={{ fontSize: 16 }}>Fuel, insurance and tips are extra. The full breakdown is in <Link href="/guides/bhutan-motorcycle-tour-cost">what a Bhutan motorcycle tour costs</Link>.</p>
         </div>
         <ul className="prose guide-list">{OPERATIONS.included.map(x => <li key={x}>{x}</li>)}</ul>
       </section>

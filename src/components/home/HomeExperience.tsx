@@ -171,7 +171,7 @@ export default function HomeExperience({ testimonials }: { testimonials?: React.
             <div style={{ fontStretch: '80%', fontWeight: 800, fontSize: 22, textTransform: 'uppercase' }}>{PARTS[pi].t}</div>
             <p style={{ margin: '8px 0 0', fontWeight: 300, lineHeight: 1.6, color: '#c7cdcf' }}>{PARTS[pi].d}</p>
           </div>
-          <p style={{ ...M, margin: 'auto 0 0', fontSize: 10, lineHeight: 1.7, color: 'var(--steel)' }}>Illustrative 3D scan: <a href={SKETCHFAB_CREDIT.url} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>“{SKETCHFAB_CREDIT.title}”</a> by {SKETCHFAB_CREDIT.author}, <a href={SKETCHFAB_CREDIT.licenseUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>{SKETCHFAB_CREDIT.license}</a>, via Sketchfab. Our touring fleet is Royal Enfield 500cc.</p>
+          <p style={{ ...M, margin: 'auto 0 0', fontSize: 10, lineHeight: 1.7, color: 'var(--steel)' }}>Illustrative 3D scan: <a href={SKETCHFAB_CREDIT.url} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>“{SKETCHFAB_CREDIT.title}”</a> by {SKETCHFAB_CREDIT.author}, <a href={SKETCHFAB_CREDIT.licenseUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>{SKETCHFAB_CREDIT.license}</a>, via Sketchfab. Our touring fleet is the Royal Enfield Himalayan (411cc and 450cc).</p>
         </div>
       </section>
 
@@ -218,7 +218,7 @@ export default function HomeExperience({ testimonials }: { testimonials?: React.
         <div style={{ display: 'grid', gap: 20 }}>
           <span className="mono" style={{ color: 'var(--orange)' }}>Guided motorcycle tours in Bhutan</span>
           <h2 id="about-title" className="display" style={{ fontSize: 'clamp(40px,5vw,80px)' }}>Ride the Kingdom<br />of the Thunder Dragon</h2>
-          <p className="prose">Bhutan is one of the last great motorcycle roads in the Himalaya: a single winding lateral highway that climbs from river valleys at 1,200 m to passes near 4,000 m, past cliffside monasteries, fortress dzongs and prayer-flag ridges. Our guided Bhutan motorcycle tours start in Paro and follow that road over Chele La, Dochula, Pele La and Yotong La to the temples of Bumthang, and on over Thrumshing La to Trashigang in the far east. You ride a Royal Enfield 500, with a guide, a mechanic and a backup 4x4 alongside, or go wherever your own route takes you.</p>
+          <p className="prose">Bhutan is one of the last great motorcycle roads in the Himalaya: a single winding lateral highway that climbs from river valleys at 1,200 m to passes near 4,000 m, past cliffside monasteries, fortress dzongs and prayer-flag ridges. Our guided Bhutan motorcycle tours start in Paro and follow that road over Chele La, Dochula, Pele La and Yotong La to the temples of Bumthang, and on over Thrumshing La to Trashigang in the far east. You ride a Royal Enfield Himalayan, with a guide, a mechanic and a backup vehicle alongside, or go wherever your own route takes you.</p>
         </div>
         <ul className="cards" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
           {TOURS.map(t => (
