@@ -1,12 +1,21 @@
 export { BRAND, img, optimized } from './assets';
 
+/**
+ * Flip to true once info@bhutanmotorcycletours.com can RECEIVE mail (the domain needs MX records).
+ * Until then it stays off the site and out of the enquiry recipients, so nothing bounces.
+ */
+const BRAND_MAILBOX_LIVE = false;
+
 export const CONTACT = {
   country: 'Bhutan',
   phone: '+975 7763 6226',
   phoneHref: 'tel:+97577636226',
   whatsapp: '+975 7763 6226',
   whatsappHref: 'https://wa.me/97577636226',
-  emails: ['info@bhutanmindvacation.com', 'mindvacationtoursbhutan@gmail.com'] as const,
+  /** Shown on the site (footer, contact strip, schema, mailto links) and the default enquiry recipients. First = primary. */
+  emails: BRAND_MAILBOX_LIVE
+    ? ['info@bhutanmotorcycletours.com', 'bhutanmotorcycletours@gmail.com']
+    : ['bhutanmotorcycletours@gmail.com'],
   address: ['House No PHA-1-38', 'Unit 01-01', 'Babesa', 'Thimphu 11001', 'Bhutan'],
 };
 
